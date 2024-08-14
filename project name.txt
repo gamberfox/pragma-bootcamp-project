@@ -1,0 +1,12 @@
+
+
+com.emazon
+
+stock-api-service
+
+
+##we do this because the package name will be
+com.emazon.stock-api-service
+
+#dependencies
+weblock
