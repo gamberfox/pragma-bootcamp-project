@@ -1,7 +1,7 @@
 package com.emazon.stock_api_service.application.mapper;
 
-import com.emazon.stock_api_service.application.dto.ArticleRequest;
-import com.emazon.stock_api_service.domain.model.Article;
+import com.emazon.stock_api_service.application.dto.CategoryRequest;
+import com.emazon.stock_api_service.domain.model.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -12,9 +12,10 @@ import org.mapstruct.ReportingPolicy;
 //the mapper when we want to make the transformations
 @Mapper(componentModel = "spring",
 //any unmapped element won't generate annoying warnings
+        //while we're building the project
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
-public interface ArticleRequestMapper {
+public interface CategoryRequestMapper {
     //convert the request into an Article
-    Article toArticle(ArticleRequest articleRequest);
+    Category toArticle(CategoryRequest categoryRequest);
 }

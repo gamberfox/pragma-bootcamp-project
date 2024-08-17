@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Article {
-    private long id;
+public class Category {
+    private Long id;
     private String name;
     private String description;
 }
