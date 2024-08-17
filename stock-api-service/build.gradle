@@ -70,9 +70,9 @@ test{
 	finalizedBy jacocoTestReport
 }
 
+//when the project finishes, the report will be run
 jacocoTestReport {
 	dependsOn test  // Ensure tests are run before generating the report
-
 	reports {
 		xml.required.set(true)
 		html.required.set(true)

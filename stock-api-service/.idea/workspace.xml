@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ee33fb3-9fc1-48b2-921d-ecc5ab8fbf00" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../spring-start-settings.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,11 +84,23 @@
       <workItem from="1723743672965" duration="2961000" />
       <workItem from="1723748250155" duration="1417000" />
       <workItem from="1723757204327" duration="654000" />
-      <workItem from="1723758061085" duration="573000" />
+      <workItem from="1723758061085" duration="1191000" />
+      <workItem from="1723759392930" duration="9000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
