@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/article")
+@RequestMapping("/category")
 @RequiredArgsConstructor
 public class CategoryRestController {
     //every independence we inject are interfaces
@@ -21,8 +21,14 @@ public class CategoryRestController {
         categoryHandler.createCategory(categoryRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+    @GetMapping("/aa")
+    public ResponseEntity<String> responseTest(){
+        System.out.println("another aa test");
+        return ResponseEntity.ok("another aa test");
+    }
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable(name="id") Long id) {
+        System.out.println("this is a test");
         return ResponseEntity.ok(categoryHandler.getCategoryResponse(id));
     }
 }
