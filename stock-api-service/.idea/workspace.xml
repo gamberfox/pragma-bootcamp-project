@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ee74dfb-5a64-487a-800a-e67b46de632a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/exception/CategoryDescriptionIsTooLongException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/exception/CategoryNameIsTooLongException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/adapter/CategoryJpaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/adapter/CategoryJpaAdapter.java" afterDir="false" />
-    </list>
+    <list default="true" id="5ee74dfb-5a64-487a-800a-e67b46de632a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -110,6 +105,7 @@
       <workItem from="1723998630833" duration="1290000" />
       <workItem from="1724018232948" duration="9395000" />
       <workItem from="1724030253173" duration="376000" />
+      <workItem from="1724031794389" duration="99000" />
     </task>
     <servers />
   </component>
