@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/category")
 @RequiredArgsConstructor
-public class CategoryRestController {
+public class    CategoryRestController {
     //every independence we inject are interfaces
     private final ICategoryHandler categoryHandler;
     @PostMapping("/")
