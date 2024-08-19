@@ -4,6 +4,8 @@ package com.emazon.stock_api_service.infrastructure.output.jpa.adapter;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.infrastructure.exception.CategoryAlreadyExistsException;
+import com.emazon.stock_api_service.infrastructure.exception.CategoryDescriptionIsTooLongException;
+import com.emazon.stock_api_service.infrastructure.exception.CategoryNameIsTooLongException;
 import com.emazon.stock_api_service.infrastructure.exception.CategoryNotFoundException;
 import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.ICategoryEntityMapper;
 import com.emazon.stock_api_service.infrastructure.output.jpa.repository.ICategoryRepository;
@@ -18,6 +20,12 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     public void createCategory(Category category) {
         if(categoryRepository.findByName(category.getName()).isPresent()) {
             throw new CategoryAlreadyExistsException();
+        }
+        if(category.getName().length() > 50) {
+            throw new CategoryNameIsTooLongException();
+        }
+        if(category.getDescription().length()>90){
+            throw new CategoryDescriptionIsTooLongException();
         }
         categoryRepository.save(categoryEntityMapper.toEntity(category));
     }
