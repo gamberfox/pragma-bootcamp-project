@@ -3,6 +3,9 @@ package com.emazon.stock_api_service.domain.usecase;
 import com.emazon.stock_api_service.domain.api.ICategoryServicePort;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -40,7 +43,8 @@ public class CategoryUseCase implements ICategoryServicePort {
     }
 
     @Override
-    public List<Category> getCategories(Boolean ascendingOrder) {
-        return this.categoryPersistencePort.getCategories(ascendingOrder);
+    public List<Category> getCategories(Boolean ascendingOrder, int page, int size) {
+        // Pass the pagination parameters to the persistence port
+        return this.categoryPersistencePort.getCategories(ascendingOrder, page, size);
     }
 }
