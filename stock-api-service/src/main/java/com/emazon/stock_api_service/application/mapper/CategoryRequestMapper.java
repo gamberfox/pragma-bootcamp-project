@@ -5,6 +5,8 @@ import com.emazon.stock_api_service.domain.model.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 //the mapper that will convert the things that come from the command
 //@Mapper annotation will make spring detect the class as a map-struct
 //componentModel is telling spring to take this as a component that is
@@ -16,6 +18,7 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface CategoryRequestMapper {
-    //convert the request into an Article
-    Category toArticle(CategoryRequest categoryRequest);
+    //convert the request into a Category
+    Category toCategory(CategoryRequest categoryRequest);
+    List<Category> toCategories(List<CategoryRequest> categoryRequestList);
 }

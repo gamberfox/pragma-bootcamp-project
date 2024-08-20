@@ -8,5 +8,6 @@ import java.util.Optional;
 //we need to clarify the class and primary key type.
 public interface ICategoryRepository extends JpaRepository<CategoryEntity, Long> {
     Optional<CategoryEntity> findByName(String name);
+    Optional<CategoryEntity> findById(Long id);
     void deleteById(Long id);
 }
