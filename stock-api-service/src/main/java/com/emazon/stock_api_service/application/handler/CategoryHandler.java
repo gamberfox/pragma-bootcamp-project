@@ -39,7 +39,6 @@ public class CategoryHandler implements ICategoryHandler{
 
     @Override
     public CategoryResponse getCategoryResponse(Long id) {
-        System.out.println("input id             in application.handler CategoryHandler: "+id.intValue());
         //validation will belong to the infrastructure
         Category category = categoryServicePort.getCategory(id);
         return categoryResponseMapper.toCategoryResponse(categoryServicePort.getCategory(id));
