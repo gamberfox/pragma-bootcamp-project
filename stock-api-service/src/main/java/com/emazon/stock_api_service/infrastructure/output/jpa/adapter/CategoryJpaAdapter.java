@@ -7,9 +7,11 @@ import com.emazon.stock_api_service.infrastructure.exception.CategoryAlreadyExis
 import com.emazon.stock_api_service.infrastructure.exception.CategoryDescriptionIsTooLongException;
 import com.emazon.stock_api_service.infrastructure.exception.CategoryNameIsTooLongException;
 import com.emazon.stock_api_service.infrastructure.exception.CategoryNotFoundException;
+import com.emazon.stock_api_service.infrastructure.output.jpa.entity.CategoryEntity;
 import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.ICategoryEntityMapper;
 import com.emazon.stock_api_service.infrastructure.output.jpa.repository.ICategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,15 +49,10 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     }
 
     @Override
-    public List<Category> getCategories(Boolean ascendingOrder) {
-        List<Category> categoryList= categoryEntityMapper.
-                toCategories(categoryRepository.findAll()).
-                stream().sorted(Comparator.comparing(Category::getName)).
-                collect(Collectors.toList());
-        if(ascendingOrder) return categoryList;
-        else{
-            Collections.reverse(categoryList);
-            return categoryList;
-        }
+    public Page<Category> getCategories(Boolean ascendingOrder, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, ascendingOrder ? Sort.by("name").ascending() : Sort.by("name").descending());
+        Page<CategoryEntity> categoryEntityPage = categoryRepository.findAll(pageable);
+        List<Category> categories = categoryEntityMapper.toCategories(categoryEntityPage.getContent());
+        return new PageImpl<>(categories, pageable, categoryEntityPage.getTotalElements());
     }
 }
