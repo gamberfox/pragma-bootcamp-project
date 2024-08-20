@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/category")
 @RequiredArgsConstructor
@@ -28,7 +30,13 @@ public class    CategoryRestController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable(name="id") Long id) {
-        System.out.println("this is a test");
+        System.out.println("id_category in infrastructure.input CategoryRestController class: "+id.toString());
         return ResponseEntity.ok(categoryHandler.getCategoryResponse(id));
+    }
+
+    @GetMapping("/all/{ascendingOrder}")
+    public ResponseEntity<List<CategoryResponse>> getCategories(
+            @PathVariable(name="ascendingOrder") boolean ascendingOrder) {
+        return ResponseEntity.ok(categoryHandler.getCategoryResponses(ascendingOrder));
     }
 }

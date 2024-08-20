@@ -11,6 +11,11 @@ import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.ICategoryEn
 import com.emazon.stock_api_service.infrastructure.output.jpa.repository.ICategoryRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 public class CategoryJpaAdapter implements ICategoryPersistencePort {
     private final ICategoryRepository categoryRepository;
@@ -32,11 +37,25 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
 
     @Override
     public Category getCategory(Long id) {
+        System.out.println("id in infrastructure.output.jpa.adapter CategoryJpaAdapter class"+id.toString());
         if(categoryRepository.findById(id).isEmpty()) {
             throw new CategoryNotFoundException();
         }
         return categoryEntityMapper.toCategory(categoryRepository.findById(id)
                 .orElseThrow(CategoryNotFoundException::new));
         //.orElseThrow(() -> new CategoryNotFoundException())); also works
+    }
+
+    @Override
+    public List<Category> getCategories(Boolean ascendingOrder) {
+        List<Category> categoryList= categoryEntityMapper.
+                toCategories(categoryRepository.findAll()).
+                stream().sorted(Comparator.comparing(Category::getName)).
+                collect(Collectors.toList());
+        if(ascendingOrder) return categoryList;
+        else{
+            Collections.reverse(categoryList);
+            return categoryList;
+        }
     }
 }

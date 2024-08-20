@@ -11,8 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+//orchestration of usecases
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor//the private final variables will be injected
 @Transactional
 public class CategoryHandler implements ICategoryHandler{
     //very similar methods to the domain infrastructure, but with elements
@@ -24,14 +27,22 @@ public class CategoryHandler implements ICategoryHandler{
     private final CategoryResponseMapper categoryResponseMapper;
     @Override
     public void createCategory(CategoryRequest categoryRequest) {
-        Category category= categoryRequestMapper.toArticle(categoryRequest);
+        Category category= categoryRequestMapper.toCategory(categoryRequest);
         categoryServicePort.createCategory(category);
     }
 
     @Override
     public CategoryResponse getCategoryResponse(Long id) {
+        System.out.println("input id             in application.handler CategoryHandler: "+id.intValue());
         //validation will belong to the infrastructure
         Category category = categoryServicePort.getCategory(id);
-        return categoryResponseMapper.toCategoryResponse(category);
+        System.out.println("Received        name in application.handler CategoryHandler: " + category.getName());
+        System.out.println("Received description in application.handler CategoryHandler: " + category.getDescription());
+        return categoryResponseMapper.toCategoryResponse(categoryServicePort.getCategory(id));
+    }
+    @Override
+    public List<CategoryResponse> getCategoryResponses(Boolean ascendingOrder) {
+        List<Category> categories = categoryServicePort.getCategories(ascendingOrder);
+        return categoryResponseMapper.toCategoryResponses(categories);
     }
 }
