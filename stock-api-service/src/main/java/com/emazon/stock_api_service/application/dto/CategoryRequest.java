@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class CategoryRequest {
     //there are cases where the id won't need to be sent
-    private Long id_category;
+    private Long id;
     private String name;
     private String description;
 }

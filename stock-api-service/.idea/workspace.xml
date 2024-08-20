@@ -5,31 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ee74dfb-5a64-487a-800a-e67b46de632a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/dto/CategoryRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/dto/CategoryRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/dto/CategoryResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/dto/CategoryResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/handler/CategoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/handler/CategoryHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/handler/ICategoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/handler/ICategoryHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/mapper/CategoryRequestMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/mapper/CategoryRequestMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/mapper/CategoryResponseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/mapper/CategoryResponseMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/api/ICategoryServicePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/api/ICategoryServicePort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/model/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/spi/ICategoryPersistencePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/spi/ICategoryPersistencePort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/usecase/CategoryUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/usecase/CategoryUseCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/input/rest/CategoryRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/input/rest/CategoryRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/adapter/CategoryJpaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/adapter/CategoryJpaAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/entity/CategoryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/entity/CategoryEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/mapper/ICategoryEntityMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/mapper/ICategoryEntityMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/repository/ICategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/repository/ICategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/mysql/entity/CategoryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/mysql/entity/CategoryEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stock.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../stock.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,27 +75,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build stock-api-service.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.StockApiServiceApplication.executor": "Run",
-    "git-widget-placeholder": "HU-001",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build stock-api-service.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.StockApiServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;HU-001&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="StockApiServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="stock-api-service.main" />
@@ -154,6 +135,7 @@
       <workItem from="1724084848908" duration="6110000" />
       <workItem from="1724096357411" duration="10736000" />
       <workItem from="1724110557628" duration="9665000" />
+      <workItem from="1724151422259" duration="728000" />
     </task>
     <servers />
   </component>

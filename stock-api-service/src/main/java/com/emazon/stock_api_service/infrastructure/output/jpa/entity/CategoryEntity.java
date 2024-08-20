@@ -17,8 +17,8 @@ public class CategoryEntity {
     @Id
     //this does the auto implement
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_category")
-    private Long id_category;
+    @Column(name = "id")
+    private Long id;
     private String name;
     private String description;
 }

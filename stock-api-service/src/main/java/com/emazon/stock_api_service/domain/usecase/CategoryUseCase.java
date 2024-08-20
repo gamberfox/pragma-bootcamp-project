@@ -33,7 +33,7 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public Category getCategory(Long id) {
-        System.out.println("id in domain.usecase CategoryUseCase: "+this.categoryPersistencePort.getCategory(id).getId_category()+ " id");
+        //System.out.println("id in domain.usecase CategoryUseCase: "+this.categoryPersistencePort.getCategory(id).getId_category()+ " id");
         System.out.println("id in domain.usecase CategoryUseCase: "+this.categoryPersistencePort.getCategory(id).getName()+ " name");
         System.out.println("id in domain.usecase CategoryUseCase: "+this.categoryPersistencePort.getCategory(id).getDescription()+ " des");
         return this.categoryPersistencePort.getCategory(id);
