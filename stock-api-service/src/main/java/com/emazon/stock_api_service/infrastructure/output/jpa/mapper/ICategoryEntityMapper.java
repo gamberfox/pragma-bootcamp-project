@@ -14,5 +14,5 @@ unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface ICategoryEntityMapper {
     CategoryEntity toEntity(Category category);
     Category toCategory(CategoryEntity categoryEntity);
-    List<Category> toCategoryList(List<CategoryEntity> categoryEntities);
+    List<Category> toCategories(List<CategoryEntity> categoryEntities);
 }
