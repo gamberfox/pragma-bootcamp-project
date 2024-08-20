@@ -14,5 +14,5 @@ public interface ICategoryServicePort {
     //this function will have a connection with the persistence
     void createCategory(Category category);
     Category getCategory(Long id);
-    Page<Category> getCategories(Boolean ascendingOrder, int page, int size);
+    List<Category> getCategories(Boolean ascendingOrder, int page, int size);
 }

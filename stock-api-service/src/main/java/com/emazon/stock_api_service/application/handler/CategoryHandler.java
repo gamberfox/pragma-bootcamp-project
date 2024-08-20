@@ -46,13 +46,13 @@ public class CategoryHandler implements ICategoryHandler{
     @Override
     public Page<CategoryResponse> getCategoryResponses(Boolean ascendingOrder, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Category> categories = categoryServicePort.getCategories(ascendingOrder,page,size);
-        List<CategoryResponse> categoryResponses = categories.getContent()
+        List<Category> categories = categoryServicePort.getCategories(ascendingOrder,page,size);
+        List<CategoryResponse> categoryResponses = categories
                 .stream()
                 .map(categoryResponseMapper::toCategoryResponse)
                 .collect(Collectors.toList());
         int start = (int)pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), categoryResponses.size());
-        return new PageImpl<>(categoryResponses, pageable, categories.getTotalElements());
+        return new PageImpl<>(categoryResponses, pageable, categories.size());
     }
 }

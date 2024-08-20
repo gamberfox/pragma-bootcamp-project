@@ -38,7 +38,7 @@ public class CategoryUseCase implements ICategoryServicePort {
     }
 
     @Override
-    public Page<Category> getCategories(Boolean ascendingOrder, int page, int size) {
+    public List<Category> getCategories(Boolean ascendingOrder, int page, int size) {
         // Pass the pagination parameters to the persistence port
         return this.categoryPersistencePort.getCategories(ascendingOrder, page, size);
     }
