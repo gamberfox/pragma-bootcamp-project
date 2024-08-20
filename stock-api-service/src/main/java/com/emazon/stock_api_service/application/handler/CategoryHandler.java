@@ -6,12 +6,18 @@ import com.emazon.stock_api_service.application.mapper.CategoryRequestMapper;
 import com.emazon.stock_api_service.application.mapper.CategoryResponseMapper;
 import com.emazon.stock_api_service.domain.api.ICategoryServicePort;
 import com.emazon.stock_api_service.domain.model.Category;
+import com.emazon.stock_api_service.infrastructure.output.jpa.entity.CategoryEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 //orchestration of usecases
 @Service
@@ -36,13 +42,18 @@ public class CategoryHandler implements ICategoryHandler{
         System.out.println("input id             in application.handler CategoryHandler: "+id.intValue());
         //validation will belong to the infrastructure
         Category category = categoryServicePort.getCategory(id);
-        System.out.println("Received        name in application.handler CategoryHandler: " + category.getName());
-        System.out.println("Received description in application.handler CategoryHandler: " + category.getDescription());
         return categoryResponseMapper.toCategoryResponse(categoryServicePort.getCategory(id));
     }
     @Override
-    public List<CategoryResponse> getCategoryResponses(Boolean ascendingOrder) {
-        List<Category> categories = categoryServicePort.getCategories(ascendingOrder);
-        return categoryResponseMapper.toCategoryResponses(categories);
+    public Page<CategoryResponse> getCategoryResponses(Boolean ascendingOrder, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        List<Category> categories = categoryServicePort.getCategories(ascendingOrder,page,size);
+        List<CategoryResponse> categoryResponses = categories
+                .stream()
+                .map(categoryResponseMapper::toCategoryResponse)
+                .collect(Collectors.toList());
+        int start = (int)pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), categoryResponses.size());
+        return new PageImpl<>(categoryResponses, pageable, categories.size());
     }
 }

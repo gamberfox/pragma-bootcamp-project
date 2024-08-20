@@ -4,6 +4,7 @@ import com.emazon.stock_api_service.application.dto.CategoryRequest;
 import com.emazon.stock_api_service.application.dto.CategoryResponse;
 import com.emazon.stock_api_service.application.handler.ICategoryHandler;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,11 @@ public class    CategoryRestController {
     }
 
     @GetMapping("/all/{ascendingOrder}")
-    public ResponseEntity<List<CategoryResponse>> getCategories(
+    public ResponseEntity<Page<CategoryResponse>> getCategories(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
             @PathVariable(name="ascendingOrder") boolean ascendingOrder) {
-        return ResponseEntity.ok(categoryHandler.getCategoryResponses(ascendingOrder));
+        Page<CategoryResponse> categoryPage = categoryHandler.getCategoryResponses(ascendingOrder, page, size);
+        return ResponseEntity.ok(categoryPage);
     }
 }
