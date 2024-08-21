@@ -5,6 +5,7 @@ import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import org.springframework.data.domain.Page;
 
+import java.util.Collections;
 import java.util.List;
 
 import java.util.List;
@@ -36,15 +37,20 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public Category getCategory(Long id) {
-        //System.out.println("id in domain.usecase CategoryUseCase: "+this.categoryPersistencePort.getCategory(id).getId_category()+ " id");
-        System.out.println("id in domain.usecase CategoryUseCase: "+this.categoryPersistencePort.getCategory(id).getName()+ " name");
-        System.out.println("id in domain.usecase CategoryUseCase: "+this.categoryPersistencePort.getCategory(id).getDescription()+ " des");
         return this.categoryPersistencePort.getCategory(id);
     }
 
     @Override
     public List<Category> getCategories(Boolean ascendingOrder, int page, int size) {
         // Pass the pagination parameters to the persistence port
-        return this.categoryPersistencePort.getCategories(ascendingOrder, page, size);
+        List<Category> categories= this.categoryPersistencePort.getCategories(ascendingOrder, page, size);
+        if(ascendingOrder) {
+            //categories.sort(Comparator.comparing(Category::getName));
+            categories.sort((a, b) -> a.getName().compareTo(b.getName()));
+        }
+        else{
+            categories.sort((a, b) -> b.getName().compareTo(a.getName()));
+        }
+        return categories;
     }
 }

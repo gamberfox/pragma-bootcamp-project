@@ -4,7 +4,7 @@ import com.emazon.stock_api_service.application.dto.CategoryRequest;
 import com.emazon.stock_api_service.application.dto.CategoryResponse;
 import com.emazon.stock_api_service.application.handler.ICategoryHandler;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,6 @@ public class    CategoryRestController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable(name="id") Long id) {
-        System.out.println("id_category in infrastructure.input CategoryRestController class: "+id.toString());
         return ResponseEntity.ok(categoryHandler.getCategoryResponse(id));
     }
 
@@ -40,7 +39,9 @@ public class    CategoryRestController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @PathVariable(name="ascendingOrder") boolean ascendingOrder) {
-        Page<CategoryResponse> categoryPage = categoryHandler.getCategoryResponses(ascendingOrder, page, size);
-        return ResponseEntity.ok(categoryPage);
+        //Pageable pageable = PageRequest.of(page, size, ascendingOrder ? Sort.by("name").ascending() : Sort.by("name").descending());
+        Pageable pageable = PageRequest.of(page, size);
+        List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder, page, size);
+        return ResponseEntity.ok(new PageImpl<>(categoryResponses, pageable, categoryResponses.size()));
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
         //while we're building the project
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
-public interface CategoryRequestMapper {
+public interface ICategoryRequestMapper {
     //convert the request into a Category
     Category toCategory(CategoryRequest categoryRequest);
     List<Category> toCategories(List<CategoryRequest> categoryRequestList);

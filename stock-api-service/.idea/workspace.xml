@@ -4,8 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ee74dfb-5a64-487a-800a-e67b46de632a" name="Changes" comment="HU-002 progress&#10;implemented pagination">
+    <list default="true" id="32410900-d963-44f6-b6e4-8e7b74b08047" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/handler/CategoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/handler/CategoryHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/handler/ICategoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/handler/ICategoryHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/mapper/CategoryRequestMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/mapper/ICategoryRequestMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/mapper/CategoryResponseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/application/mapper/ICategoryResponseMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/usecase/CategoryUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/usecase/CategoryUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/input/rest/CategoryRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/input/rest/CategoryRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/adapter/CategoryJpaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/adapter/CategoryJpaAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/repository/ICategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/infrastructure/output/jpa/repository/ICategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/emazon/stock_api_service/StockApiServiceCategoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/emazon/stock_api_service/StockApiServiceCategoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,25 +35,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="stock-api-service" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="stock-api-service" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="stock-api-service" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
             </expand>
             <select />
@@ -47,52 +49,35 @@
       </state>
     </system>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$/.." value="dev" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="KubernetesApiPersistence">{}</component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectId" id="2kpfzeq1n2tRmAYiKv77vdgvsQp" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2kwf3QH79OpLXI54YVBGQGz2paS" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Build stock-api-service.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.StockApiServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;HU-003&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build stock-api-service.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.StockApiServiceApplication.executor": "Run",
+    "git-widget-placeholder": "HU-001",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
@@ -115,42 +100,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5ee74dfb-5a64-487a-800a-e67b46de632a" name="Changes" comment="" />
-      <created>1723985703435</created>
+      <changelist id="32410900-d963-44f6-b6e4-8e7b74b08047" name="Changes" comment="" />
+      <created>1724199360787</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1723985703435</updated>
-      <workItem from="1723985705343" duration="173000" />
-      <workItem from="1723985885262" duration="185000" />
-      <workItem from="1723995063490" duration="1203000" />
-      <workItem from="1723996289152" duration="704000" />
-      <workItem from="1723997044942" duration="749000" />
-      <workItem from="1723998517171" duration="27000" />
-      <workItem from="1723998630833" duration="1290000" />
-      <workItem from="1724018232948" duration="9395000" />
-      <workItem from="1724030253173" duration="376000" />
-      <workItem from="1724031794389" duration="99000" />
-      <workItem from="1724066391310" duration="2673000" />
-      <workItem from="1724084848908" duration="6110000" />
-      <workItem from="1724096357411" duration="10736000" />
-      <workItem from="1724110557628" duration="9665000" />
-      <workItem from="1724151422259" duration="728000" />
-      <workItem from="1724158476900" duration="443000" />
-      <workItem from="1724159150235" duration="6614000" />
-      <workItem from="1724172716710" duration="6896000" />
-      <workItem from="1724185190147" duration="25000" />
-      <workItem from="1724192143824" duration="2219000" />
-      <workItem from="1724199185390" duration="11000" />
+      <updated>1724199360787</updated>
+      <workItem from="1724199362212" duration="7419000" />
     </task>
-    <task id="LOCAL-00001" summary="HU-002 progress&#10;implemented pagination">
-      <option name="closed" value="true" />
-      <created>1724181955898</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1724181955898</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,27 +117,10 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="dev" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="HU-001 progress" />
-    <MESSAGE value="HU-002 progress&#10;implemented pagination" />
-    <option name="LAST_COMMIT_MESSAGE" value="HU-002 progress&#10;implemented pagination" />
   </component>
 </project>
