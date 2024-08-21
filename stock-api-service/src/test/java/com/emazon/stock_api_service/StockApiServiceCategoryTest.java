@@ -24,29 +24,27 @@ public class StockApiServiceCategoryTest {
     @InjectMocks
     private CategoryUseCase categoryUseCase;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
     Category category = new Category(1L,"lego","lego description");
     Category category2 = new Category(2L,"nike","nike description");
     List<Category> categories = new ArrayList<>();
-    @Test
-    void contextLoads() {}
-    @Test
-    void testCreateCategory(){
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
         Long categoryId = 1L;
         Long categoryId2 = 2L;
         when(categoryPersistencePort.getCategory(categoryId)).thenReturn(category);
         when(categoryPersistencePort.getCategory(categoryId2)).thenReturn(category2);
-
-        Category result = categoryUseCase.getCategory(categoryId);
-        assertEquals(categoryId, result.getId());
+    }
+    @Test
+    void testCreateCategory(){
+        Category result = categoryUseCase.getCategory(1L);
+        assertEquals(1L, result.getId());
         assertEquals("nike", result.getName());
-        Category result2 = categoryUseCase.getCategory(categoryId);
-        assertEquals(categoryId, result.getId());
+        Category result2 = categoryUseCase.getCategory(2L);
+        assertEquals(1L, result.getId());
         assertEquals("lego", result.getName());
-        verify(categoryPersistencePort, times(2)).getCategory(categoryId);
+        verify(categoryPersistencePort, times(1)).getCategory(1L);
+        verify(categoryPersistencePort, times(1)).getCategory(2L);
     }
     @Test
     void testGetCategory() {
@@ -70,7 +68,7 @@ public class StockApiServiceCategoryTest {
     void testGetCategories(){
         categories.add(category);
         categories.add(category2);
-        when(categoryPersistencePort.getCategories(true,0,10)).thenReturn(categories);
+        when(categoryPersistencePort.getCategories()).thenReturn(categories);
         
     }
 }

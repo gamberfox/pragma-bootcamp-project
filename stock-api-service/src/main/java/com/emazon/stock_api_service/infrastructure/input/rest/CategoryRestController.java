@@ -41,7 +41,7 @@ public class    CategoryRestController {
             @PathVariable(name="ascendingOrder") boolean ascendingOrder) {
         //Pageable pageable = PageRequest.of(page, size, ascendingOrder ? Sort.by("name").ascending() : Sort.by("name").descending());
         Pageable pageable = PageRequest.of(page, size);
-        List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder, page, size);
+        List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder);
         return ResponseEntity.ok(new PageImpl<>(categoryResponses, pageable, categoryResponses.size()));
     }
 }

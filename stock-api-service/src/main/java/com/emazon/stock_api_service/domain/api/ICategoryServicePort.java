@@ -13,8 +13,9 @@ import java.util.List;
 //we'll also declare methods that we'll expose through the interface
 //@ComponentScan
 public interface ICategoryServicePort {
+    void validate(Category category);
     //this function will have a connection with the persistence
     void createCategory(Category category);
     Category getCategory(Long id);
-    List<Category> getCategories(Boolean ascendingOrder, int page, int size);
+    List<Category> getCategories(Boolean ascendingOrder);
 }

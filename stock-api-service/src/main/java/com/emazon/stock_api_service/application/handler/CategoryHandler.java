@@ -35,14 +35,14 @@ public class CategoryHandler implements ICategoryHandler{
 
     @Override
     public CategoryResponse getCategoryResponse(Long id) {
-        System.out.println("input id             in application.handler CategoryHandler: "+id.intValue());
         //validation will belong to the infrastructure
         Category category = categoryServicePort.getCategory(id);
-        return categoryResponseMapper.toCategoryResponse(categoryServicePort.getCategory(id));
+        return categoryResponseMapper.toCategoryResponse(category);
+        //return categoryResponseMapper.toCategoryResponse(categoryServicePort.getCategory(id));
     }
     @Override
-    public List<CategoryResponse> getCategoryResponses(Boolean ascendingOrder, int page, int size) {
-        List<Category> categories = categoryServicePort.getCategories(ascendingOrder,page,size);
+    public List<CategoryResponse> getCategoryResponses(Boolean ascendingOrder) {
+        List<Category> categories = categoryServicePort.getCategories(ascendingOrder);
         List<CategoryResponse> categoryResponses = categories
                 .stream()
                 .map(categoryResponseMapper::toCategoryResponse)

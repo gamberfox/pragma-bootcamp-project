@@ -11,5 +11,5 @@ public interface ICategoryHandler {
     //but we're using the methods with elements of the same layer
     void createCategory(CategoryRequest categoryRequest);
     CategoryResponse getCategoryResponse(Long id);
-    List<CategoryResponse> getCategoryResponses(Boolean ascendingOrder, int page, int size);
+    List<CategoryResponse> getCategoryResponses(Boolean ascendingOrder);
 }
