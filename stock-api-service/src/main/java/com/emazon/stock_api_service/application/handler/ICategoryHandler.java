@@ -9,8 +9,6 @@ import java.util.List;
 
 import java.util.List;
 
-import java.util.List;
-
 public interface ICategoryHandler {
     //methods very similar to the domain because it's a CRUD
     //but we're using the methods with elements of the same layer

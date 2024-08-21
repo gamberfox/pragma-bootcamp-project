@@ -7,8 +7,6 @@ import java.util.List;
 
 import java.util.List;
 
-import java.util.List;
-
 //spi are interfaces that extend the capacities of our system.
 public interface ICategoryPersistencePort {
     void createCategory(Category category);

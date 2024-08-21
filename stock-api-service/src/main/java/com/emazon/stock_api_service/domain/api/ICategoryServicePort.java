@@ -9,8 +9,6 @@ import java.util.List;
 
 import java.util.List;
 
-import java.util.List;
-
 //this will be exposed as the service to the exterior
 //we'll also declare methods that we'll expose through the interface
 //@ComponentScan
