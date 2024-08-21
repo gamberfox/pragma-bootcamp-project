@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ee74dfb-5a64-487a-800a-e67b46de632a" name="Changes" comment="HU-002 progress&#10;implemented pagination" />
+    <list default="true" id="32410900-d963-44f6-b6e4-8e7b74b08047" name="Changes" comment="HU-001 progress&#10;implementing exception handlers in the domain layer">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/usecase/CategoryUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/usecase/CategoryUseCase.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,25 +26,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="stock-api-service" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="stock-api-service" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="stock-api-service" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
             </expand>
             <select />
@@ -49,6 +44,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Exception" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -60,14 +57,26 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="KubernetesApiPersistence">{}</component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "gamberfox"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:gamberfox/pragma-bootcamp-project.git",
+    "accountId": "95acc297-c189-4608-9310-5aeb97108267"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
 }</component>
-  <component name="ProjectId" id="2kpfzeq1n2tRmAYiKv77vdgvsQp" />
+  <component name="ProjectId" id="2kwf3QH79OpLXI54YVBGQGz2paS" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -81,15 +90,14 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.StockApiServiceApplication.executor": "Run",
-    "git-widget-placeholder": "HU-003",
-    "ignore.virus.scanning.warn.message": "true",
+    "git-widget-placeholder": "HU-001",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -113,38 +121,21 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5ee74dfb-5a64-487a-800a-e67b46de632a" name="Changes" comment="" />
-      <created>1723985703435</created>
+      <changelist id="32410900-d963-44f6-b6e4-8e7b74b08047" name="Changes" comment="" />
+      <created>1724199360787</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1723985703435</updated>
-      <workItem from="1723985705343" duration="173000" />
-      <workItem from="1723985885262" duration="185000" />
-      <workItem from="1723995063490" duration="1203000" />
-      <workItem from="1723996289152" duration="704000" />
-      <workItem from="1723997044942" duration="749000" />
-      <workItem from="1723998517171" duration="27000" />
-      <workItem from="1723998630833" duration="1290000" />
-      <workItem from="1724018232948" duration="9395000" />
-      <workItem from="1724030253173" duration="376000" />
-      <workItem from="1724031794389" duration="99000" />
-      <workItem from="1724066391310" duration="2673000" />
-      <workItem from="1724084848908" duration="6110000" />
-      <workItem from="1724096357411" duration="10736000" />
-      <workItem from="1724110557628" duration="9665000" />
-      <workItem from="1724151422259" duration="728000" />
-      <workItem from="1724158476900" duration="443000" />
-      <workItem from="1724159150235" duration="6614000" />
-      <workItem from="1724172716710" duration="6896000" />
-      <workItem from="1724185190147" duration="25000" />
+      <updated>1724199360787</updated>
+      <workItem from="1724199362212" duration="7419000" />
+      <workItem from="1724242529746" duration="22471000" />
     </task>
-    <task id="LOCAL-00001" summary="HU-002 progress&#10;implemented pagination">
+    <task id="LOCAL-00001" summary="HU-001 progress&#10;implementing exception handlers in the domain layer">
       <option name="closed" value="true" />
-      <created>1724181955898</created>
+      <created>1724264851509</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1724181955898</updated>
+      <updated>1724264851509</updated>
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
@@ -176,8 +167,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="HU-001 progress" />
-    <MESSAGE value="HU-002 progress&#10;implemented pagination" />
-    <option name="LAST_COMMIT_MESSAGE" value="HU-002 progress&#10;implemented pagination" />
+    <MESSAGE value="HU-001 progress&#10;implementing exception handlers in the domain layer" />
+    <option name="LAST_COMMIT_MESSAGE" value="HU-001 progress&#10;implementing exception handlers in the domain layer" />
   </component>
 </project>

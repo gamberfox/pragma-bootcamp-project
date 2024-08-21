@@ -1,9 +1,13 @@
 package com.emazon.stock_api_service.domain.usecase;
 
 import com.emazon.stock_api_service.domain.api.ICategoryServicePort;
+import com.emazon.stock_api_service.domain.exception.ErrorType;
+import com.emazon.stock_api_service.domain.exception.category.*;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -21,10 +25,13 @@ public class CategoryUseCase implements ICategoryServicePort {
     public CategoryUseCase(ICategoryPersistencePort categoryPersistencePort) {
         this.categoryPersistencePort = categoryPersistencePort;
     }
+
+
     //we need to communicate what we're receiving with the thing that will
     //go through the domain, and what will be sent to the persistence
     @Override
     public void createCategory(Category category) {
+        this.validate(category);
         //we're using the class that will be implemented by the interface we declared
         //we're making separation through interfaces because if we use a
         //PersistencePort class, that class could change any day, and then we'll have
@@ -36,15 +43,50 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public Category getCategory(Long id) {
-        //System.out.println("id in domain.usecase CategoryUseCase: "+this.categoryPersistencePort.getCategory(id).getId_category()+ " id");
-        System.out.println("id in domain.usecase CategoryUseCase: "+this.categoryPersistencePort.getCategory(id).getName()+ " name");
-        System.out.println("id in domain.usecase CategoryUseCase: "+this.categoryPersistencePort.getCategory(id).getDescription()+ " des");
+        if(!categoryPersistencePort.categoryIdExists(id)){
+            throw new CategoryException(ErrorType.RESOURCE_NOT_FOUND,
+                    "the category id "+id.toString()+" does not exist");
+        }
         return this.categoryPersistencePort.getCategory(id);
     }
 
     @Override
-    public List<Category> getCategories(Boolean ascendingOrder, int page, int size) {
+    public List<Category> getCategories(Boolean ascendingOrder) {
         // Pass the pagination parameters to the persistence port
-        return this.categoryPersistencePort.getCategories(ascendingOrder, page, size);
+        List<Category> categories= this.categoryPersistencePort.getCategories();
+        if(ascendingOrder) {
+            //categories.sort(Comparator.comparing(Category::getName));
+            categories.sort((a, b) -> a.getName().compareTo(b.getName()));
+        }
+        else{
+            categories.sort((a, b) -> b.getName().compareTo(a.getName()));
+        }
+        return categories;
+    }
+    @Override
+    public void validate(Category category) {
+        if(category.getName().equals("t")){
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,"test exception");
+        }
+        if(categoryPersistencePort.categoryNameExists(category.getName())) {
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+                    "the category name "+category.getName()+" already exists");
+        }
+        if(category.getName().length()>50){
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+                    "the name is too long, it cannot be longer than 50 characters");
+        }
+        if(category.getDescription().length()>90){
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+                    "the description is too long, it cannot be longer than 90 characters");
+        }
+        if(category.getName().isEmpty()){
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+                    "the name cannot be empty");
+        }
+        if(category.getDescription().isEmpty()){
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+                    "the description cannot be empty");
+        }
     }
 }

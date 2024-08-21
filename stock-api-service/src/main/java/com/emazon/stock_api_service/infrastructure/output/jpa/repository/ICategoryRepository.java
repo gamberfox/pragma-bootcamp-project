@@ -5,12 +5,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 //we need to clarify the class and primary key type.
+//JpaRepository= java persistency API.
 public interface ICategoryRepository extends JpaRepository<CategoryEntity, Long> {
+    /*Optional<CategoryEntity> findByName(String name);
+    Optional<CategoryEntity> findById(Long id);*/
     Optional<CategoryEntity> findByName(String name);
     Optional<CategoryEntity> findById(Long id);
     void deleteById(Long id);
-    Page<CategoryEntity> findAll(Pageable pageable);
+    List<CategoryEntity> findAll();
 }

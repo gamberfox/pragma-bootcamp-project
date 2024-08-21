@@ -11,5 +11,7 @@ import java.util.List;
 public interface ICategoryPersistencePort {
     void createCategory(Category category);
     Category getCategory(Long id);
-    List<Category> getCategories(Boolean ascendingOrder, int page, int size);
+    boolean categoryNameExists(String categoryName);
+    boolean categoryIdExists(Long id);
+    List<Category> getCategories();
 }

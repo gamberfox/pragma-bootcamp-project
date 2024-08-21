@@ -1,11 +1,10 @@
 package com.emazon.stock_api_service.infrastructure.output.jpa.adapter;
 
 
+import com.emazon.stock_api_service.domain.exception.ErrorType;
+import com.emazon.stock_api_service.domain.exception.category.CategoryException;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
-import com.emazon.stock_api_service.infrastructure.exception.CategoryAlreadyExistsException;
-import com.emazon.stock_api_service.infrastructure.exception.CategoryDescriptionIsTooLongException;
-import com.emazon.stock_api_service.infrastructure.exception.CategoryNameIsTooLongException;
 import com.emazon.stock_api_service.infrastructure.exception.CategoryNotFoundException;
 import com.emazon.stock_api_service.infrastructure.output.jpa.entity.CategoryEntity;
 import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.ICategoryEntityMapper;
@@ -23,6 +22,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 public class CategoryJpaAdapter implements ICategoryPersistencePort {
     private final ICategoryRepository categoryRepository;
@@ -30,35 +31,33 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
 
     @Override
     public void createCategory(Category category) {
-        if(categoryRepository.findByName(category.getName()).isPresent()) {
-            throw new CategoryAlreadyExistsException();
-        }
-        if(category.getName().length() > 50) {
-            throw new CategoryNameIsTooLongException();
-        }
-        if(category.getDescription().length()>90){
-            throw new CategoryDescriptionIsTooLongException();
-        }
         categoryRepository.save(categoryEntityMapper.toEntity(category));
     }
 
     @Override
     public Category getCategory(Long id) {
-        System.out.println("id in infrastructure.output.jpa.adapter CategoryJpaAdapter class"+id.toString());
-        if(categoryRepository.findById(id).isEmpty()) {
-            throw new CategoryNotFoundException();
-        }
-        return categoryEntityMapper.toCategory(categoryRepository.findById(id)
-                .orElseThrow(CategoryNotFoundException::new));
+        CategoryEntity categoryEntity = categoryRepository.findById(id)
+                .orElseThrow(()->new CategoryException(ErrorType.RESOURCE_NOT_FOUND,"category id does not exist"));
+        return categoryEntityMapper.toCategory(categoryEntity);
+        //public interface ICategoryRepository extends JpaRepository<CategoryEntity, Long> {
         //.orElseThrow(() -> new CategoryNotFoundException())); also works
     }
 
     @Override
-    public List<Category> getCategories(Boolean ascendingOrder, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, ascendingOrder ? Sort.by("name").ascending() : Sort.by("name").descending());
-        Page<CategoryEntity> categoryEntityPage = categoryRepository.findAll(pageable);
-        List<Category> categories = categoryEntityMapper.toCategories(categoryEntityPage.getContent());
-        //return new PageImpl<>(categories, pageable, categoryEntityPage.getTotalElements());
+    public boolean categoryNameExists(String categoryName) {
+        return categoryRepository.findByName(categoryName).isPresent();
+    }
+
+    @Override
+    public boolean categoryIdExists(Long id) {
+        return categoryRepository.findById(id).isPresent();
+        //return categoryRepository.findById(id)!=null;
+    }
+
+    @Override
+    public List<Category> getCategories() {
+        List<CategoryEntity> categoryEntities = categoryRepository.findAll();
+        List<Category> categories = categoryEntityMapper.toCategories(categoryEntities);
         return categories;
     }
 }
