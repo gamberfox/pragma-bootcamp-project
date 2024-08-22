@@ -26,15 +26,21 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     }
 
     @Override
-    public Category getCategory(Long id) {
+    public Category getCategoryById(Long id) {
         CategoryEntity categoryEntity = categoryRepository.findById(id)
                 .orElseThrow(()->new CategoryPersistenceException(
                         "category id "
                                 +id.toString()
                                 +" does not exist"));
         return categoryEntityMapper.toCategory(categoryEntity);
-        //public interface ICategoryRepository extends JpaRepository<CategoryEntity, Long> {
-        //.orElseThrow(() -> new CategoryNotFoundException())); also works
+    }
+
+    @Override
+    public Category getCategoryByName(String name) {
+        CategoryEntity categoryEntity = categoryRepository.findByName(name)
+                .orElseThrow(()-> new CategoryPersistenceException(
+                        "category name" +name +" does not exist"));
+        return categoryEntityMapper.toCategory(categoryEntity);
     }
 
     @Override

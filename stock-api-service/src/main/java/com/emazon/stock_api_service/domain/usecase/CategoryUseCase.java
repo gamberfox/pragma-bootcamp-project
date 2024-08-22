@@ -38,8 +38,12 @@ public class CategoryUseCase implements ICategoryServicePort {
     }
 
     @Override
-    public Category getCategory(Long id) {
-        return this.categoryPersistencePort.getCategory(id);
+    public Category getCategoryById(Long id) {
+        return this.categoryPersistencePort.getCategoryById(id);
+    }
+    @Override
+    public Category getCategoryByName(String name) {
+        return this.categoryPersistencePort.getCategoryByName(name);
     }
 
     @Override

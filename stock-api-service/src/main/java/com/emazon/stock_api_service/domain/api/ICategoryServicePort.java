@@ -16,6 +16,7 @@ public interface ICategoryServicePort {
     void validate(Category category);
     //this function will have a connection with the persistence
     void createCategory(Category category);
-    Category getCategory(Long id);
+    Category getCategoryById(Long id);
+    Category getCategoryByName(String name);
     List<Category> getCategories(Boolean ascendingOrder);
 }

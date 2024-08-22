@@ -19,6 +19,7 @@ public interface ICategoryHandler {
     //methods very similar to the domain because it's a CRUD
     //but we're using the methods with elements of the same layer
     void createCategory(CategoryRequest categoryRequest);
-    CategoryResponse getCategoryResponse(Long id);
+    CategoryResponse getCategoryResponseById(Long id);
+    CategoryResponse getCategoryResponseByName(String id);
     List<CategoryResponse> getCategoryResponses(Boolean ascendingOrder);
 }
