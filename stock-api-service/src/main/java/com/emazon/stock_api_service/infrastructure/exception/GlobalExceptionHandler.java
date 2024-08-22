@@ -9,8 +9,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(CategoryException.class)
-    public ResponseEntity<String> handleException(CategoryException ex){
+    public ResponseEntity<String> handleCategoryUseCaseException(CategoryException ex){
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ex.getErrorType().getDescription()+": " + ex.getMessage());
     }
+    @ExceptionHandler(CategoryPersistenceException.class)
+    public ResponseEntity<String> handleCategoryPersistenceException(CategoryPersistenceException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
+    }
+
+    
 }

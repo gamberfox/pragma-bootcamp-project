@@ -39,10 +39,6 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public Category getCategory(Long id) {
-        if(!categoryPersistencePort.categoryIdExists(id)){
-            throw new CategoryException(ErrorType.RESOURCE_NOT_FOUND,
-                    "the category id "+id.toString()+" does not exist");
-        }
         return this.categoryPersistencePort.getCategory(id);
     }
 
@@ -50,23 +46,13 @@ public class CategoryUseCase implements ICategoryServicePort {
     public List<Category> getCategories(Boolean ascendingOrder) {
         // Pass the pagination parameters to the persistence port
         List<Category> categories= this.categoryPersistencePort.getCategories();
-        if(ascendingOrder) {
-            //categories.sort(Comparator.comparing(Category::getName));
-            categories.sort((a, b) -> a.getName().compareTo(b.getName()));
-        }
-        else{
-            categories.sort((a, b) -> b.getName().compareTo(a.getName()));
-        }
+        sortCategories(categories, ascendingOrder);
         return categories;
     }
     @Override
     public void validate(Category category) {
         if(category.getName().equals("t")){
             throw new CategoryException(ErrorType.VALIDATION_ERROR,"test exception");
-        }
-        if(categoryPersistencePort.categoryNameExists(category.getName())) {
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the category name "+category.getName()+" already exists");
         }
         if(category.getName().length()>50){
             throw new CategoryException(ErrorType.VALIDATION_ERROR,
@@ -83,6 +69,15 @@ public class CategoryUseCase implements ICategoryServicePort {
         if(category.getDescription().isEmpty()){
             throw new CategoryException(ErrorType.VALIDATION_ERROR,
                     "the description cannot be empty");
+        }
+    }
+    public void sortCategories(List<Category>categories,Boolean ascendingOrder) {
+        if(ascendingOrder) {
+            //categories.sort(Comparator.comparing(Category::getName));
+            categories.sort((a, b) -> a.getName().compareTo(b.getName()));
+        }
+        else{
+            categories.sort((a, b) -> b.getName().compareTo(a.getName()));
         }
     }
 }
