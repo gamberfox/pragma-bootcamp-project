@@ -1,12 +1,12 @@
 package com.emazon.stock_api_service.domain.usecase;
 
 import com.emazon.stock_api_service.domain.api.ICategoryServicePort;
-import com.emazon.stock_api_service.domain.exception.ErrorType;
-import com.emazon.stock_api_service.domain.exception.category.*;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
+
 
 public class CategoryUseCase implements ICategoryServicePort {
     //@AutoWired is not recommended, if you want to do dependency injection,
@@ -85,84 +85,6 @@ public class CategoryUseCase implements ICategoryServicePort {
                     "the description cannot be empty");
         }
     }
-    @Override
-    public void validate(Category category) {
-        if(category.getName().equals("t")){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,"test exception");
-        }
-        if(categoryPersistencePort.categoryNameExists(category.getName())) {
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the category name "+category.getName()+" already exists");
-        }
-        if(category.getName().length()>50){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the name is too long, it cannot be longer than 50 characters");
-        }
-        if(category.getDescription().length()>90){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the description is too long, it cannot be longer than 90 characters");
-        }
-        if(category.getName().isEmpty()){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the name cannot be empty");
-        }
-        if(category.getDescription().isEmpty()){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the description cannot be empty");
-        }
-    }
-    @Override
-    public void validate(Category category) {
-        if(category.getName().equals("t")){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,"test exception");
-        }
-        if(categoryPersistencePort.categoryNameExists(category.getName())) {
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the category name "+category.getName()+" already exists");
-        }
-        if(category.getName().length()>50){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the name is too long, it cannot be longer than 50 characters");
-        }
-        if(category.getDescription().length()>90){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the description is too long, it cannot be longer than 90 characters");
-        }
-        if(category.getName().isEmpty()){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the name cannot be empty");
-        }
-        if(category.getDescription().isEmpty()){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the description cannot be empty");
-        }
-    }
-    @Override
-    public void validate(Category category) {
-        if(category.getName().equals("t")){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,"test exception");
-        }
-        if(categoryPersistencePort.categoryNameExists(category.getName())) {
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the category name "+category.getName()+" already exists");
-        }
-        if(category.getName().length()>50){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the name is too long, it cannot be longer than 50 characters");
-        }
-        if(category.getDescription().length()>90){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the description is too long, it cannot be longer than 90 characters");
-        }
-        if(category.getName().isEmpty()){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the name cannot be empty");
-        }
-        if(category.getDescription().isEmpty()){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the description cannot be empty");
-        }
-    }
 
     @Override
     public void sortCategories(List<Category> categories,Boolean ascendingOrder) {
@@ -172,33 +94,6 @@ public class CategoryUseCase implements ICategoryServicePort {
         }
         else{
             categories.sort((a, b) -> b.getName().compareTo(a.getName()));
-        }
-    }
-
-    @Override
-    public void validate(Category category) {
-        if(category.getName().equals("t")){
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,"test exception");
-        }
-        if(category.getName().length()>50){
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
-                    "the name is too long, it cannot be longer than 50 characters");
-        }
-        if(category.getName().isEmpty()){
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
-                    "the name cannot be empty");
-        }
-        /*if(categoryPersistencePort.categoryNameExists(category.getName())) {
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
-                    "the category name "+category.getName()+" already exists");
-        }*/
-        if(category.getDescription().length()>90){
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
-                    "the description is too long, it cannot be longer than 90 characters");
-        }
-        if(category.getDescription().isEmpty()){
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
-                    "the description cannot be empty");
         }
     }
 }
