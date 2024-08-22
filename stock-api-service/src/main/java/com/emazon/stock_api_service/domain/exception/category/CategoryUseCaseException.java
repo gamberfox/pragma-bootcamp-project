@@ -2,9 +2,9 @@ package com.emazon.stock_api_service.domain.exception.category;
 
 import com.emazon.stock_api_service.domain.exception.ErrorType;
 
-public class CategoryException extends RuntimeException {
+public class CategoryUseCaseException extends RuntimeException {
   private final ErrorType errorType;
-    public CategoryException(ErrorType errorType,String message) {
+    public CategoryUseCaseException(ErrorType errorType, String message) {
         super(message);
         this.errorType = errorType;
     }

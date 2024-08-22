@@ -18,4 +18,5 @@ public interface ICategoryServicePort {
     void createCategory(Category category);
     Category getCategory(Long id);
     List<Category> getCategories(Boolean ascendingOrder);
+    void sortCategories(List<Category> category,Boolean ascendingOrder);
 }

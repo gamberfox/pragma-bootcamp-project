@@ -5,12 +5,8 @@ import com.emazon.stock_api_service.domain.exception.ErrorType;
 import com.emazon.stock_api_service.domain.exception.category.*;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
-import org.springframework.data.domain.Page;
 
-import java.util.List;
-
-import java.util.List;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryUseCase implements ICategoryServicePort {
@@ -20,6 +16,7 @@ public class CategoryUseCase implements ICategoryServicePort {
     //so we won't use any annotation, therefore we'll make the injection
     //manually
     private final ICategoryPersistencePort categoryPersistencePort;
+    private List<Category> categories;
     //we'll generate a constructor with our attribute
     //we're performing dependency injection through a constructor
     public CategoryUseCase(ICategoryPersistencePort categoryPersistencePort) {
@@ -43,17 +40,19 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public Category getCategory(Long id) {
-        if(!categoryPersistencePort.categoryIdExists(id)){
-            throw new CategoryException(ErrorType.RESOURCE_NOT_FOUND,
-                    "the category id "+id.toString()+" does not exist");
-        }
         return this.categoryPersistencePort.getCategory(id);
     }
 
     @Override
     public List<Category> getCategories(Boolean ascendingOrder) {
         // Pass the pagination parameters to the persistence port
-        List<Category> categories= this.categoryPersistencePort.getCategories();
+        List<Category> categories= categoryPersistencePort.getCategories();
+        sortCategories(categories,ascendingOrder);
+        return categories;
+    }
+
+    @Override
+    public void sortCategories(List<Category> categories,Boolean ascendingOrder) {
         if(ascendingOrder) {
             //categories.sort(Comparator.comparing(Category::getName));
             categories.sort((a, b) -> a.getName().compareTo(b.getName()));
@@ -61,31 +60,31 @@ public class CategoryUseCase implements ICategoryServicePort {
         else{
             categories.sort((a, b) -> b.getName().compareTo(a.getName()));
         }
-        return categories;
     }
+
     @Override
     public void validate(Category category) {
         if(category.getName().equals("t")){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,"test exception");
-        }
-        if(categoryPersistencePort.categoryNameExists(category.getName())) {
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the category name "+category.getName()+" already exists");
+            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,"test exception");
         }
         if(category.getName().length()>50){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
                     "the name is too long, it cannot be longer than 50 characters");
         }
-        if(category.getDescription().length()>90){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
-                    "the description is too long, it cannot be longer than 90 characters");
-        }
         if(category.getName().isEmpty()){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
                     "the name cannot be empty");
         }
+        /*if(categoryPersistencePort.categoryNameExists(category.getName())) {
+            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
+                    "the category name "+category.getName()+" already exists");
+        }*/
+        if(category.getDescription().length()>90){
+            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
+                    "the description is too long, it cannot be longer than 90 characters");
+        }
         if(category.getDescription().isEmpty()){
-            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
                     "the description cannot be empty");
         }
     }
