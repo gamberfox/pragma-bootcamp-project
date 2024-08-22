@@ -1,8 +1,6 @@
 package com.emazon.stock_api_service.infrastructure.output.jpa.adapter;
 
 
-import com.emazon.stock_api_service.domain.exception.ErrorType;
-import com.emazon.stock_api_service.domain.exception.category.CategoryException;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.infrastructure.exception.CategoryPersistenceException;

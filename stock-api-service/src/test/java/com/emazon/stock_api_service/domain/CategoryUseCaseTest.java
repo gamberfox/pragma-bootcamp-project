@@ -1,6 +1,5 @@
-package com.emazon.stock_api_service;
+package com.emazon.stock_api_service.domain;
 
-import com.emazon.stock_api_service.application.handler.CategoryHandler;
 import com.emazon.stock_api_service.domain.exception.ErrorType;
 import com.emazon.stock_api_service.domain.exception.category.CategoryUseCaseException;
 import com.emazon.stock_api_service.domain.model.Category;
@@ -22,11 +21,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-public class StockApiServiceCategoryTest {
+public class CategoryUseCaseTest {
     @Mock
     private ICategoryPersistencePort categoryPersistencePort;
     @InjectMocks
