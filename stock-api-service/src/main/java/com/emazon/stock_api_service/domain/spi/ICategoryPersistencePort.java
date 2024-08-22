@@ -7,10 +7,12 @@ import java.util.List;
 
 import java.util.List;
 
+//implemented by the lord jpa
 //spi are interfaces that extend the capacities of our system.
 public interface ICategoryPersistencePort {
     void createCategory(Category category);
-    Category getCategory(Long id);
+    Category getCategoryById(Long id);
+    Category getCategoryByName(String name);
     boolean categoryNameExists(String categoryName);
     boolean categoryIdExists(Long id);
     List<Category> getCategories();

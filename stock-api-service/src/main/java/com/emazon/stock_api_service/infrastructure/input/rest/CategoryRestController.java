@@ -20,9 +20,11 @@ public class    CategoryRestController {
     @PostMapping("/")
     //we'll return a response entity of a  Void type because we're not interested
     //showing the user/client anything beyond the creation being made
-    public ResponseEntity<Void> createCategory(@RequestBody CategoryRequest categoryRequest) {
+    public ResponseEntity<String> createCategory(@RequestBody CategoryRequest categoryRequest) {
         categoryHandler.createCategory(categoryRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        //return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("category created successfully");
     }
     @GetMapping("/aa")
     public ResponseEntity<String> responseTest(){
@@ -31,7 +33,12 @@ public class    CategoryRestController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable(name="id") Long id) {
-        return ResponseEntity.ok(categoryHandler.getCategoryResponse(id));
+        return ResponseEntity.ok(categoryHandler.getCategoryResponseById(id));
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<CategoryResponse> getCategoryByName(@PathVariable(name="name") String name) {
+        return ResponseEntity.ok(categoryHandler.getCategoryResponseByName(name));
     }
 
     @GetMapping("/all/{ascendingOrder}")

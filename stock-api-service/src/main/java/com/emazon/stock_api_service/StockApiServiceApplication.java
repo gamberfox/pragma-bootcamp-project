@@ -5,10 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class StockApiServiceApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(StockApiServiceApplication.class, args);
 		System.out.println("more at the end");
 	}
-	
 }
