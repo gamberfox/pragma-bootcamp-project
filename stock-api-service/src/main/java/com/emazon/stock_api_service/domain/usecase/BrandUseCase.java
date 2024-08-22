@@ -23,19 +23,31 @@ public class BrandUseCase implements IBrandServicePort {
     }
 
     @Override
-    public Brand getBrand(Long brandId) {
-        return this.brandPersistencePort.getBrand(brandId);
+    public Brand getBrandById(Long brandId) {
+        return this.brandPersistencePort.getBrandById(brandId);
+    }
+
+    @Override
+    public Brand getBrandByName(String name) {
+        return this.brandPersistencePort.getBrandByName(name);
     }
 
     @Override
     public List<Brand> getBrands(Boolean ascendingOrder) {
-        return this.brandPersistencePort.getBrands(ascendingOrder);
+        List<Brand> brands=this.brandPersistencePort.getBrands();
+        sortBrands(brands,ascendingOrder);
+        return brands;
     }
     @Override
     public void validate(Brand brand) {
-
     }
     public void sortBrands(List<Brand> brands, Boolean ascendingOrder) {
-
+        if(ascendingOrder) {
+            //categories.sort(Comparator.comparing(Category::getName));
+            brands.sort((a, b) -> a.getName().compareTo(b.getName()));
+        }
+        else{
+            brands.sort((a, b) -> b.getName().compareTo(a.getName()));
+        }
     }
 }
