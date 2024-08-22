@@ -5,7 +5,6 @@ import com.emazon.stock_api_service.domain.exception.ErrorType;
 import com.emazon.stock_api_service.domain.exception.category.*;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
-
 import java.util.List;
 
 public class CategoryUseCase implements ICategoryServicePort {

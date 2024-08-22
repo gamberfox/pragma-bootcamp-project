@@ -3,7 +3,6 @@ package com.emazon.stock_api_service.domain.usecase;
 import com.emazon.stock_api_service.domain.api.IBrandServicePort;
 import com.emazon.stock_api_service.domain.model.Brand;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
-
 import java.util.List;
 
 public class BrandUseCase implements IBrandServicePort {
