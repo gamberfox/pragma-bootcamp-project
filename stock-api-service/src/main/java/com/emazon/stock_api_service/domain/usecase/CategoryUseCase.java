@@ -1,12 +1,13 @@
 package com.emazon.stock_api_service.domain.usecase;
 
 import com.emazon.stock_api_service.domain.api.ICategoryServicePort;
+import com.emazon.stock_api_service.domain.exception.ErrorType;
+import com.emazon.stock_api_service.domain.exception.category.*;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
-import org.springframework.data.domain.Page;
-
 import java.util.List;
 
+import java.util.List;
 
 public class CategoryUseCase implements ICategoryServicePort {
     //@AutoWired is not recommended, if you want to do dependency injection,
@@ -15,7 +16,6 @@ public class CategoryUseCase implements ICategoryServicePort {
     //so we won't use any annotation, therefore we'll make the injection
     //manually
     private final ICategoryPersistencePort categoryPersistencePort;
-    private List<Category> categories;
     //we'll generate a constructor with our attribute
     //we're performing dependency injection through a constructor
     public CategoryUseCase(ICategoryPersistencePort categoryPersistencePort) {
@@ -83,17 +83,6 @@ public class CategoryUseCase implements ICategoryServicePort {
         if(category.getDescription().isEmpty()){
             throw new CategoryException(ErrorType.VALIDATION_ERROR,
                     "the description cannot be empty");
-        }
-    }
-
-    @Override
-    public void sortCategories(List<Category> categories,Boolean ascendingOrder) {
-        if(ascendingOrder) {
-            //categories.sort(Comparator.comparing(Category::getName));
-            categories.sort((a, b) -> a.getName().compareTo(b.getName()));
-        }
-        else{
-            categories.sort((a, b) -> b.getName().compareTo(a.getName()));
         }
     }
 }
