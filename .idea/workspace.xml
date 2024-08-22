@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4c9ab8d-d6cb-49b7-a30a-63a617d26302" name="Changes" comment="Merge branch 'HU-001' into dev" />
+    <list default="true" id="b4c9ab8d-d6cb-49b7-a30a-63a617d26302" name="Changes" comment="preparing main for merge" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,12 +54,12 @@
     &quot;assignee&quot;: &quot;gamberfox&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;git@github.com:gamberfox/pragma-bootcamp-project.git&quot;,
-    &quot;accountId&quot;: &quot;95acc297-c189-4608-9310-5aeb97108267&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:pragma-bootcamp-repositories/pragma-stock-api-service.git",
+    "accountId": "95acc297-c189-4608-9310-5aeb97108267"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -81,7 +81,6 @@
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.StockApiServiceApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
@@ -139,6 +138,7 @@
       <workItem from="1724340482418" duration="622000" />
       <workItem from="1724341985764" duration="115000" />
       <workItem from="1724342117704" duration="7663000" />
+      <workItem from="1724350999836" duration="201000" />
     </task>
     <task id="LOCAL-00001" summary="merging dev into HU-003&#10;I spent 30 minutes stressing over a space">
       <option name="closed" value="true" />
@@ -252,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724350482515</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="preparing main for merge">
+      <option name="closed" value="true" />
+      <created>1724351153253</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1724351153253</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,6 +316,7 @@
     <MESSAGE value="HU-001 progress&#10;getting a category by using an id or description" />
     <MESSAGE value="merging HU-001 into dev" />
     <MESSAGE value="Merge branch 'HU-001' into dev" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'HU-001' into dev" />
+    <MESSAGE value="preparing main for merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="preparing main for merge" />
   </component>
 </project>
