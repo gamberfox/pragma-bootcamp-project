@@ -6,37 +6,33 @@ DROP TABLE IF EXISTS category;
 ---------------- stock database for the emazon sotre--------------------------------
 USE stock;
 -- brand table
-DROP TABLE IF EXISTS brand;
 CREATE TABLE brand (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_brand BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) UNIQUE,
     description VARCHAR(120)
 );
 -- category table
-DROP TABLE IF EXISTS category;
 CREATE TABLE category (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_category BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) unique,
     description VARCHAR(90) NOT NULL
 );
 -- article table
-DROP TABLE IF EXISTS article;
 CREATE TABLE article (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_article BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) unique,
-    stock_quantity BIGINT,
+    stock_quantity INT,
     price decimal(10, 2),
     id_brand BIGINT,
-    FOREIGN KEY (id_brand) REFERENCES brand(id)
+    FOREIGN KEY (id_brand) REFERENCES brand(id_brand)
 );
 -- article_category table
-DROP TABLE IF EXISTS article_category;
 CREATE TABLE article_category (
     id_article BIGINT NOT NULL,
     id_category BIGINT NOT NULL,
     PRIMARY KEY (id_article, id_category),
-    FOREIGN KEY (id_article) REFERENCES article(id),
-    FOREIGN KEY (id_category) REFERENCES category(id)
+    FOREIGN KEY (id_article) REFERENCES article(id_article),
+    FOREIGN KEY (id_category) REFERENCES category(id_category)
 );
 INSERT INTO brand(name, description)
 VALUES('noke', 'niko brand description');
