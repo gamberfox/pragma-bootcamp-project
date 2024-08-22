@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4c9ab8d-d6cb-49b7-a30a-63a617d26302" name="Changes" comment="preparing main for merge" />
+    <list default="true" id="b4c9ab8d-d6cb-49b7-a30a-63a617d26302" name="Changes" comment="merging dev into main">
+      <change beforePath="$PROJECT_DIR$/stock-api-service/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/stock-api-service/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock-api-service/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/stock-api-service/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock-api-service/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/stock-api-service/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock-api-service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/stock-api-service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock-api-service/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/stock-api-service/.gradle/file-system.probe" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,7 +99,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Spring Boot.StockApiServiceApplication">
+  <component name="RunManager">
     <configuration name="stock-app" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -138,7 +144,7 @@
       <workItem from="1724340482418" duration="622000" />
       <workItem from="1724341985764" duration="115000" />
       <workItem from="1724342117704" duration="7663000" />
-      <workItem from="1724350999836" duration="201000" />
+      <workItem from="1724350999836" duration="653000" />
     </task>
     <task id="LOCAL-00001" summary="merging dev into HU-003&#10;I spent 30 minutes stressing over a space">
       <option name="closed" value="true" />
@@ -260,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724351153253</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="merging dev into main">
+      <option name="closed" value="true" />
+      <created>1724351216376</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1724351216376</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,6 +331,7 @@
     <MESSAGE value="merging HU-001 into dev" />
     <MESSAGE value="Merge branch 'HU-001' into dev" />
     <MESSAGE value="preparing main for merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="preparing main for merge" />
+    <MESSAGE value="merging dev into main" />
+    <option name="LAST_COMMIT_MESSAGE" value="merging dev into main" />
   </component>
 </project>
