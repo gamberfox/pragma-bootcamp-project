@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b4c9ab8d-d6cb-49b7-a30a-63a617d26302" name="Changes" comment="Merge branch 'HU-001' into dev" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/stock-api-service">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="stock-api-service" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;gamberfox&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:gamberfox/pragma-bootcamp-project.git&quot;,
+    &quot;accountId&quot;: &quot;95acc297-c189-4608-9310-5aeb97108267&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2kwCPmSeN53pusH4hHXoe1fpOVn" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build stock-api-service.executor": "Run",
+    "Gradle.CategoryUseCaseTest.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.StockApiServiceApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.StockApiServiceApplication">
+    <configuration name="stock-app" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.emazon.stock_api_service.StockApiServiceApplication" />
+      <module name="stock-api-service.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StockApiServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="stock-api-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.emazon.stock_api_service.StockApiServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.300" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.300" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b4c9ab8d-d6cb-49b7-a30a-63a617d26302" name="Changes" comment="" />
+      <created>1724185231627</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1724185231627</updated>
+      <workItem from="1724185232886" duration="3010000" />
+      <workItem from="1724188608331" duration="1104000" />
+      <workItem from="1724338230323" duration="870000" />
+      <workItem from="1724339214868" duration="161000" />
+      <workItem from="1724339522976" duration="211000" />
+      <workItem from="1724340002530" duration="17000" />
+      <workItem from="1724340051694" duration="29000" />
+      <workItem from="1724340206172" duration="14000" />
+      <workItem from="1724340482418" duration="622000" />
+      <workItem from="1724341985764" duration="115000" />
+      <workItem from="1724342117704" duration="7663000" />
+    </task>
+    <task id="LOCAL-00001" summary="merging dev into HU-003&#10;I spent 30 minutes stressing over a space">
+      <option name="closed" value="true" />
+      <created>1724340574059</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1724340574059</updated>
+    </task>
+    <task id="LOCAL-00002" summary="HU-001 progress">
+      <option name="closed" value="true" />
+      <created>1724342218168</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1724342218168</updated>
+    </task>
+    <task id="LOCAL-00003" summary="preparing for merge">
+      <option name="closed" value="true" />
+      <created>1724342397038</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1724342397038</updated>
+    </task>
+    <task id="LOCAL-00004" summary="preparing for merge">
+      <option name="closed" value="true" />
+      <created>1724342409143</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1724342409143</updated>
+    </task>
+    <task id="LOCAL-00005" summary="preparing for merge">
+      <option name="closed" value="true" />
+      <created>1724342427329</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1724342427329</updated>
+    </task>
+    <task id="LOCAL-00006" summary="HU-003 progress">
+      <option name="closed" value="true" />
+      <created>1724343239728</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1724343239728</updated>
+    </task>
+    <task id="LOCAL-00007" summary="HU-003 progress">
+      <option name="closed" value="true" />
+      <created>1724343338890</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1724343338890</updated>
+    </task>
+    <task id="LOCAL-00008" summary="HU-003 progress">
+      <option name="closed" value="true" />
+      <created>1724343416344</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724343416344</updated>
+    </task>
+    <task id="LOCAL-00009" summary="HU-001 merge issues&#10;there's an incredible amount of bad things that happen when you trust git to automerge">
+      <option name="closed" value="true" />
+      <created>1724346263172</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1724346263172</updated>
+    </task>
+    <task id="LOCAL-00010" summary="HU-001 test progress&#10;setting up tests">
+      <option name="closed" value="true" />
+      <created>1724346689868</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1724346689868</updated>
+    </task>
+    <task id="LOCAL-00011" summary="HU-001 progress&#10;getting a category by using an id or description">
+      <option name="closed" value="true" />
+      <created>1724348324296</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1724348324296</updated>
+    </task>
+    <task id="LOCAL-00012" summary="HU-001 progress&#10;getting a category by using an id or description">
+      <option name="closed" value="true" />
+      <created>1724350317378</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1724350317378</updated>
+    </task>
+    <task id="LOCAL-00013" summary="HU-001 progress&#10;getting a category by using an id or description">
+      <option name="closed" value="true" />
+      <created>1724350353310</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1724350353310</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Merge branch 'HU-001' into dev">
+      <option name="closed" value="true" />
+      <created>1724350482515</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1724350482515</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="dev" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="merging dev into HU-003&#10;I spent 30 minutes stressing over a space" />
+    <MESSAGE value="HU-001 progress" />
+    <MESSAGE value="preparing for merge" />
+    <MESSAGE value="merging HU-003 into dev" />
+    <MESSAGE value="HU-003 progress" />
+    <MESSAGE value="HU-001 merge issues&#10;there's an incredible amount of bad things that happen when you trust git to automerge" />
+    <MESSAGE value="HU-001 test progress&#10;setting up tests" />
+    <MESSAGE value="merge preparation" />
+    <MESSAGE value="HU-001 progress&#10;getting a category by using an id or description" />
+    <MESSAGE value="merging HU-001 into dev" />
+    <MESSAGE value="Merge branch 'HU-001' into dev" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'HU-001' into dev" />
+  </component>
+</project>
