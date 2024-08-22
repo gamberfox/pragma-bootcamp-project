@@ -18,6 +18,7 @@ public class BrandUseCase implements IBrandServicePort {
     @Override
     public void createBrand(Brand brand) {
         //we're using the class that will be implemented by the interface we declared
+        validate(brand);
         this.brandPersistencePort.createBrand(brand);
     }
 
@@ -32,6 +33,9 @@ public class BrandUseCase implements IBrandServicePort {
     }
     @Override
     public void validate(Brand brand) {
+
+    }
+    public void sortBrands(List<Brand> brands, Boolean ascendingOrder) {
 
     }
 }
