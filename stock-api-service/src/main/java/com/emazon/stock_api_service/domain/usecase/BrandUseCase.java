@@ -3,6 +3,7 @@ package com.emazon.stock_api_service.domain.usecase;
 import com.emazon.stock_api_service.domain.api.IBrandServicePort;
 import com.emazon.stock_api_service.domain.model.Brand;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
+
 import java.util.List;
 
 public class BrandUseCase implements IBrandServicePort {
@@ -12,6 +13,8 @@ public class BrandUseCase implements IBrandServicePort {
         //we're performing dependency injection through a constructor
         this.brandPersistencePort = brandPersistencePort;
     }
+
+
     @Override
     public void createBrand(Brand brand) {
         //we're using the class that will be implemented by the interface we declared
@@ -24,7 +27,11 @@ public class BrandUseCase implements IBrandServicePort {
     }
 
     @Override
-    public List<Brand> getBrands(Boolean ascendingOrder, int page, int size) {
-        return this.brandPersistencePort.getBrands(ascendingOrder, page, size);
+    public List<Brand> getBrands(Boolean ascendingOrder) {
+        return this.brandPersistencePort.getBrands(ascendingOrder);
+    }
+    @Override
+    public void validate(Brand brand) {
+
     }
 }

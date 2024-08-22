@@ -7,5 +7,5 @@ import java.util.List;
 public interface IBrandPersistencePort {
     void createBrand(Brand brand);
     Brand getBrand(Long brandName);
-    List<Brand> getBrands(Boolean ascendingOrder, int page, int size);
+    List<Brand> getBrands(Boolean ascendingOrder);
 }

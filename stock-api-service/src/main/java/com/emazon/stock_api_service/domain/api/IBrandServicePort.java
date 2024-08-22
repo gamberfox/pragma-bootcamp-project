@@ -5,7 +5,8 @@ import com.emazon.stock_api_service.domain.model.Brand;
 import java.util.List;
 
 public interface IBrandServicePort {
+    void validate(Brand brand);
     void createBrand(Brand brand);
     Brand getBrand(Long brandId);
-    List<Brand> getBrands(Boolean ascendingOrder, int page, int size);
+    List<Brand> getBrands(Boolean ascendingOrder);
 }

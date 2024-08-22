@@ -1,4 +1,2 @@
-######these are personal notes about the project
-
 START:
-start time for development
+3:37
