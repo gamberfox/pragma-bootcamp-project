@@ -2,14 +2,18 @@ package com.emazon.stock_api_service.infrastructure.output.jpa.adapter;
 
 
 import com.emazon.stock_api_service.domain.exception.ErrorType;
-import com.emazon.stock_api_service.domain.exception.category.CategoryUseCaseException;
+import com.emazon.stock_api_service.domain.exception.category.CategoryException;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
-import com.emazon.stock_api_service.infrastructure.exception.CategoryPersistenceException;
+import com.emazon.stock_api_service.infrastructure.exception.CategoryNotFoundException;
 import com.emazon.stock_api_service.infrastructure.output.jpa.entity.CategoryEntity;
 import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.ICategoryEntityMapper;
 import com.emazon.stock_api_service.infrastructure.output.jpa.repository.ICategoryRepository;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -20,16 +24,13 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
 
     @Override
     public void createCategory(Category category) {
-        if(categoryRepository.findByName(category.getName()).isPresent()) {
-            throw new CategoryPersistenceException("BAD REQUEST: Category with name " + category.getName() + " already exists");
-        }
         categoryRepository.save(categoryEntityMapper.toEntity(category));
     }
 
     @Override
     public Category getCategory(Long id) {
         CategoryEntity categoryEntity = categoryRepository.findById(id)
-                .orElseThrow(()->new CategoryPersistenceException("RESOURCE NOT FOUND: category id does not exist"));
+                .orElseThrow(()->new CategoryException(ErrorType.RESOURCE_NOT_FOUND,"category id does not exist"));
         return categoryEntityMapper.toCategory(categoryEntity);
         //public interface ICategoryRepository extends JpaRepository<CategoryEntity, Long> {
         //.orElseThrow(() -> new CategoryNotFoundException())); also works
