@@ -13,6 +13,10 @@ import java.util.List;
 
 import java.util.List;
 
+import java.util.List;
+
+import java.util.List;
+
 public class CategoryUseCase implements ICategoryServicePort {
     //@AutoWired is not recommended, if you want to do dependency injection,
     //you need to do it through injections in the class constructor.
@@ -63,6 +67,32 @@ public class CategoryUseCase implements ICategoryServicePort {
             categories.sort((a, b) -> b.getName().compareTo(a.getName()));
         }
         return categories;
+    }
+    @Override
+    public void validate(Category category) {
+        if(category.getName().equals("t")){
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,"test exception");
+        }
+        if(categoryPersistencePort.categoryNameExists(category.getName())) {
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+                    "the category name "+category.getName()+" already exists");
+        }
+        if(category.getName().length()>50){
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+                    "the name is too long, it cannot be longer than 50 characters");
+        }
+        if(category.getDescription().length()>90){
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+                    "the description is too long, it cannot be longer than 90 characters");
+        }
+        if(category.getName().isEmpty()){
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+                    "the name cannot be empty");
+        }
+        if(category.getDescription().isEmpty()){
+            throw new CategoryException(ErrorType.VALIDATION_ERROR,
+                    "the description cannot be empty");
+        }
     }
     @Override
     public void validate(Category category) {
