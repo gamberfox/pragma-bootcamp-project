@@ -1,7 +1,7 @@
 package com.emazon.stock_api_service.domain;
 
 import com.emazon.stock_api_service.domain.exception.ErrorType;
-import com.emazon.stock_api_service.domain.exception.category.CategoryUseCaseException;
+import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.domain.usecase.CategoryUseCase;

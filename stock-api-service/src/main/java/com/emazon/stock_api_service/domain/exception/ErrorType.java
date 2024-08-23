@@ -1,7 +1,7 @@
 package com.emazon.stock_api_service.domain.exception;
 
 public enum ErrorType {
-    VALIDATION_ERROR("Validation Error"),
+    VALIDATION_ERROR("VALIDATION_ERROR: "),
     RESOURCE_NOT_FOUND("Resource Not Found"),
     CONFLICT("Conflict"),
     UNAUTHORIZED("Unauthorized"),

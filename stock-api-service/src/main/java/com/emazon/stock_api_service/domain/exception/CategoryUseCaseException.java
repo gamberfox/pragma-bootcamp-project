@@ -1,6 +1,4 @@
-package com.emazon.stock_api_service.domain.exception.category;
-
-import com.emazon.stock_api_service.domain.exception.ErrorType;
+package com.emazon.stock_api_service.domain.exception;
 
 public class CategoryUseCaseException extends RuntimeException {
   private final ErrorType errorType;
