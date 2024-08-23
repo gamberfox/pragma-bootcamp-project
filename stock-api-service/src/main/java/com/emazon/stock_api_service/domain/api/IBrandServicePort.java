@@ -9,5 +9,4 @@ public interface IBrandServicePort {
     void createBrand(Brand brand);
     Brand getBrandById(Long id);
     Brand getBrandByName(String name);
-    List<Brand> getBrands(Boolean ascendingOrder);
 }

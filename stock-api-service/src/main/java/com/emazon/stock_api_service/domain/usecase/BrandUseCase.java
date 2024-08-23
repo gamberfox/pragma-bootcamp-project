@@ -1,23 +1,22 @@
 package com.emazon.stock_api_service.domain.usecase;
 
 import com.emazon.stock_api_service.domain.api.IBrandServicePort;
+import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
 import com.emazon.stock_api_service.domain.model.Brand;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 
 import java.util.List;
 
 public class BrandUseCase implements IBrandServicePort {
-    //dependency injection will be done manually
+    private static int MAXIMUM_NAME_LENGTH=50;
+    private static int MAXIMUM_DESCRIPTION_LENGTH=120;
     private final IBrandPersistencePort brandPersistencePort;
     public BrandUseCase(IBrandPersistencePort brandPersistencePort) {
-        //we're performing dependency injection through a constructor
         this.brandPersistencePort = brandPersistencePort;
     }
 
-
     @Override
     public void createBrand(Brand brand) {
-        //we're using the class that will be implemented by the interface we declared
         validate(brand);
         this.brandPersistencePort.createBrand(brand);
     }
@@ -31,23 +30,27 @@ public class BrandUseCase implements IBrandServicePort {
     public Brand getBrandByName(String name) {
         return this.brandPersistencePort.getBrandByName(name);
     }
-
-    @Override
-    public List<Brand> getBrands(Boolean ascendingOrder) {
-        List<Brand> brands=this.brandPersistencePort.getBrands();
-        sortBrands(brands,ascendingOrder);
-        return brands;
-    }
     @Override
     public void validate(Brand brand) {
-    }
-    public void sortBrands(List<Brand> brands, Boolean ascendingOrder) {
-        if(ascendingOrder) {
-            //categories.sort(Comparator.comparing(Category::getName));
-            brands.sort((a, b) -> a.getName().compareTo(b.getName()));
+        if(brand.getName().length()>MAXIMUM_NAME_LENGTH){
+            throw new BrandUseCaseException(
+                    "the brand name cannot be longer than "
+                            +MAXIMUM_NAME_LENGTH
+                            +" characters");
         }
-        else{
-            brands.sort((a, b) -> b.getName().compareTo(a.getName()));
+        if(brand.getName().isEmpty()){
+            throw new BrandUseCaseException(
+                    "the brand name cannot be empty");
+        }
+        if(brand.getDescription().length()>MAXIMUM_DESCRIPTION_LENGTH){
+            throw new BrandUseCaseException(
+                    "the description cannot be longer than "
+                            +MAXIMUM_DESCRIPTION_LENGTH+
+                            " characters");
+        }
+        if(brand.getDescription().isEmpty()){
+            throw new BrandUseCaseException(
+                    "the brand description cannot be empty");
         }
     }
 }

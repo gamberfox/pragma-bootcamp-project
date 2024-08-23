@@ -1,12 +1,10 @@
 package com.emazon.stock_api_service.domain.usecase;
 
 import com.emazon.stock_api_service.domain.api.ICategoryServicePort;
+import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
 import com.emazon.stock_api_service.domain.exception.ErrorType;
-import com.emazon.stock_api_service.domain.exception.category.*;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
-import java.util.List;
-
 import java.util.List;
 
 public class CategoryUseCase implements ICategoryServicePort {
@@ -21,7 +19,6 @@ public class CategoryUseCase implements ICategoryServicePort {
     public CategoryUseCase(ICategoryPersistencePort categoryPersistencePort) {
         this.categoryPersistencePort = categoryPersistencePort;
     }
-
 
     //we need to communicate what we're receiving with the thing that will
     //go through the domain, and what will be sent to the persistence

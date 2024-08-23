@@ -1,6 +1,6 @@
 package com.emazon.stock_api_service.infrastructure.exception;
 
-import com.emazon.stock_api_service.domain.exception.category.CategoryUseCaseException;
+import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
