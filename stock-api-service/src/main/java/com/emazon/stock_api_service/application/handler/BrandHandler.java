@@ -25,13 +25,13 @@ public class BrandHandler implements IBrandHandler{
     }
 
     @Override
-    public BrandResponse getBrandById(Long id) {
+    public BrandResponse getBrandResponseById(Long id) {
         Brand brand= brandServicePort.getBrandById(id);
         return brandResponseMapper.toBrandResponse(brand);
     }
 
     @Override
-    public BrandResponse getBrandByName(String name) {
+    public BrandResponse getBrandResponseByName(String name) {
         Brand brand = brandServicePort.getBrandByName(name);
         return brandResponseMapper.toBrandResponse(brand);
     }

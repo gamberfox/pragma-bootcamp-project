@@ -1,5 +1,6 @@
 package com.emazon.stock_api_service.infrastructure.exception;
 
+import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
 import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,15 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ex.getMessage());
     }
-
+    @ExceptionHandler(BrandUseCaseException.class)
+    public ResponseEntity<String> handleBrandUseCaseException(BrandPersistenceException ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ex.getMessage());
+    }
+    @ExceptionHandler(BrandPersistenceException.class)
+    public ResponseEntity<String> handleBrandPersistenceException(BrandPersistenceException ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ex.getMessage());
+    }
 
 }

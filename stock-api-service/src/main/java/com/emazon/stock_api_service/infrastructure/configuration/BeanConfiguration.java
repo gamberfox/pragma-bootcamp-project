@@ -7,8 +7,11 @@ import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.domain.usecase.BrandUseCase;
 import com.emazon.stock_api_service.domain.usecase.CategoryUseCase;
+import com.emazon.stock_api_service.infrastructure.output.jpa.adapter.BrandJpaAdapter;
 import com.emazon.stock_api_service.infrastructure.output.jpa.adapter.CategoryJpaAdapter;
+import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.IBrandEntityMapper;
 import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.ICategoryEntityMapper;
+import com.emazon.stock_api_service.infrastructure.output.jpa.repository.IBrandRepository;
 import com.emazon.stock_api_service.infrastructure.output.jpa.repository.ICategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +38,7 @@ public class BeanConfiguration {
     }
     @Bean
     public IBrandPersistencePort brandPersistencePort() {
-        return new CategoryJpaAdapter(brandRepository, brandEntityMapper);
+        return new BrandJpaAdapter(brandRepository, brandEntityMapper);
     }
     @Bean
     public IBrandServicePort brandServicePort() {

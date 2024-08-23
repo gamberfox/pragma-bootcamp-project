@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface IBrandHandler {
     void createBrand(BrandRequest brandRequest);
-    BrandResponse getBrandById(Long id);
-    BrandResponse getBrandByName(String name);
+    BrandResponse getBrandResponseById(Long id);
+    BrandResponse getBrandResponseByName(String name);
 }

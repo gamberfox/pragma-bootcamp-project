@@ -8,8 +8,8 @@ import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import java.util.List;
 
 public class BrandUseCase implements IBrandServicePort {
-    private static int MAXIMUM_NAME_LENGTH=50;
-    private static int MAXIMUM_DESCRIPTION_LENGTH=120;
+    private static final int MAXIMUM_NAME_LENGTH=50;
+    private static final int MAXIMUM_DESCRIPTION_LENGTH=120;
     private final IBrandPersistencePort brandPersistencePort;
     public BrandUseCase(IBrandPersistencePort brandPersistencePort) {
         this.brandPersistencePort = brandPersistencePort;
@@ -30,6 +30,7 @@ public class BrandUseCase implements IBrandServicePort {
     public Brand getBrandByName(String name) {
         return this.brandPersistencePort.getBrandByName(name);
     }
+
     @Override
     public void validate(Brand brand) {
         if(brand.getName().length()>MAXIMUM_NAME_LENGTH){
