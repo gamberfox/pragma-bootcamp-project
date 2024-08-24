@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-//we could create the getters, setters, constructors on our own
-//but lombock is very helpful here
 @Getter
 @Setter
 @AllArgsConstructor
