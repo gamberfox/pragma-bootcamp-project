@@ -10,6 +10,8 @@ import com.emazon.stock_api_service.infrastructure.output.jpa.repository.ICatego
 import lombok.RequiredArgsConstructor;
 import java.util.List;
 
+import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NOT_FOUND;
+
 @RequiredArgsConstructor
 public class CategoryJpaAdapter implements ICategoryPersistencePort {
     private final ICategoryRepository categoryRepository;
@@ -17,11 +19,6 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
 
     @Override
     public void createCategory(Category category) {
-        if(categoryRepository.findByName(category.getName()).isPresent()) {
-            throw new CategoryPersistenceException(
-                    "VALIDATION ERROR: the category name "
-                    +category.getName()+" already exists");
-        }
         categoryRepository.save(categoryEntityMapper.toEntity(category));
     }
 
@@ -29,9 +26,7 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     public Category getCategoryById(Long id) {
         CategoryEntity categoryEntity = categoryRepository.findById(id)
                 .orElseThrow(()->new CategoryPersistenceException(
-                        "category id "
-                                +id.toString()
-                                +" does not exist"));
+                        CATEGORY_NOT_FOUND));
         return categoryEntityMapper.toCategory(categoryEntity);
     }
 
@@ -39,7 +34,7 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     public Category getCategoryByName(String name) {
         CategoryEntity categoryEntity = categoryRepository.findByName(name)
                 .orElseThrow(()-> new CategoryPersistenceException(
-                        "category name" +name +" does not exist"));
+                        CATEGORY_NOT_FOUND));
         return categoryEntityMapper.toCategory(categoryEntity);
     }
 

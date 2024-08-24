@@ -7,11 +7,9 @@ import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.infrastructure.exception.ResourceNotFoundException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static com.emazon.stock_api_service.util.Constants.*;
+import static com.emazon.stock_api_service.util.CategoryConstants.*;
 
 public class CategoryUseCase implements ICategoryServicePort {
     //@AutoWired is not recommended, if you want to do dependency injection,
@@ -36,14 +34,14 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public Category getCategoryById(Long id) {
-        if(categoryPersistencePort.getCategoryById(id) == null) {
+        if(Boolean.TRUE.equals(categoryPersistencePort.categoryIdExists(id))) {
             throw new ResourceNotFoundException(CATEGORY_NOT_FOUND);
         }
         return this.categoryPersistencePort.getCategoryById(id);
     }
     @Override
     public Category getCategoryByName(String name) {
-        if(categoryPersistencePort.getCategoryByName(name) == null) {
+        if(Boolean.TRUE.equals(categoryPersistencePort.categoryNameExists(name))) {
             throw new ResourceNotFoundException(CATEGORY_NOT_FOUND);
         }
         return this.categoryPersistencePort.getCategoryByName(name);
@@ -58,17 +56,14 @@ public class CategoryUseCase implements ICategoryServicePort {
     @Override
     public void validate(Category category) {
         List<String> errorList=new ArrayList<>();
+        if(categoryPersistencePort.categoryNameExists(category.getName())) {
+            errorList.add("the category name already exists");
+        }
         if(category.getName().length()>MAXIMUM_CATEGORY_NAME_LENGTH){
-            errorList.add(
-                    "the category name cannot be longer than "
-                            +MAXIMUM_CATEGORY_NAME_LENGTH
-                            +" characters");
+            errorList.add(CATEGORY_NAME_TOO_LONG);
         }
         if(category.getDescription().length()>MAXIMUM_CATEGORY_DESCRIPTION_LENGTH){
-            errorList.add(
-                    "the category description cannot be longer than "
-                            +MAXIMUM_CATEGORY_DESCRIPTION_LENGTH
-                            +" characters");
+            errorList.add(CATEGORY_DESCRIPTION_TOO_LONG);
         }
         if(category.getName().isEmpty()){
             errorList.add(

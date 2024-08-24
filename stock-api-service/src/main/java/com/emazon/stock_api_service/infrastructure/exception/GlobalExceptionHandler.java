@@ -6,27 +6,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(CategoryUseCaseException.class)
     public ResponseEntity<Map<String, Object>> handleCategoryUseCaseException(CategoryUseCaseException ex){
-        Map<String, Object> response = new HashMap<>();
-        response.put("VALIDATION_ERROR: ", ex.getErrorList());
-        response.put("statusCode",HttpStatus.NOT_FOUND.value());
-        response.put("timestamp", System.currentTimeMillis());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        JsonErrorResponse errorResponse =
+                new JsonErrorResponse(HttpStatus.BAD_REQUEST.value(),
+                        ex.getErrorList());
+        return new ResponseEntity<>(errorResponse.getResponse(), HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(CategoryPersistenceException.class)
-    public ResponseEntity<Map<String, Object>> handleCategoryPersistenceException(CategoryPersistenceException ex){
-        Map<String, Object> response = new HashMap<>();
-        response.put("RESOURCE NOT FOUND: ", ex.getMessage());
-        response.put("statusCode",HttpStatus.NOT_FOUND.value());
-        response.put("timestamp", System.currentTimeMillis());
-        return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleResourceNotFoundException(ResourceNotFoundException ex){
+        JsonErrorResponse errorResponse =
+                new JsonErrorResponse(HttpStatus.NOT_FOUND.value(),
+                        ex.getMessage());
+        return new ResponseEntity<>(errorResponse.getResponse(),HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(BrandUseCaseException.class)
     public ResponseEntity<String> handleBrandUseCaseException(BrandPersistenceException ex){

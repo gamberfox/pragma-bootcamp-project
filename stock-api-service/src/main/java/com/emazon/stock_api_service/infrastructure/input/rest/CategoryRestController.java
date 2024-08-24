@@ -44,8 +44,8 @@ public class    CategoryRestController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @PathVariable(name="ascendingOrder") boolean ascendingOrder) {
-        Pageable pageable = PageRequest.of(page, size);
         List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder);
+        Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(new PageImpl<>(categoryResponses, pageable, categoryResponses.size()));
     }
 }
