@@ -1,12 +1,15 @@
 package com.emazon.stock_api_service.domain.exception;
 
+import java.util.List;
+import java.util.Map;
+
 public class CategoryUseCaseException extends RuntimeException {
-  private final ErrorType errorType;
-    public CategoryUseCaseException(ErrorType errorType, String message) {
-        super(message);
-        this.errorType = errorType;
+    private final List<String> errorList;
+    public CategoryUseCaseException(List<String> errorList) {
+        super("VALIDATION_ERROR");
+        this.errorList = errorList;
     }
-  public ErrorType getErrorType() {
-    return errorType;
-  }
+    public List<String> getErrorList() {
+        return errorList;
+    }
 }

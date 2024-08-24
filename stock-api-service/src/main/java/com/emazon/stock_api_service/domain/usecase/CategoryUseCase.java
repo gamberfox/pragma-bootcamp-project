@@ -2,10 +2,16 @@ package com.emazon.stock_api_service.domain.usecase;
 
 import com.emazon.stock_api_service.domain.api.ICategoryServicePort;
 import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
-import com.emazon.stock_api_service.domain.exception.ErrorType;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
+import com.emazon.stock_api_service.infrastructure.exception.ResourceNotFoundException;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.emazon.stock_api_service.util.Constants.*;
 
 public class CategoryUseCase implements ICategoryServicePort {
     //@AutoWired is not recommended, if you want to do dependency injection,
@@ -25,56 +31,58 @@ public class CategoryUseCase implements ICategoryServicePort {
     @Override
     public void createCategory(Category category) {
         this.validate(category);
-        //we're using the class that will be implemented by the interface we declared
-        //we're making separation through interfaces because if we use a
-        //PersistencePort class, that class could change any day, and then we'll have
-        // to change the whole code. we won't be affected by this if we use interfaces
         this.categoryPersistencePort.createCategory(category);
-        //we're using a class that will implement the ICategoryPersistencePort interface
-        //and telling it to createCategory()
     }
 
     @Override
     public Category getCategoryById(Long id) {
+        if(categoryPersistencePort.getCategoryById(id) == null) {
+            throw new ResourceNotFoundException(CATEGORY_NOT_FOUND);
+        }
         return this.categoryPersistencePort.getCategoryById(id);
     }
     @Override
     public Category getCategoryByName(String name) {
+        if(categoryPersistencePort.getCategoryByName(name) == null) {
+            throw new ResourceNotFoundException(CATEGORY_NOT_FOUND);
+        }
         return this.categoryPersistencePort.getCategoryByName(name);
     }
 
     @Override
     public List<Category> getCategories(Boolean ascendingOrder) {
-        // Pass the pagination parameters to the persistence port
         List<Category> categories= this.categoryPersistencePort.getCategories();
         sortCategories(categories, ascendingOrder);
         return categories;
     }
     @Override
     public void validate(Category category) {
-        if(category.getName().equals("t")){
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,"test exception");
+        List<String> errorList=new ArrayList<>();
+        if(category.getName().length()>MAXIMUM_CATEGORY_NAME_LENGTH){
+            errorList.add(
+                    "the category name cannot be longer than "
+                            +MAXIMUM_CATEGORY_NAME_LENGTH
+                            +" characters");
         }
-        if(category.getName().length()>50){
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
-                    "the name is too long, it cannot be longer than 50 characters");
-        }
-        if(category.getDescription().length()>90){
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
-                    "the description is too long, it cannot be longer than 90 characters");
+        if(category.getDescription().length()>MAXIMUM_CATEGORY_DESCRIPTION_LENGTH){
+            errorList.add(
+                    "the category description cannot be longer than "
+                            +MAXIMUM_CATEGORY_DESCRIPTION_LENGTH
+                            +" characters");
         }
         if(category.getName().isEmpty()){
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
+            errorList.add(
                     "the name cannot be empty");
         }
         if(category.getDescription().isEmpty()){
-            throw new CategoryUseCaseException(ErrorType.VALIDATION_ERROR,
-                    "the description cannot be empty");
+            errorList.add("the description cannot be empty");
+        }
+        if(!errorList.isEmpty()){
+            throw new CategoryUseCaseException(errorList);
         }
     }
     public void sortCategories(List<Category>categories,Boolean ascendingOrder) {
-        if(ascendingOrder) {
-            //categories.sort(Comparator.comparing(Category::getName));
+        if(Boolean.TRUE.equals(ascendingOrder)){
             categories.sort((a, b) -> a.getName().compareTo(b.getName()));
         }
         else{

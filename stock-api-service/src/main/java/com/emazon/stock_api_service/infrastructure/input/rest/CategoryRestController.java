@@ -22,13 +22,11 @@ public class    CategoryRestController {
     //showing the user/client anything beyond the creation being made
     public ResponseEntity<String> createCategory(@RequestBody CategoryRequest categoryRequest) {
         categoryHandler.createCategory(categoryRequest);
-        //return ResponseEntity.status(HttpStatus.CREATED).build();
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("category created successfully");
     }
     @GetMapping("/aa")
     public ResponseEntity<String> responseTest(){
-        System.out.println("another aa test");
         return ResponseEntity.ok("another aa test");
     }
     @GetMapping("/{id}")
@@ -46,7 +44,6 @@ public class    CategoryRestController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @PathVariable(name="ascendingOrder") boolean ascendingOrder) {
-        //Pageable pageable = PageRequest.of(page, size, ascendingOrder ? Sort.by("name").ascending() : Sort.by("name").descending());
         Pageable pageable = PageRequest.of(page, size);
         List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder);
         return ResponseEntity.ok(new PageImpl<>(categoryResponses, pageable, categoryResponses.size()));

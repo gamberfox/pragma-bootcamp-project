@@ -4,12 +4,9 @@ import com.emazon.stock_api_service.domain.api.IBrandServicePort;
 import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
 import com.emazon.stock_api_service.domain.model.Brand;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
-
-import java.util.List;
+import static com.emazon.stock_api_service.util.Constants.*;
 
 public class BrandUseCase implements IBrandServicePort {
-    private static final int MAXIMUM_NAME_LENGTH=50;
-    private static final int MAXIMUM_DESCRIPTION_LENGTH=120;
     private final IBrandPersistencePort brandPersistencePort;
     public BrandUseCase(IBrandPersistencePort brandPersistencePort) {
         this.brandPersistencePort = brandPersistencePort;
@@ -33,20 +30,20 @@ public class BrandUseCase implements IBrandServicePort {
 
     @Override
     public void validate(Brand brand) {
-        if(brand.getName().length()>MAXIMUM_NAME_LENGTH){
+        if(brand.getName().length()>MAXIMUM_CATEGORY_NAME_LENGTH){
             throw new BrandUseCaseException(
                     "the brand name cannot be longer than "
-                            +MAXIMUM_NAME_LENGTH
+                            +MAXIMUM_CATEGORY_NAME_LENGTH
                             +" characters");
         }
         if(brand.getName().isEmpty()){
             throw new BrandUseCaseException(
                     "the brand name cannot be empty");
         }
-        if(brand.getDescription().length()>MAXIMUM_DESCRIPTION_LENGTH){
+        if(brand.getDescription().length()>MAXIMUM_CATEGORY_DESCRIPTION_LENGTH){
             throw new BrandUseCaseException(
                     "the description cannot be longer than "
-                            +MAXIMUM_DESCRIPTION_LENGTH+
+                            +MAXIMUM_CATEGORY_DESCRIPTION_LENGTH+
                             " characters");
         }
         if(brand.getDescription().isEmpty()){

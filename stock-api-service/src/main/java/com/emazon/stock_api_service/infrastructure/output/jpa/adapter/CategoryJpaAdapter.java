@@ -51,13 +51,11 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     @Override
     public boolean categoryIdExists(Long id) {
         return categoryRepository.findById(id).isPresent();
-        //return categoryRepository.findById(id)!=null;
     }
 
     @Override
     public List<Category> getCategories() {
         List<CategoryEntity> categoryEntities = categoryRepository.findAll();
-        List<Category> categories = categoryEntityMapper.toCategories(categoryEntities);
-        return categories;
+        return categoryEntityMapper.toCategories(categoryEntities);
     }
 }
