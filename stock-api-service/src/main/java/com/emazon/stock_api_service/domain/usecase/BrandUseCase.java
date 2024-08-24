@@ -4,7 +4,10 @@ import com.emazon.stock_api_service.domain.api.IBrandServicePort;
 import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
 import com.emazon.stock_api_service.domain.model.Brand;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
-import static com.emazon.stock_api_service.util.CategoryConstants.*;
+import com.emazon.stock_api_service.infrastructure.exception.ResourceNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import static com.emazon.stock_api_service.util.BrandConstants.*;
 
 public class BrandUseCase implements IBrandServicePort {
     private final IBrandPersistencePort brandPersistencePort;
@@ -19,36 +22,47 @@ public class BrandUseCase implements IBrandServicePort {
     }
 
     @Override
-    public Brand getBrandById(Long brandId) {
-        return this.brandPersistencePort.getBrandById(brandId);
+    public Brand getBrandById(Long id) {
+        if(Boolean.FALSE.equals(idExists(id))) {
+            throw new ResourceNotFoundException(BRAND_NOT_FOUND);
+        }
+        return brandPersistencePort.getBrandById(id);
     }
 
     @Override
     public Brand getBrandByName(String name) {
+        if(Boolean.FALSE.equals(nameExists(name))) {
+            throw new ResourceNotFoundException(BRAND_NOT_FOUND);
+        }
         return this.brandPersistencePort.getBrandByName(name);
     }
 
     @Override
     public void validate(Brand brand) {
-        if(brand.getName().length()>MAXIMUM_CATEGORY_NAME_LENGTH){
-            throw new BrandUseCaseException(
-                    "the brand name cannot be longer than "
-                            +MAXIMUM_CATEGORY_NAME_LENGTH
-                            +" characters");
+        List<String> errorList=new ArrayList<>();
+        if(Boolean.TRUE.equals(nameExists(brand.getName()))){
+            errorList.add(BRAND_NAME_ALREADY_EXISTS);
+        }
+        if(brand.getName().length()>MAXIMUM_BRAND_NAME_LENGTH){
+            errorList.add(BRAND_NAME_TOO_LONG);
         }
         if(brand.getName().isEmpty()){
-            throw new BrandUseCaseException(
-                    "the brand name cannot be empty");
+            errorList.add(BRAND_NAME_CANNOT_BE_EMPTY);
         }
-        if(brand.getDescription().length()>MAXIMUM_CATEGORY_DESCRIPTION_LENGTH){
-            throw new BrandUseCaseException(
-                    "the description cannot be longer than "
-                            +MAXIMUM_CATEGORY_DESCRIPTION_LENGTH+
-                            " characters");
+        if(brand.getDescription().length()>MAXIMUM_BRAND_DESCRIPTION_LENGTH){
+            errorList.add(BRAND_DESCRIPTION_TOO_LONG);
         }
         if(brand.getDescription().isEmpty()){
-            throw new BrandUseCaseException(
-                    "the brand description cannot be empty");
+            errorList.add(BRAND_DESCRIPTION_CANNOT_BE_EMPTY);
         }
+        if(!errorList.isEmpty()){
+            throw new BrandUseCaseException(errorList);
+        }
+    }
+    public Boolean idExists(Long id) {
+        return this.brandPersistencePort.brandIdExists(id);
+    }
+    public Boolean nameExists(String name) {
+        return this.brandPersistencePort.brandNameExists(name);
     }
 }

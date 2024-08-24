@@ -25,11 +25,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse.getResponse(),HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(BrandUseCaseException.class)
-    public ResponseEntity<String> handleBrandUseCaseException(BrandPersistenceException ex){
-        return new ResponseEntity<>(ex.getMessage(),HttpStatus.BAD_REQUEST);
-    }
-    @ExceptionHandler(BrandPersistenceException.class)
-    public ResponseEntity<String> handleBrandPersistenceException(BrandPersistenceException ex){
-        return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
+    public ResponseEntity<Map<String, Object>> handleBrandUseCaseException(BrandUseCaseException ex){
+        JsonErrorResponse errorResponse =
+                new JsonErrorResponse(HttpStatus.BAD_REQUEST.value(),
+                        ex.getErrorList());
+        return new ResponseEntity<>(errorResponse.getResponse(), HttpStatus.BAD_REQUEST);
     }
 }

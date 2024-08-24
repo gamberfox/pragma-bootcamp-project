@@ -40,26 +40,21 @@ dependencies {
 }
 
 jacoco {
-	toolVersion = "0.8.12" // Specify the JaCoCo version
+	toolVersion = "0.8.12"
 }
+
 tasks.named('test') {
 	useJUnitPlatform()
 	filter {
 		includeTestsMatching "com.emazon.stock_api_service.*"
-		//includeTestsMatching "com.emazon.stock_api_service.StockApiServiceCategoryTest"
 	}
 	finalizedBy jacocoTestReport
 }
 
-
-//test{
-	//finalizedBy jacocoTestReport
-//}
-
 jacocoTestReport {
-	dependsOn test // tests are required to run before generating the report
+	dependsOn test
 	reports {
-		xml.required = true
-		html.required = true
+		xml.required.set(true)
+		html.required.set(true)
 	}
 }
