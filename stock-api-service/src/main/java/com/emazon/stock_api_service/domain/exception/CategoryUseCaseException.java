@@ -1,7 +1,6 @@
 package com.emazon.stock_api_service.domain.exception;
 
 import java.util.List;
-import java.util.Map;
 
 public class CategoryUseCaseException extends RuntimeException {
     private final List<String> errorList;
