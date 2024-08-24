@@ -2,7 +2,6 @@ package com.emazon.stock_api_service.infrastructure.output.jpa.mapper;
 
 import com.emazon.stock_api_service.domain.model.Brand;
 import com.emazon.stock_api_service.infrastructure.output.jpa.entity.BrandEntity;
-import com.emazon.stock_api_service.infrastructure.output.jpa.entity.CategoryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

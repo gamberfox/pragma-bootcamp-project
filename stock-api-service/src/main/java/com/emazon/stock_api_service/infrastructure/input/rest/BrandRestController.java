@@ -3,12 +3,15 @@ package com.emazon.stock_api_service.infrastructure.input.rest;
 
 import com.emazon.stock_api_service.application.dto.BrandRequest;
 import com.emazon.stock_api_service.application.dto.BrandResponse;
-import com.emazon.stock_api_service.application.dto.CategoryResponse;
 import com.emazon.stock_api_service.application.handler.IBrandHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
+import static com.emazon.stock_api_service.util.BrandConstants.BRAND_CREATED;
 
 @RestController
 @RequestMapping("/brand")
@@ -17,10 +20,11 @@ public class BrandRestController {
     private final IBrandHandler brandHandler;
 
     @PostMapping("/")
-    public ResponseEntity<String> createBrand(@RequestBody BrandRequest brandRequest) {
+    public ResponseEntity<Map<String, Object>> createBrand(@RequestBody BrandRequest brandRequest) {
         brandHandler.createBrand(brandRequest);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Brand created");
+        BrandResponse brandResponse=brandHandler.getBrandResponseByName(brandRequest.getName());
+        RestResponse response=new RestResponse(BRAND_CREATED, brandResponse);
+        return new ResponseEntity<>(response.getResponse(),HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
