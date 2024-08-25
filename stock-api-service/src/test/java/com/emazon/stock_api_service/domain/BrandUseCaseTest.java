@@ -12,6 +12,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static com.emazon.stock_api_service.util.BrandConstants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -25,6 +30,30 @@ class BrandUseCaseTest {
     @InjectMocks
     private BrandUseCase brandUseCase;
 
+    @Test
+    void testSortBrands(){
+        Brand c1=new Brand(1L,"a","description");
+        Brand c2=new Brand(2L,"b","description");
+        Brand c3=new Brand(3L,"c","description");
+        List<Brand> organizedBrands = Arrays.asList(c1,c2,c3);
+        List<Brand> brands = Arrays.asList(c1,c3,c2);
+        List<Brand> testList = new ArrayList<>(brands);
+        brandUseCase.sortBrands(testList,true);
+        for(int i=0; i<organizedBrands.size(); i++){
+            assertEquals(organizedBrands.get(i).getId(),testList.get(i).getId());
+            assertEquals(organizedBrands.get(i).getName(),testList.get(i).getName());
+            assertEquals(organizedBrands.get(i).getDescription(),testList.get(i).getDescription());
+        }
+
+        Collections.reverse(organizedBrands);
+        testList = new ArrayList<>(brands);
+        brandUseCase.sortBrands(testList,false);
+        for(int i=0; i<organizedBrands.size(); i++){
+            assertEquals(organizedBrands.get(i).getId(),testList.get(i).getId());
+            assertEquals(organizedBrands.get(i).getName(),testList.get(i).getName());
+            assertEquals(organizedBrands.get(i).getDescription(),testList.get(i).getDescription());
+        }
+    }
     @Test
     void testBrandValidateNameAlreadyExists() {
         when(brandUseCase.nameExists("lego")).thenReturn(true);

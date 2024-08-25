@@ -36,6 +36,11 @@ public class BrandUseCase implements IBrandServicePort {
         }
         return this.brandPersistencePort.getBrandByName(name);
     }
+    public List<Brand> getBrands(Boolean ascendingOrder){
+        List<Brand> brands= brandPersistencePort.getBrands();
+        sortBrands(brands,ascendingOrder);
+        return brands;
+    }
 
     @Override
     public void validate(Brand brand) {
@@ -64,5 +69,14 @@ public class BrandUseCase implements IBrandServicePort {
     }
     public Boolean nameExists(String name) {
         return this.brandPersistencePort.brandNameExists(name);
+    }
+
+    public void sortBrands(List<Brand> brands,Boolean ascendingOrder) {
+        if(Boolean.TRUE.equals(ascendingOrder)){
+            brands.sort((a, b) -> a.getName().compareTo(b.getName()));
+        }
+        else{
+            brands.sort((a, b) -> b.getName().compareTo(a.getName()));
+        }
     }
 }
