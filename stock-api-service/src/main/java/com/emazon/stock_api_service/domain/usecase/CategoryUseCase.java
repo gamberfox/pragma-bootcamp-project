@@ -34,14 +34,14 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public Category getCategoryById(Long id) {
-        if(Boolean.TRUE.equals(categoryPersistencePort.categoryIdExists(id))) {
+        if(Boolean.FALSE.equals(idExists(id))) {
             throw new ResourceNotFoundException(CATEGORY_NOT_FOUND);
         }
         return this.categoryPersistencePort.getCategoryById(id);
     }
     @Override
     public Category getCategoryByName(String name) {
-        if(Boolean.TRUE.equals(categoryPersistencePort.categoryNameExists(name))) {
+        if(Boolean.FALSE.equals(nameExists(name))) {
             throw new ResourceNotFoundException(CATEGORY_NOT_FOUND);
         }
         return this.categoryPersistencePort.getCategoryByName(name);
@@ -56,8 +56,8 @@ public class CategoryUseCase implements ICategoryServicePort {
     @Override
     public void validate(Category category) {
         List<String> errorList=new ArrayList<>();
-        if(categoryPersistencePort.categoryNameExists(category.getName())) {
-            errorList.add("the category name already exists");
+        if(Boolean.TRUE.equals(nameExists(category.getName()))) {
+            errorList.add(CATEGORY_NAME_ALREADY_EXISTS);
         }
         if(category.getName().length()>MAXIMUM_CATEGORY_NAME_LENGTH){
             errorList.add(CATEGORY_NAME_TOO_LONG);
@@ -67,10 +67,10 @@ public class CategoryUseCase implements ICategoryServicePort {
         }
         if(category.getName().isEmpty()){
             errorList.add(
-                    "the name cannot be empty");
+                    CATEGORY_NAME_CANNOT_BE_EMPTY);
         }
         if(category.getDescription().isEmpty()){
-            errorList.add("the description cannot be empty");
+            errorList.add(CATEGORY_DESCRIPTION_CANNOT_BE_EMPTY);
         }
         if(!errorList.isEmpty()){
             throw new CategoryUseCaseException(errorList);
@@ -83,5 +83,11 @@ public class CategoryUseCase implements ICategoryServicePort {
         else{
             categories.sort((a, b) -> b.getName().compareTo(a.getName()));
         }
+    }
+    public Boolean idExists(Long id) {
+        return this.categoryPersistencePort.categoryIdExists(id);
+    }
+    public Boolean nameExists(String name) {
+        return this.categoryPersistencePort.categoryNameExists(name);
     }
 }

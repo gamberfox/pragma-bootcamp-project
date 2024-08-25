@@ -21,6 +21,7 @@ import java.util.List;
 import static com.emazon.stock_api_service.util.CategoryConstants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -61,8 +62,18 @@ class CategoryUseCaseTest {
     }
 
     @Test
+    void testCategoryValidateNameAlreadyExists() {
+        when(categoryUseCase.nameExists("categoryName")).thenReturn(true);
+        Category category = new Category(null,"categoryName", "description");
+        CategoryUseCaseException ex = assertThrows(CategoryUseCaseException.class
+                , () -> categoryUseCase.validate(category));
+        assertEquals(CATEGORY_NAME_ALREADY_EXISTS
+                ,ex.getErrorList().get(0));
+    }
+
+    @Test
     void testCategoryValidateNameTooLong(){
-        Category category = new Category(null, "a".repeat(51), "description");
+        Category category = new Category(null, "a".repeat(MAXIMUM_CATEGORY_NAME_LENGTH+1), "description");
         CategoryUseCaseException ex = assertThrows(CategoryUseCaseException.class
                 , () -> categoryUseCase.validate(category));
         assertEquals(CATEGORY_NAME_TOO_LONG
@@ -73,13 +84,13 @@ class CategoryUseCaseTest {
         Category category = new Category(4L, "", "description");
         CategoryUseCaseException ex = assertThrows(CategoryUseCaseException.class
                 , () -> categoryUseCase.validate(category));
-        assertEquals("the name cannot be empty"
+        assertEquals(CATEGORY_NAME_CANNOT_BE_EMPTY
                 ,ex.getErrorList().get(0));
 
     }
     @Test
     void testCategoryValidateDescriptionTooLong(){
-        Category category = new Category(3L, "lego", "a".repeat(91));
+        Category category = new Category(3L, "lego", "a".repeat(MAXIMUM_CATEGORY_DESCRIPTION_LENGTH+1));
         CategoryUseCaseException ex = assertThrows(CategoryUseCaseException.class
                 , () -> categoryUseCase.validate(category));
         assertEquals(CATEGORY_DESCRIPTION_TOO_LONG
@@ -89,7 +100,7 @@ class CategoryUseCaseTest {
     void testCategoryValidateDescriptionEmpty(){
         Category category = new Category(3L, "lego", "");
         CategoryUseCaseException ex = assertThrows(CategoryUseCaseException.class, () -> categoryUseCase.validate(category));
-        assertEquals("the description cannot be empty"
+        assertEquals(CATEGORY_DESCRIPTION_CANNOT_BE_EMPTY
                 ,ex.getErrorList().get(0));
     }
 }
