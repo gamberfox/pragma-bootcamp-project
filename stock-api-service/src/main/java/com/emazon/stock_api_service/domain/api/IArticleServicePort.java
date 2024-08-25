@@ -5,7 +5,7 @@ import com.emazon.stock_api_service.domain.model.Article;
 import java.util.List;
 
 public interface IArticleServicePort {
-    void validateArticle(Article article);
+    void validate(Article article, List<Long> categoryIdList);
     void createArticle(Article article, List<Long> categoryIdList);
     Article getArticleById(Long id);
     Article getArticleByName(String name);
