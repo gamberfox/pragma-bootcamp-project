@@ -6,6 +6,7 @@ public class ArticleConstants {
     }
     public static final String ARTICLE_CREATED = "The article was successfully created";
     public static final String ARTICLE_NOT_FOUND = "The article does not exist";
+    public static final String CATEGORY_REPEATED = "category is repeated";
     public static final Integer MAXIMUM_ARTICLE_NAME_LENGTH=50;
     public static final Integer MAXIMUM_ARTICLE_DESCRIPTION_LENGTH=90;
     public static final Integer MINIMUM_CATEGORIES_ASSOCIATED=1;
@@ -29,6 +30,6 @@ public class ArticleConstants {
             "the number of categories associated with the article must be at least"
             +MINIMUM_CATEGORIES_ASSOCIATED;
     public static final String MAXIMUM_CATEGORY =
-            "the number of categories associated with the article must be at least"
+            "the number of categories associated with the article must be less than"
                     +MAXIMUM_CATEGORIES_ASSOCIATED;
 }
