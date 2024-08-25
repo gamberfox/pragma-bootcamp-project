@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -33,5 +35,13 @@ public class BrandHandler implements IBrandHandler{
     public BrandResponse getBrandResponseByName(String name) {
         Brand brand = brandServicePort.getBrandByName(name);
         return brandResponseMapper.toBrandResponse(brand);
+    }
+    @Override
+    public List<BrandResponse> getBrandResponses(Boolean ascendingOrder) {
+        List<Brand> brands = brandServicePort.getBrands(ascendingOrder);
+        return brands
+                .stream()
+                .map(brandResponseMapper::toBrandResponse)
+                .toList();
     }
 }

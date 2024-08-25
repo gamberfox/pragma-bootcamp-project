@@ -8,6 +8,11 @@ import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.IBrandEntit
 import com.emazon.stock_api_service.infrastructure.output.jpa.repository.IBrandRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
+import static com.emazon.stock_api_service.util.BrandConstants.BRAND_NAME_ALREADY_EXISTS;
+import static com.emazon.stock_api_service.util.BrandConstants.BRAND_NOT_FOUND;
+
 @RequiredArgsConstructor
 public class BrandJpaAdapter implements IBrandPersistencePort {
     private final IBrandRepository brandRepository;
@@ -15,9 +20,7 @@ public class BrandJpaAdapter implements IBrandPersistencePort {
     @Override
     public void createBrand(Brand brand) {
         if(brandRepository.findByName(brand.getName()).isPresent()) {
-            throw new BrandPersistenceException(
-                    "VALIDATION ERROR: the brand name "
-                            +brand.getName()+" already exists");
+            throw new BrandPersistenceException(BRAND_NAME_ALREADY_EXISTS);
         }
         BrandEntity brandEntity = brandEntityMapper.toBrandEntity(brand);
         brandRepository.save(brandEntity);
@@ -27,9 +30,7 @@ public class BrandJpaAdapter implements IBrandPersistencePort {
     public Brand getBrandById(Long id) {
         BrandEntity brandEntity = brandRepository.findById(id)
                 .orElseThrow(()->new BrandPersistenceException(
-                        "brand id "
-                                +id.toString()
-                                +" does not exist"));
+                        BRAND_NOT_FOUND));
         return brandEntityMapper.toBrand(brandEntity);
     }
 
@@ -37,7 +38,7 @@ public class BrandJpaAdapter implements IBrandPersistencePort {
     public Brand getBrandByName(String name) {
         BrandEntity brandEntity = brandRepository.findByName(name)
                 .orElseThrow(()-> new BrandPersistenceException(
-                        "brand name" +name +" does not exist"));
+                        BRAND_NOT_FOUND));
         return brandEntityMapper.toBrand(brandEntity);
     }
 
@@ -49,5 +50,10 @@ public class BrandJpaAdapter implements IBrandPersistencePort {
     @Override
     public boolean brandIdExists(Long id) {
         return brandRepository.findById(id).isPresent();
+    }
+    @Override
+    public List<Brand> getBrands() {
+        List<BrandEntity> brands=brandRepository.findAll();
+        return brandEntityMapper.toBrands(brands);
     }
 }
