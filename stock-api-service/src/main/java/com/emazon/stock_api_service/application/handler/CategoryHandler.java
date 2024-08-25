@@ -6,17 +6,12 @@ import com.emazon.stock_api_service.application.mapper.ICategoryRequestMapper;
 import com.emazon.stock_api_service.application.mapper.ICategoryResponseMapper;
 import com.emazon.stock_api_service.domain.api.ICategoryServicePort;
 import com.emazon.stock_api_service.domain.model.Category;
-import com.emazon.stock_api_service.infrastructure.output.jpa.entity.CategoryEntity;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-//orchestration of usecases
 @Service
 @RequiredArgsConstructor//the private final variables will be injected
 @Transactional
@@ -39,7 +34,6 @@ public class CategoryHandler implements ICategoryHandler{
         //validation will belong to the infrastructure
         Category category = categoryServicePort.getCategoryById(id);
         return categoryResponseMapper.toCategoryResponse(category);
-        //return categoryResponseMapper.toCategoryResponse(categoryServicePort.getCategory(id));
     }
     @Override
     public CategoryResponse getCategoryResponseByName(String name) {
@@ -50,10 +44,9 @@ public class CategoryHandler implements ICategoryHandler{
     @Override
     public List<CategoryResponse> getCategoryResponses(Boolean ascendingOrder) {
         List<Category> categories = categoryServicePort.getCategories(ascendingOrder);
-        List<CategoryResponse> categoryResponses = categories
+        return categories
                 .stream()
                 .map(categoryResponseMapper::toCategoryResponse)
-                .collect(Collectors.toList());
-        return categoryResponses;
+                .toList();
     }
 }
