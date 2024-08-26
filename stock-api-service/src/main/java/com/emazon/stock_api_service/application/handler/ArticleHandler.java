@@ -5,9 +5,14 @@ import com.emazon.stock_api_service.application.dto.ArticleResponse;
 import com.emazon.stock_api_service.application.mapper.IArticleRequestMapper;
 import com.emazon.stock_api_service.application.mapper.IArticleResponseMapper;
 import com.emazon.stock_api_service.domain.api.IArticleServicePort;
-import com.emazon.stock_api_service.domain.api.IArticleServicePort;
 import com.emazon.stock_api_service.domain.model.Article;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@RequiredArgsConstructor
+@Transactional
 public class ArticleHandler implements IArticleHandler {
     private final IArticleServicePort articleServicePort;
     private final IArticleRequestMapper articleRequestMapper;
@@ -15,7 +20,7 @@ public class ArticleHandler implements IArticleHandler {
     @Override
     public void createArticle(ArticleRequest articleRequest) {
         Article article = articleRequestMapper.toArticle(articleRequest);
-        articleServicePort.createArticle(article);
+        articleServicePort.createArticle(article, articleRequest.getCategoryIds());
     }
 
     @Override

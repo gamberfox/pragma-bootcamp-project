@@ -6,6 +6,6 @@ import com.emazon.stock_api_service.domain.model.Article;
 
 public interface IArticleHandler {
     void createArticle(ArticleRequest articleRequest);
-    ArticleResponse getArticleById(Long id);
-    ArticleResponse getArticleByName(String name);
+    ArticleResponse getArticleResponseById(Long id);
+    ArticleResponse getArticleResponseByName(String name);
 }
