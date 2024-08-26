@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name="article_category")
@@ -14,21 +16,9 @@ import lombok.Setter;
 @Setter
 public class ArticleCategoryEntity {
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "id_article")
-    private ArticleEntity article;
+    @EmbeddedId
+    private ArticleCategoryId id;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "id_category")
-    private CategoryEntity category;
-
-    /*@Id
-    @Column(name = "id_article")
-    private Long idArticle;
-
-    @Id
-    @Column(name = "id_category")
-    private Long idCategory;*/
 }
+
+
