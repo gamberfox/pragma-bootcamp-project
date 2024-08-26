@@ -19,4 +19,5 @@ public class Article {
     private Long stock;
     private BigDecimal price;
     private Long brandId;
+    private List<Category> categories;
 }

@@ -4,6 +4,7 @@ package com.emazon.stock_api_service.infrastructure.configuration;
 import com.emazon.stock_api_service.domain.api.IArticleServicePort;
 import com.emazon.stock_api_service.domain.api.IBrandServicePort;
 import com.emazon.stock_api_service.domain.api.ICategoryServicePort;
+import com.emazon.stock_api_service.domain.spi.IArticleCategoryPersistencePort;
 import com.emazon.stock_api_service.domain.spi.IArticlePersistencePort;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
@@ -11,7 +12,9 @@ import com.emazon.stock_api_service.domain.usecase.ArticleUseCase;
 import com.emazon.stock_api_service.domain.usecase.BrandUseCase;
 import com.emazon.stock_api_service.domain.usecase.CategoryUseCase;
 import com.emazon.stock_api_service.infrastructure.output.jpa.adapter.BrandJpaAdapter;
+import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.IArticleCategoryEntityMapper;
 import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.IBrandEntityMapper;
+import com.emazon.stock_api_service.infrastructure.output.jpa.repository.IArticleCategoryRepository;
 import com.emazon.stock_api_service.infrastructure.output.jpa.repository.IBrandRepository;
 import com.emazon.stock_api_service.infrastructure.output.jpa.adapter.CategoryJpaAdapter;
 import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.ICategoryEntityMapper;
@@ -35,6 +38,8 @@ public class BeanConfiguration {
     private final IBrandEntityMapper brandEntityMapper;
     private final IArticleRepository articleRepository;
     private final IArticleEntityMapper articleEntityMapper;
+    private final IArticleCategoryRepository articleCategoryRepository;
+    private final IArticleCategoryEntityMapper articleCategoryEntityMapper;
 
     @Bean
     public ICategoryPersistencePort categoryPersistencePort() {
@@ -54,10 +59,16 @@ public class BeanConfiguration {
     }
     @Bean
     public IArticlePersistencePort articlePersistencePort() {
-        return new ArticleJpaAdapter(articleRepository, articleEntityMapper);
+        return new ArticleJpaAdapter(
+                articleRepository,articleEntityMapper
+                ,articleCategoryRepository,articleCategoryEntityMapper);
     }
     @Bean
     public IArticleServicePort articleServicePort() {
-        return new ArticleUseCase(articlePersistencePort());
+        return new ArticleUseCase(
+                articlePersistencePort()
+                ,articleCategoryPersistencePort()
+        ,categoryPersistencePort()
+        ,brandPersistencePort());
     }
 }

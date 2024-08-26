@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArticleCategory {
-    Long categoryId;
     Long articleId;
+    Long categoryId;
 }
