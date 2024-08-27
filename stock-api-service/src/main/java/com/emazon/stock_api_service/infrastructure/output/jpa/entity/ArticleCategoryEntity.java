@@ -17,11 +17,11 @@ public class ArticleCategoryEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_article", insertable = false, updatable = false)
-    private ArticleEntity article;
+    private ArticleEntity articleId;
 
     @ManyToOne
     @JoinColumn(name = "id_category", insertable = false, updatable = false)
-    private CategoryEntity category;
+    private CategoryEntity categoryId;
 }
 
 

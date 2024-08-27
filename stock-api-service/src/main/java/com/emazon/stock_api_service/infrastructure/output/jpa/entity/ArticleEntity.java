@@ -21,7 +21,10 @@ public class ArticleEntity {
     private Long id;
     private String name;
     private String description;
+
+    @Column(name = "stock_quantity")
     private Long stock;
+    @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
     private Long brandId;
 }

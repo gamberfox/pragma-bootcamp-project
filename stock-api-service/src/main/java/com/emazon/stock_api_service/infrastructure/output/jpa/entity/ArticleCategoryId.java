@@ -16,8 +16,8 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class ArticleCategoryId implements Serializable {
     @Column(name = "id_article")
-    private Long article;
+    private Long articleId;
 
     @Column(name = "id_category")
-    private Long category;
+    private Long categoryId;
 }

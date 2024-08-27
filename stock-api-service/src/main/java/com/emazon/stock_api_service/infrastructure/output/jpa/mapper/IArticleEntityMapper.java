@@ -13,6 +13,6 @@ import java.util.List;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IArticleEntityMapper {
     ArticleEntity toArticleEntity(Article article);
-    ArticleCategoryEntity toArticleCategoryEntity(Long articleId, Long categoryId);
+    //ArticleCategoryEntity toArticleCategoryEntity(Long articleId, Long categoryId);
     Article toArticle(ArticleEntity articleEntity,List<Long> categoryIds);
 }

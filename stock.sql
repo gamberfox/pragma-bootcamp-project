@@ -23,7 +23,8 @@ CREATE TABLE category (
 DROP TABLE IF EXISTS article;
 CREATE TABLE article (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) unique,
+    name TEXT,
+    description TEXT,
     stock_quantity BIGINT,
     price decimal(10, 2),
     id_brand BIGINT,
@@ -39,17 +40,20 @@ CREATE TABLE article_category (
     FOREIGN KEY (id_category) REFERENCES category(id)
 );
 INSERT INTO brand(name, description)
-VALUES('noke', 'niko brand description');
+VALUES('brand1', 'brand1 description');
 INSERT INTO brand(name, description)
-VALUES('adodas', 'adedos brand description');
+VALUES('brand2', 'brand2 description');
+--
 INSERT INTO category(name, description)
-VALUES('underwear', 'underwear description');
+VALUES('category1', 'category1 description');
 INSERT INTO category(name, description)
-VALUES('pants', 'pants description');
+VALUES('category2', 'category2 description');
+--
 INSERT INTO article(name, stock_quantity, price, id_brand)
-VALUES('blue pants', 2, 30.00, 1);
+VALUES('article1', 2, 30.00, 1);
 INSERT INTO article(name, stock_quantity, price, id_brand)
-VALUES('white boxers', 5, 10.00, 1);
+VALUES('article2', 5, 10.00, 1);
+--
 INSERT INTO article_category(id_article, id_category)
 VALUES(1, 1);
 INSERT INTO article_category(id_article, id_category)

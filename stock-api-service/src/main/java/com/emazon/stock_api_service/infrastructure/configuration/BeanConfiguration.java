@@ -63,7 +63,8 @@ public class BeanConfiguration {
     public IArticlePersistencePort articlePersistencePort() {
         return new ArticleJpaAdapter(
                 articleRepository,articleEntityMapper
-                ,articleCategoryRepository,articleCategoryEntityMapper);
+                ,articleCategoryRepository,articleCategoryEntityMapper
+        ,categoryRepository,categoryEntityMapper);
     }
     @Bean
     public IArticleServicePort articleServicePort() {
