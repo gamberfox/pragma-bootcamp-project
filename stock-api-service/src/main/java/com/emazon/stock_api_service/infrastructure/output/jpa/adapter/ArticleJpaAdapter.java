@@ -12,6 +12,9 @@ import com.emazon.stock_api_service.infrastructure.output.jpa.repository.IArticl
 import com.emazon.stock_api_service.infrastructure.output.jpa.repository.IArticleRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 public class ArticleJpaAdapter implements IArticlePersistencePort {
     private final IArticleRepository articleRepository;
@@ -22,23 +25,18 @@ public class ArticleJpaAdapter implements IArticlePersistencePort {
     public void createArticle(Article article) {
         ArticleEntity articleEntity = articleEntityMapper.toArticleEntity(article);
         articleRepository.save(articleEntity);
-        for(Category category:article.getCategories()){
+        for(Long categoryId:article.getCategoryIds()){
             articleCategoryRepository
                     .save(articleCategoryEntityMapper
-                            .toArticleCategoryEntity(new ArticleCategory(article.getId(), category.getId())));
+                            .toArticleCategoryEntity(new ArticleCategory(article.getId(), categoryId)));
         }
     }
 
     @Override
     public Article getArticleById(Long id) {
         ArticleEntity articleEntity= articleRepository.findById(id).get();
-        return articleEntityMapper.toArticle(articleEntity);
-    }
-
-    @Override
-    public Article getArticleByName(String name) {
-        ArticleEntity articleEntity = articleRepository.findByName(name).get();
-        return articleEntityMapper.toArticle(articleEntity);
+        List<Long> categoryIdentities = articleCategoryRepository.findCategoryIdsByArticleId(id);
+        return articleEntityMapper.toArticle(articleEntity,categoryIdentities);
     }
 
     @Override

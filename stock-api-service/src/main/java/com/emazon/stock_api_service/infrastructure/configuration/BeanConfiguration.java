@@ -43,7 +43,8 @@ public class BeanConfiguration {
 
     @Bean
     public ICategoryPersistencePort categoryPersistencePort() {
-        return new CategoryJpaAdapter(categoryRepository, categoryEntityMapper);
+        return new CategoryJpaAdapter(
+                categoryRepository, categoryEntityMapper);
     }
     @Bean
     public ICategoryServicePort categoryServicePort() {
@@ -51,7 +52,8 @@ public class BeanConfiguration {
     }
     @Bean
     public IBrandPersistencePort brandPersistencePort() {
-        return new BrandJpaAdapter(brandRepository, brandEntityMapper);
+        return new BrandJpaAdapter(
+                brandRepository, brandEntityMapper);
     }
     @Bean
     public IBrandServicePort brandServicePort() {
@@ -67,7 +69,6 @@ public class BeanConfiguration {
     public IArticleServicePort articleServicePort() {
         return new ArticleUseCase(
                 articlePersistencePort()
-                ,articleCategoryPersistencePort()
         ,categoryPersistencePort()
         ,brandPersistencePort());
     }

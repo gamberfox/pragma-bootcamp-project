@@ -5,6 +5,7 @@ import com.emazon.stock_api_service.domain.exception.ArticleUseCaseException;
 import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import com.emazon.stock_api_service.domain.model.Article;
 import com.emazon.stock_api_service.domain.model.ArticleCategory;
+import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.IArticleCategoryPersistencePort;
 import com.emazon.stock_api_service.domain.spi.IArticlePersistencePort;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
@@ -21,30 +22,21 @@ import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NOT_F
 
 public class ArticleUseCase implements IArticleServicePort {
     private final IArticlePersistencePort articlePersistencePort;
-    private final IArticleCategoryPersistencePort articleCategoryPersistencePort;
     private final ICategoryPersistencePort categoryPersistencePort;
     private final IBrandPersistencePort brandPersistencePort;
 
     public ArticleUseCase(IArticlePersistencePort articlePersistencePort
-    , IArticleCategoryPersistencePort articleCategoryPersistencePort
     , ICategoryPersistencePort categoryPersistencePort
     ,IBrandPersistencePort brandPersistencePort) {
         this.articlePersistencePort = articlePersistencePort;
-        this.articleCategoryPersistencePort=articleCategoryPersistencePort;
         this.categoryPersistencePort=categoryPersistencePort;
         this.brandPersistencePort=brandPersistencePort;
     }
 
     @Override
-    public void createArticle(Article article, List<Long> categoryIds) {
-        validate(article,categoryIds);
+    public void createArticle(Article article) {
+        validate(article);
         articlePersistencePort.createArticle(article);
-        Long articleId=articlePersistencePort
-                .getArticleByName(article.getName()).getId();
-        for(Long categoryId : categoryIds) {
-            articleCategoryPersistencePort
-                    .createArticleCategory(new ArticleCategory(articleId, categoryId));
-        }
     }
 
     @Override
@@ -56,18 +48,12 @@ public class ArticleUseCase implements IArticleServicePort {
     }
 
     @Override
-    public Article getArticleByName(String name) {
-        if(Boolean.FALSE.equals(nameExists(name))) {
-            throw new ResourceNotFoundException(ARTICLE_NOT_FOUND);
-        }
-        return null;
-    }
-
-    @Override
-    public void validate(Article article, List<Long> categoryIds) {
+    public void validate(Article article) {
         List<String> errorList=new ArrayList<>();
         validateArticle(article,errorList);
-        validateCategoryIds(categoryIds,errorList);
+        if(Boolean.FALSE.equals(brandIdExists(article.getBrandId()))){
+            errorList.add(BRAND_ID_NOT_FOUND);
+        }
         if(!errorList.isEmpty()){
             throw new ArticleUseCaseException(errorList);
         }

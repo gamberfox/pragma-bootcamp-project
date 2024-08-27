@@ -7,7 +7,6 @@ import java.util.List;
 public interface IArticlePersistencePort {
     void createArticle(Article article);
     Article getArticleById(Long id);
-    Article getArticleByName(String name);
     Boolean articleIdExists(Long id);
     Boolean articleNameExists(String name);
 }
