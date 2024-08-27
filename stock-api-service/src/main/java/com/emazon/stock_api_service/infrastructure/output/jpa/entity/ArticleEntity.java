@@ -1,5 +1,6 @@
 package com.emazon.stock_api_service.infrastructure.output.jpa.entity;
 
+import com.emazon.stock_api_service.domain.model.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="article")
@@ -27,4 +30,12 @@ public class ArticleEntity {
     @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
     private Long brandId;
+
+    @ManyToMany
+    @JoinTable(
+            name = "article_category",
+            joinColumns = @JoinColumn(name = "id_article"),
+            inverseJoinColumns = @JoinColumn(name = "id_category")
+    )
+    private Set<Category> categories;
 }

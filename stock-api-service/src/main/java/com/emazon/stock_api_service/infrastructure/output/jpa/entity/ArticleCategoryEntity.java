@@ -1,6 +1,7 @@
 package com.emazon.stock_api_service.infrastructure.output.jpa.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,11 +9,18 @@ import lombok.Setter;
 @Entity
 @Table(name = "article_category")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class ArticleCategoryEntity {
 
-    @EmbeddedId
+    @Column(name = "id_article")
+    private Long articleId;
+
+    @Column(name = "id_category")
+    private Long categoryId;
+
+    /*@EmbeddedId
     private ArticleCategoryId id;
 
     @ManyToOne
@@ -21,7 +29,7 @@ public class ArticleCategoryEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_category", insertable = false, updatable = false)
-    private CategoryEntity categoryId;
+    private CategoryEntity categoryId;*/
 }
 
 

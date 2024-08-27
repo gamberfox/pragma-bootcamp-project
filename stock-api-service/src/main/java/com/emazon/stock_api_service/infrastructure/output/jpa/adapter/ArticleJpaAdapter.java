@@ -30,7 +30,13 @@ public class ArticleJpaAdapter implements IArticlePersistencePort {
     public Article createArticle(Article article) {
         ArticleEntity articleEntity = articleEntityMapper.toArticleEntity(article);
         articleEntity =articleRepository.save(articleEntity);
-        ArticleCategoryId articleCategoryId = new ArticleCategoryId();
+        for(Long categoryId:article.getCategoryIds()){
+            articleCategoryRepository
+                    .save(new ArticleCategoryEntity(
+                            articleEntity.getId(), categoryId
+                    ));
+        }
+        /*ArticleCategoryId articleCategoryId = new ArticleCategoryId();
         ArticleCategoryEntity articleCategoryEntity = new ArticleCategoryEntity();
         CategoryEntity categoryEntity = new CategoryEntity();
         articleCategoryId.setArticleId(articleEntity.getId());
@@ -41,7 +47,7 @@ public class ArticleJpaAdapter implements IArticlePersistencePort {
             articleCategoryEntity.setCategoryId(categoryEntity);
             articleCategoryRepository
                     .save(articleCategoryEntity);
-        }
+        }*/
         return articleEntityMapper.toArticle(articleEntity,
                 articleCategoryRepository.findCategoryIdsByArticleId(articleEntity.getId()));
     }
