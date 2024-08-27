@@ -9,9 +9,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name="article_category")
+@Table(name = "article_category")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class ArticleCategoryEntity {
@@ -19,6 +18,7 @@ public class ArticleCategoryEntity {
     @EmbeddedId
     private ArticleCategoryId id;
 
+    // Additional fields if needed
 }
 
 
