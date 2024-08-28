@@ -49,10 +49,22 @@ VALUES('category1', 'category1 description');
 INSERT INTO category(name, description)
 VALUES('category2', 'category2 description');
 --
-INSERT INTO article(name, stock_quantity, price, id_brand)
-VALUES('article1', 2, 30.00, 1);
-INSERT INTO article(name, stock_quantity, price, id_brand)
-VALUES('article2', 5, 10.00, 1);
+INSERT INTO article(
+        name,
+        description,
+        stock_quantity,
+        price,
+        id_brand
+    )
+VALUES('article1', "article description", 2, 30.00, 1);
+INSERT INTO article(
+        name,
+        description,
+        stock_quantity,
+        price,
+        id_brand
+    )
+VALUES('article2', "article description", 5, 10.00, 1);
 --
 INSERT INTO article_category(id_article, id_category)
 VALUES(1, 1);
