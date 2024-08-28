@@ -30,7 +30,10 @@ public class ArticleEntity {
     private Long stock;
     @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
-    private Long brandId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_brand", nullable = false)
+    private BrandEntity brand;
 
     @ManyToMany
     @JoinTable(

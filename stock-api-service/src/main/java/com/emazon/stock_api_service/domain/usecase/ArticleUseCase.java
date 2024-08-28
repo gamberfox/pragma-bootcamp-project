@@ -70,7 +70,7 @@ public class ArticleUseCase implements IArticleServicePort {
         if(categoryIds.isEmpty()){
             errorList.add(MINIMUM_CATEGORY);
         }
-        else{
+        /*else{
             Map<Long, Long> hashMap = new HashMap<>();
             for(Long categoryId : categoryIds) {
                 if(Boolean.TRUE.equals(categoryIdExists(categoryId))) {
@@ -91,7 +91,7 @@ public class ArticleUseCase implements IArticleServicePort {
             else if(MAXIMUM_CATEGORIES_ASSOCIATED<errorList.size()){
                 errorList.add(MAXIMUM_CATEGORY);
             }
-        }
+        }*/
     }
 
     public void validateCategoryNames(List<String> categoryNames,List<String> errorList){

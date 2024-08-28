@@ -32,17 +32,18 @@ public class ArticleHandler implements IArticleHandler {
     @Override
     public void createArticle(ArticleRequest articleRequest) {
         Article article = articleRequestMapper.toArticle(articleRequest);
+        article.setBrand(brandServicePort.getBrandById(articleRequest.getBrandId()));
+        List<Category> categoriesToAdd = new ArrayList<>();
+        for(Long categoryId : articleRequest.getCategoryIds()) {
+            categoriesToAdd.add(categoryServicePort.getCategoryById(categoryId));
+        }
+        article.setCategories(categoriesToAdd);
         articleServicePort.createArticle(article);
     }
 
     @Override
     public ArticleResponse getArticleResponseById(Long id) {
         Article article= articleServicePort.getArticleById(id);
-        Brand brand = brandServicePort.getBrandById(id);
-        List<Category> categories = new ArrayList<>();
-        for(Long categoryId : article.getCategoryIds()) {
-            categories.add(categoryServicePort.getCategoryById(categoryId));
-        }
-        return articleResponseMapper.toArticleResponse(article,brand,categories);
+        return articleResponseMapper.toArticleResponse(article);
     }
 }
