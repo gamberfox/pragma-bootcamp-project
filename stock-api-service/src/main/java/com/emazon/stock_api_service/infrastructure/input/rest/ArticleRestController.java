@@ -21,7 +21,6 @@ public class ArticleRestController {
     @PostMapping("/")
     public ResponseEntity<Map<String, Object>> createArticle(@RequestBody ArticleRequest articleRequest) {
         articleHandler.createArticle(articleRequest);
-        //ArticleResponse articleResponse=articleHandler.getArticleResponseByName(articleRequest.getName());
         RestResponse response=new RestResponse(ARTICLE_CREATED, articleRequest);
         return new ResponseEntity<>(response.getResponse(), HttpStatus.CREATED);
     }
@@ -38,9 +37,4 @@ public class ArticleRestController {
         +articleHandler.getArticleResponseById(id).getId()
         +articleHandler.getArticleResponseById(id).getBrand().getName());
     }
-
-//    @GetMapping("/name/{name}")
-//    public ResponseEntity<ArticleResponse> getArticleByName(@PathVariable(name="name") String name) {
-//        return ResponseEntity.ok(articleHandler.getArticleResponseByName(name));
-//    }
 }

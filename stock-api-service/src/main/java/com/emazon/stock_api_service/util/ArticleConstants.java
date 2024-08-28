@@ -8,11 +8,12 @@ public class ArticleConstants {
     public static final String ARTICLE_NOT_FOUND = "The article does not exist";
     public static final String BRAND_ID_NOT_FOUND = "The brand id does not exist";
     public static final String CATEGORY_REPEATED = "categories cannot be repeated";
+    public static final String CATEGORY_IDS_OBLIGATORY = "you must include at least one category";
     public static final Integer MAXIMUM_ARTICLE_NAME_LENGTH=50;
     public static final Integer MAXIMUM_ARTICLE_DESCRIPTION_LENGTH=90;
     public static final Integer MINIMUM_CATEGORIES_ASSOCIATED=1;
     public static final Integer MAXIMUM_CATEGORIES_ASSOCIATED=3;
-    public static final String CATEGORY_ID_DOES_NOT_EXIST(Long id){
+    public static String CATEGORY_ID_DOES_NOT_EXIST(Long id){
         return "The category id "+id+" does not exist";
     }
     public static final String ARTICLE_NAME_ALREADY_EXISTS =

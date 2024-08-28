@@ -2,13 +2,9 @@ package com.emazon.stock_api_service.application.mapper;
 
 import com.emazon.stock_api_service.application.dto.ArticleResponse;
 import com.emazon.stock_api_service.domain.model.Article;
-import com.emazon.stock_api_service.domain.model.Brand;
-import com.emazon.stock_api_service.domain.model.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,

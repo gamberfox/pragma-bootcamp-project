@@ -44,23 +44,13 @@ public class ArticleUseCase implements IArticleServicePort {
     public void validate(Article article) {
         List<String> errorList=new ArrayList<>();
         validateArticle(article,errorList);
-//        if(Boolean.FALSE.equals(brandIdExists(article.getBrandId()))){
-//            errorList.add(BRAND_ID_NOT_FOUND);
-//        }
         if(!errorList.isEmpty()){
             throw new ArticleUseCaseException(errorList);
         }
     }
 
     public void validateArticle(Article article,List<String> errorList){
-//        if(Boolean.TRUE.equals(
-//                nameExists(article.getName()))){
-//            errorList.add(ARTICLE_NAME_ALREADY_EXISTS);
-//        }
-//        if(Boolean.FALSE.equals(
-//                categoryIdExists(article.getBrandId()))){
-//            errorList.add(BRAND_NOT_FOUND);
-//        }
+        //empty method
     }
     public void validateCategoryIds(List<Long> categoryIds,List<String> errorList){
         if(categoryIds.isEmpty()){

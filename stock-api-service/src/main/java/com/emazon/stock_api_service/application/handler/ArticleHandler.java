@@ -60,23 +60,29 @@ public class ArticleHandler implements IArticleHandler {
         if(articleRequest.getBrandId()==null){
             errorList.add(BRAND_ID_OBLIGATORY);
         }
-        if(Boolean.FALSE.equals(brandIdExists(articleRequest.getBrandId()))){
-            errorList.add(BRAND_NOT_FOUND);
+        else if(Boolean.FALSE.equals(brandIdExists(articleRequest.getBrandId()))){
+            errorList.add(BRAND_ID_NOT_FOUND);
         }
-        if(articleRequest.getCategoryIds().size()<MINIMUM_CATEGORIES_ASSOCIATED){
-            errorList.add(MINIMUM_CATEGORIES_MESSAGE);
+        if(articleRequest.getCategoryIds()==null){
+            errorList.add(CATEGORY_IDS_OBLIGATORY);
         }
-        if(articleRequest.getCategoryIds().size()>MAXIMUM_CATEGORIES_ASSOCIATED){
-            errorList.add(MAXIMUM_CATEGORIES_MESSAGE);
-        }
-        if((new HashSet<>(articleRequest.getCategoryIds())).size()
-                <articleRequest.getCategoryIds().size()){
-           errorList.add(CATEGORY_REPEATED);
-        }
-        HashSet<Long> categoryIds=new HashSet<>(articleRequest.getCategoryIds());
-        for(Long categoryId : categoryIds){
-            if(Boolean.FALSE.equals(categoryIdExists(categoryId))){
-                errorList.add(CATEGORY_ID_DOES_NOT_EXIST(categoryId));
+        else{
+            if(articleRequest.getCategoryIds().size()<MINIMUM_CATEGORIES_ASSOCIATED){
+                errorList.add(MINIMUM_CATEGORIES_MESSAGE);
+            }
+            if(articleRequest.getCategoryIds().size()
+                    >MAXIMUM_CATEGORIES_ASSOCIATED){
+                errorList.add(MAXIMUM_CATEGORIES_MESSAGE);
+            }
+            HashSet<Long> categoryIdSet=new HashSet<>(articleRequest.getCategoryIds());
+            if(categoryIdSet.size()
+                    <articleRequest.getCategoryIds().size()){
+               errorList.add(CATEGORY_REPEATED);
+            }
+            for(Long categoryId : categoryIdSet){
+                if(Boolean.FALSE.equals(categoryIdExists(categoryId))){
+                    errorList.add(CATEGORY_ID_DOES_NOT_EXIST(categoryId));
+                }
             }
         }
         if(!errorList.isEmpty()){

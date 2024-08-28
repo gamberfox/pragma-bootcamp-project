@@ -46,9 +46,9 @@ jacoco {
 
 tasks.named('test') {
 	useJUnitPlatform()
-	filter {
-		includeTestsMatching "com.emazon.stock_api_service.*"
-	}
+//	filter {
+//		includeTestsMatching "com.emazon.stock_api_service.*"
+//	}
 	finalizedBy jacocoTestReport
 }
 
