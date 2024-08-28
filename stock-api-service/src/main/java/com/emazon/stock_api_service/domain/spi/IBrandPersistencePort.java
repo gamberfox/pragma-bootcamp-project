@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface IBrandPersistencePort {
     void createBrand(Brand brand);
-    Brand getBrand(Long brandName);
-    List<Brand> getBrands(Boolean ascendingOrder);
+    Brand getBrandById(Long id);
+    Brand getBrandByName(String name);
+    boolean brandNameExists(String categoryName);
+    boolean brandIdExists(Long id);
+    List<Brand> getBrands();
 }

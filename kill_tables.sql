@@ -1,0 +1,5 @@
+USE stock;
+DROP TABLE IF EXISTS article_category;
+DROP TABLE IF EXISTS article;
+DROP TABLE IF EXISTS brand;
+DROP TABLE IF EXISTS category;

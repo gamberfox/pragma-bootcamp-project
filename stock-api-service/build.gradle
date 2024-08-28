@@ -30,6 +30,7 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	implementation 'mysql:mysql-connector-java:8.0.33'
 	implementation 'org.junit.jupiter:junit-jupiter:5.11.0'
+	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -40,26 +41,21 @@ dependencies {
 }
 
 jacoco {
-	toolVersion = "0.8.12" // Specify the JaCoCo version
+	toolVersion = "0.8.12"
 }
+
 tasks.named('test') {
 	useJUnitPlatform()
-	filter {
-		includeTestsMatching "com.emazon.stock_api_service.*"
-		//includeTestsMatching "com.emazon.stock_api_service.StockApiServiceCategoryTest"
-	}
+//	filter {
+//		includeTestsMatching "com.emazon.stock_api_service.*"
+//	}
 	finalizedBy jacocoTestReport
 }
 
-
-//test{
-	//finalizedBy jacocoTestReport
-//}
-
 jacocoTestReport {
-	dependsOn test // tests are required to run before generating the report
+	dependsOn test
 	reports {
-		xml.required = true
-		html.required = true
+		xml.required.set(true)
+		html.required.set(true)
 	}
 }

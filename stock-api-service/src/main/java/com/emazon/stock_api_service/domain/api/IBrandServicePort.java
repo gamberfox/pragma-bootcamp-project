@@ -7,6 +7,7 @@ import java.util.List;
 public interface IBrandServicePort {
     void validate(Brand brand);
     void createBrand(Brand brand);
-    Brand getBrand(Long brandId);
+    Brand getBrandById(Long id);
+    Brand getBrandByName(String name);
     List<Brand> getBrands(Boolean ascendingOrder);
 }

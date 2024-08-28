@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name="category")
 @NoArgsConstructor
@@ -21,4 +23,7 @@ public class CategoryEntity {
     private Long id;
     private String name;
     private String description;
+
+    @ManyToMany(mappedBy = "categories")//we tell spring this not the honor entity
+    private List<ArticleEntity> categories;
 }
