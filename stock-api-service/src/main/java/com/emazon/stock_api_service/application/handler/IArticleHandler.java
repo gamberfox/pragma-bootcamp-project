@@ -6,5 +6,8 @@ import com.emazon.stock_api_service.domain.model.Article;
 
 public interface IArticleHandler {
     void createArticle(ArticleRequest articleRequest);
+    void validateIds(ArticleRequest articleRequest);
+    Boolean brandIdExists(Long id);
+    Boolean categoryIdExists(Long id);
     ArticleResponse getArticleResponseById(Long id);
 }

@@ -6,6 +6,7 @@ public class BrandConstants {
     }
     public static final String BRAND_CREATED = "The brand was successfully created";
     public static final String BRAND_NOT_FOUND = "The brand does not exist";
+    public static final String BRAND_ID_OBLIGATORY = "you must include a brand id";
     public static final Integer MAXIMUM_BRAND_NAME_LENGTH=50;
     public static final Integer MAXIMUM_BRAND_DESCRIPTION_LENGTH=90;
     public static final String BRAND_NAME_ALREADY_EXISTS =

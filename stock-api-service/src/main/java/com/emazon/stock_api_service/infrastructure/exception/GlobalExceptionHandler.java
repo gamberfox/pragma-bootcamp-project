@@ -1,5 +1,6 @@
 package com.emazon.stock_api_service.infrastructure.exception;
 
+import com.emazon.stock_api_service.domain.exception.ArticleUseCaseException;
 import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
 import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,13 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(BrandUseCaseException.class)
     public ResponseEntity<Map<String, Object>> handleBrandUseCaseException(BrandUseCaseException ex){
+        JsonErrorResponse errorResponse =
+                new JsonErrorResponse(HttpStatus.BAD_REQUEST.value(),
+                        ex.getErrorList());
+        return new ResponseEntity<>(errorResponse.getResponse(), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(ArticleUseCaseException.class)
+    public ResponseEntity<Map<String, Object>> handleArticleUseCaseException(ArticleUseCaseException ex){
         JsonErrorResponse errorResponse =
                 new JsonErrorResponse(HttpStatus.BAD_REQUEST.value(),
                         ex.getErrorList());

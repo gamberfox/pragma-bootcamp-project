@@ -9,13 +9,9 @@ import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.emazon.stock_api_service.util.ArticleConstants.*;
-import static com.emazon.stock_api_service.util.BrandConstants.BRAND_NOT_FOUND;
-import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NOT_FOUND;
 
 public class ArticleUseCase implements IArticleServicePort {
     private final IArticlePersistencePort articlePersistencePort;
@@ -68,35 +64,13 @@ public class ArticleUseCase implements IArticleServicePort {
     }
     public void validateCategoryIds(List<Long> categoryIds,List<String> errorList){
         if(categoryIds.isEmpty()){
-            errorList.add(MINIMUM_CATEGORY);
+            errorList.add(MINIMUM_CATEGORIES_MESSAGE);
         }
-        /*else{
-            Map<Long, Long> hashMap = new HashMap<>();
-            for(Long categoryId : categoryIds) {
-                if(Boolean.TRUE.equals(categoryIdExists(categoryId))) {
-                    if(!hashMap.containsKey(categoryId)) {
-                        hashMap.put(categoryId, 1L);
-                    }
-                    else if(hashMap.get(categoryId)==2L){
-                        errorList.add(CATEGORY_REPEATED);
-                    }
-                }
-                else{
-                    errorList.add(CATEGORY_NOT_FOUND);
-                }
-            }
-            if(MINIMUM_CATEGORIES_ASSOCIATED>errorList.size()){
-                errorList.add(MINIMUM_CATEGORY);
-            }
-            else if(MAXIMUM_CATEGORIES_ASSOCIATED<errorList.size()){
-                errorList.add(MAXIMUM_CATEGORY);
-            }
-        }*/
     }
 
     public void validateCategoryNames(List<String> categoryNames,List<String> errorList){
         if(categoryNames.isEmpty()){
-            errorList.add(MINIMUM_CATEGORY);
+            errorList.add(MINIMUM_CATEGORIES_MESSAGE);
         }
     }
 
