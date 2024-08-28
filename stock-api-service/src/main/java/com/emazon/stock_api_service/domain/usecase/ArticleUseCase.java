@@ -4,9 +4,6 @@ import com.emazon.stock_api_service.domain.api.IArticleServicePort;
 import com.emazon.stock_api_service.domain.exception.ArticleUseCaseException;
 import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import com.emazon.stock_api_service.domain.model.Article;
-import com.emazon.stock_api_service.domain.model.ArticleCategory;
-import com.emazon.stock_api_service.domain.model.Category;
-import com.emazon.stock_api_service.domain.spi.IArticleCategoryPersistencePort;
 import com.emazon.stock_api_service.domain.spi.IArticlePersistencePort;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
@@ -51,23 +48,23 @@ public class ArticleUseCase implements IArticleServicePort {
     public void validate(Article article) {
         List<String> errorList=new ArrayList<>();
         validateArticle(article,errorList);
-        if(Boolean.FALSE.equals(brandIdExists(article.getBrandId()))){
-            errorList.add(BRAND_ID_NOT_FOUND);
-        }
+//        if(Boolean.FALSE.equals(brandIdExists(article.getBrandId()))){
+//            errorList.add(BRAND_ID_NOT_FOUND);
+//        }
         if(!errorList.isEmpty()){
             throw new ArticleUseCaseException(errorList);
         }
     }
 
     public void validateArticle(Article article,List<String> errorList){
-        if(Boolean.TRUE.equals(
-                nameExists(article.getName()))){
-            errorList.add(ARTICLE_NAME_ALREADY_EXISTS);
-        }
-        if(Boolean.FALSE.equals(
-                categoryIdExists(article.getBrandId()))){
-            errorList.add(BRAND_NOT_FOUND);
-        }
+//        if(Boolean.TRUE.equals(
+//                nameExists(article.getName()))){
+//            errorList.add(ARTICLE_NAME_ALREADY_EXISTS);
+//        }
+//        if(Boolean.FALSE.equals(
+//                categoryIdExists(article.getBrandId()))){
+//            errorList.add(BRAND_NOT_FOUND);
+//        }
     }
     public void validateCategoryIds(List<Long> categoryIds,List<String> errorList){
         if(categoryIds.isEmpty()){

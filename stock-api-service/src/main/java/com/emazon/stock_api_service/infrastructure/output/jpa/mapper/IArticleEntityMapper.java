@@ -1,7 +1,6 @@
 package com.emazon.stock_api_service.infrastructure.output.jpa.mapper;
 
 import com.emazon.stock_api_service.domain.model.Article;
-import com.emazon.stock_api_service.infrastructure.output.jpa.entity.ArticleCategoryEntity;
 import com.emazon.stock_api_service.infrastructure.output.jpa.entity.ArticleEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -14,5 +13,5 @@ import java.util.List;
 public interface IArticleEntityMapper {
     ArticleEntity toArticleEntity(Article article);
     //ArticleCategoryEntity toArticleCategoryEntity(Long articleId, Long categoryId);
-    Article toArticle(ArticleEntity articleEntity,List<Long> categoryIds);
+    Article toArticle(ArticleEntity articleEntity);
 }

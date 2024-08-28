@@ -1,6 +1,7 @@
 package com.emazon.stock_api_service.infrastructure.output.jpa.entity;
 
 import com.emazon.stock_api_service.domain.model.Category;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,5 +38,5 @@ public class ArticleEntity {
             joinColumns = @JoinColumn(name = "id_article"),
             inverseJoinColumns = @JoinColumn(name = "id_category")
     )
-    private Set<Category> categories;
+    private List<CategoryEntity> categories;
 }

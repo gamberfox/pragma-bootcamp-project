@@ -18,6 +18,6 @@ public class Article {
     private String description;
     private Long stock;
     private BigDecimal price;
-    private Long brandId;
-    private List<Long> categoryIds;
+    private Brand brand;
+    private List<Category> categories;
 }
