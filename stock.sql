@@ -27,17 +27,17 @@ CREATE TABLE article (
     description TEXT,
     stock_quantity BIGINT,
     price decimal(10, 2),
-    id_brand BIGINT,
-    FOREIGN KEY (id_brand) REFERENCES brand(id)
+    brand_id BIGINT,
+    FOREIGN KEY (brand_id) REFERENCES brand(id)
 );
 -- article_category table
 DROP TABLE IF EXISTS article_category;
 CREATE TABLE article_category (
-    id_article BIGINT NOT NULL,
-    id_category BIGINT NOT NULL,
-    PRIMARY KEY (id_article, id_category),
-    FOREIGN KEY (id_article) REFERENCES article(id),
-    FOREIGN KEY (id_category) REFERENCES category(id)
+    article_id BIGINT NOT NULL,
+    category_id BIGINT NOT NULL,
+    PRIMARY KEY (article_id, category_id),
+    FOREIGN KEY (article_id) REFERENCES article(id),
+    FOREIGN KEY (category_id) REFERENCES category(id)
 );
 INSERT INTO brand(name, description)
 VALUES('brand1', 'brand1 description');
@@ -54,7 +54,7 @@ INSERT INTO article(
         description,
         stock_quantity,
         price,
-        id_brand
+        brand_id
     )
 VALUES('article1', "article description", 2, 30.00, 1);
 INSERT INTO article(
@@ -62,11 +62,11 @@ INSERT INTO article(
         description,
         stock_quantity,
         price,
-        id_brand
+        brand_id
     )
 VALUES('article2', "article description", 5, 10.00, 1);
 --
-INSERT INTO article_category(id_article, id_category)
+INSERT INTO article_category(article_id, category_id)
 VALUES(1, 1);
-INSERT INTO article_category(id_article, id_category)
+INSERT INTO article_category(article_id, category_id)
 VALUES(2, 2);

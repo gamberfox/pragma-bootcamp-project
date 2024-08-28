@@ -1,7 +1,5 @@
 package com.emazon.stock_api_service.infrastructure.output.jpa.entity;
 
-import com.emazon.stock_api_service.domain.model.Category;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,14 +30,14 @@ public class ArticleEntity {
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_brand", nullable = false)
+    @JoinColumn(name = "brand_id", nullable = false)
     private BrandEntity brand;
 
     @ManyToMany
     @JoinTable(
             name = "article_category",
-            joinColumns = @JoinColumn(name = "id_article"),
-            inverseJoinColumns = @JoinColumn(name = "id_category")
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<CategoryEntity> categories;
 }
