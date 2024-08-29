@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.net.ssl.ExtendedSSLSession;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
 public class Article {
     private Long id;
     private String name;
-    @Size(min=2)
     private String description;
     private Long stock;
     private BigDecimal price;

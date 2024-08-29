@@ -7,6 +7,8 @@ public class ArticleConstants {
     public static final String ARTICLE_CREATED = "The article was successfully created";
     public static final String ARTICLE_NOT_FOUND = "The article does not exist";
     public static final String BRAND_ID_NOT_FOUND = "The brand id does not exist";
+    public static final String BRAND_OBLIGATORY = "you must include a brand";
+    public static final String CATEGORY_LIST_OBLIGATORY = "you must include category list";
     public static final String CATEGORY_REPEATED = "category is repeated";
     public static final Integer MAXIMUM_ARTICLE_NAME_LENGTH=50;
     public static final Integer MAXIMUM_ARTICLE_DESCRIPTION_LENGTH=90;

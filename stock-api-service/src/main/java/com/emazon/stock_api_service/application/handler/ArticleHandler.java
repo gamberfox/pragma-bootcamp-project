@@ -33,6 +33,7 @@ public class ArticleHandler implements IArticleHandler {
     public void createArticle(ArticleRequest articleRequest) {
         Article article = articleRequestMapper.toArticle(articleRequest);
         article.setBrand(brandServicePort.getBrandById(articleRequest.getBrandId()));
+        article.setBrand(brandServicePort.getBrandById(1L));
         List<Category> categoriesToAdd = new ArrayList<>();
         for(Long categoryId : articleRequest.getCategoryIds()) {
             categoriesToAdd.add(categoryServicePort.getCategoryById(categoryId));
