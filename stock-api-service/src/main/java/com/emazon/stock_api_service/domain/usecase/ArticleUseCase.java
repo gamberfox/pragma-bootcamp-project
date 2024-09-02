@@ -103,8 +103,12 @@ public class ArticleUseCase implements IArticleServicePort {
                     if(!hashMap.containsKey(categoryId)) {
                         hashMap.put(categoryId, 1L);
                     }
+                    //we check if the id exists 2 times
                     else if(hashMap.get(categoryId)==2L){
                         errorList.add(CATEGORY_REPEATED);
+                    }
+                    else{
+                        hashMap.put(categoryId, 2L);
                     }
                 }
                 else{
