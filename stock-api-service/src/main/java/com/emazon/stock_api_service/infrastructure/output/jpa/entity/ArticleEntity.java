@@ -1,7 +1,5 @@
 package com.emazon.stock_api_service.infrastructure.output.jpa.entity;
 
-import com.emazon.stock_api_service.domain.model.Category;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +8,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name="article")

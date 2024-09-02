@@ -30,9 +30,9 @@ public class ArticleConstants {
             "The article description cannot be empty";
 
     public static final String MINIMUM_CATEGORY =
-            "the number of categories associated with the article must be at least"
+            "the number of categories associated with the article must be at least "
             +MINIMUM_CATEGORIES_ASSOCIATED;
     public static final String MAXIMUM_CATEGORY =
-            "the number of categories associated with the article must be less than"
+            "the number of categories associated with the article must be less than "
                     +MAXIMUM_CATEGORIES_ASSOCIATED;
 }

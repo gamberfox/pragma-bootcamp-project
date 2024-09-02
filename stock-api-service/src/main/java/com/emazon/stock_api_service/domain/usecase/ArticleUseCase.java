@@ -4,6 +4,8 @@ import com.emazon.stock_api_service.domain.api.IArticleServicePort;
 import com.emazon.stock_api_service.domain.exception.ArticleUseCaseException;
 import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import com.emazon.stock_api_service.domain.model.Article;
+import com.emazon.stock_api_service.domain.model.Brand;
+import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.IArticlePersistencePort;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
@@ -33,6 +35,14 @@ public class ArticleUseCase implements IArticleServicePort {
     @Override
     public void createArticle(Article article) {
         validate(article);
+        article.setBrand(brandPersistencePort
+                .getBrandById(article.getBrand().getId()));
+        List<Category> categoriesToAdd = new ArrayList<>();
+        for(Category category : article.getCategories()) {
+            categoriesToAdd.add(categoryPersistencePort
+                    .getCategoryById(category.getId()));
+        }
+        article.setCategories(categoriesToAdd);
         articlePersistencePort.createArticle(article);
     }
 
@@ -47,30 +57,46 @@ public class ArticleUseCase implements IArticleServicePort {
     @Override
     public void validate(Article article) {
         List<String> errorList=new ArrayList<>();
-        validateArticle(article,errorList);
-//        if(Boolean.FALSE.equals(brandIdExists(article.getBrandId()))){
-//            errorList.add(BRAND_ID_NOT_FOUND);
-//        }
-        if(!errorList.isEmpty()){
+        validateBrand(article.getBrand(),errorList);
+        validateCategories(article.getCategories().stream()
+                .map(Category::getId)
+                .toList(),errorList);
+        if(!errorList.isEmpty()) {
             throw new ArticleUseCaseException(errorList);
         }
     }
 
     public void validateArticle(Article article,List<String> errorList){
-//        if(Boolean.TRUE.equals(
-//                nameExists(article.getName()))){
-//            errorList.add(ARTICLE_NAME_ALREADY_EXISTS);
-//        }
-//        if(Boolean.FALSE.equals(
-//                categoryIdExists(article.getBrandId()))){
-//            errorList.add(BRAND_NOT_FOUND);
-//        }
+//        there's no restrictions in the article, it could all be null
     }
-    public void validateCategoryIds(List<Long> categoryIds,List<String> errorList){
+    public void validateBrand(Brand brand, List<String> errorList){
+        if(brand.getId()==null){
+            errorList.add(BRAND_OBLIGATORY);
+        }
+        else if(Boolean.FALSE.equals(brandIdExists(brand.getId()))){
+            errorList.add(BRAND_NOT_FOUND);
+        }
+    }
+    public void validateCategories(List<Long> categoryIds,List<String> errorList){
         if(categoryIds.isEmpty()){
             errorList.add(MINIMUM_CATEGORY);
         }
-        /*else{
+        else{
+            validateRepeatedCategories(categoryIds,errorList);
+            if(MINIMUM_CATEGORIES_ASSOCIATED>categoryIds.size()){
+                errorList.add(MINIMUM_CATEGORY);
+            }
+            else if(MAXIMUM_CATEGORIES_ASSOCIATED<categoryIds.size()){
+                errorList.add(MAXIMUM_CATEGORY);
+            }
+        }
+    }
+
+    private void validateRepeatedCategories(List<Long> categoryIds,List<String> errorList){
+        if(categoryIds.isEmpty()){
+            errorList.add(MINIMUM_CATEGORY);
+        }
+        else{
             Map<Long, Long> hashMap = new HashMap<>();
             for(Long categoryId : categoryIds) {
                 if(Boolean.TRUE.equals(categoryIdExists(categoryId))) {
@@ -85,18 +111,6 @@ public class ArticleUseCase implements IArticleServicePort {
                     errorList.add(CATEGORY_NOT_FOUND);
                 }
             }
-            if(MINIMUM_CATEGORIES_ASSOCIATED>errorList.size()){
-                errorList.add(MINIMUM_CATEGORY);
-            }
-            else if(MAXIMUM_CATEGORIES_ASSOCIATED<errorList.size()){
-                errorList.add(MAXIMUM_CATEGORY);
-            }
-        }*/
-    }
-
-    public void validateCategoryNames(List<String> categoryNames,List<String> errorList){
-        if(categoryNames.isEmpty()){
-            errorList.add(MINIMUM_CATEGORY);
         }
     }
 

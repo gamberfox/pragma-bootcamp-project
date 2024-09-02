@@ -35,8 +35,6 @@ public class BeanConfiguration {
     private final IBrandEntityMapper brandEntityMapper;
     private final IArticleRepository articleRepository;
     private final IArticleEntityMapper articleEntityMapper;
-//    private final IArticleCategoryRepository articleCategoryRepository;
-//    private final IArticleCategoryEntityMapper articleCategoryEntityMapper;
 
     @Bean
     public ICategoryPersistencePort categoryPersistencePort() {
