@@ -23,6 +23,7 @@ public class ArticleJpaAdapter implements IArticlePersistencePort {
 
     @Override
     public Article getArticleById(Long id) {
+        //I called .isPresent() before getting to this line
         ArticleEntity articleEntity= articleRepository.findById(id).get();
         return articleEntityMapper.toArticle(articleEntity);
     }
