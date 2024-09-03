@@ -17,6 +17,10 @@ public class JsonErrorResponse {
                 response.put("RESOURCE NOT FOUND: ", error);
                 response.put("statusCode",HttpStatus.NOT_FOUND.value());
                 break;
+            case 430:
+                response.put("REQUEST LEVEL ERROR: ", error);
+                response.put("statusCode",HttpStatus.BAD_REQUEST.value());
+                break;
             default:
                 response.put("UNHANDLED ERROR: ", error);
         }
