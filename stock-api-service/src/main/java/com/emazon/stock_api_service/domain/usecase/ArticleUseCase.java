@@ -58,9 +58,7 @@ public class ArticleUseCase implements IArticleServicePort {
     public void validate(Article article) {
         List<String> errorList=new ArrayList<>();
         validateBrand(article.getBrand(),errorList);
-        validateCategories(article.getCategories().stream()
-                .map(Category::getId)
-                .toList(),errorList);
+        validateCategories(article.getCategories(),errorList);
         if(!errorList.isEmpty()) {
             throw new ArticleUseCaseException(errorList);
         }
@@ -70,18 +68,25 @@ public class ArticleUseCase implements IArticleServicePort {
 //        there's no restrictions in the article, it could all be null
     }
     public void validateBrand(Brand brand, List<String> errorList){
-        if(brand.getId()==null){
+        //the brand object is null, or its id attribute is null
+        if(brand==null || brand.getId()==null){
             errorList.add(BRAND_OBLIGATORY);
         }
         else if(Boolean.FALSE.equals(brandIdExists(brand.getId()))){
             errorList.add(BRAND_NOT_FOUND);
         }
     }
-    public void validateCategories(List<Long> categoryIds,List<String> errorList){
-        if(categoryIds.isEmpty()){
-            errorList.add(MINIMUM_CATEGORY);
+    public void validateCategories(List<Category> categories,List<String> errorList){
+        //we separate both conditionals so we don't have to go into the else
+        if(categories==null || categories.isEmpty()){
+            if(MINIMUM_CATEGORIES_ASSOCIATED>0){
+                errorList.add(MINIMUM_CATEGORY);
+            }
         }
         else{
+            List<Long> categoryIds=categories.stream()
+                    .map(Category::getId)
+                    .toList();
             validateRepeatedCategories(categoryIds,errorList);
             if(MINIMUM_CATEGORIES_ASSOCIATED>categoryIds.size()){
                 errorList.add(MINIMUM_CATEGORY);
@@ -92,28 +97,22 @@ public class ArticleUseCase implements IArticleServicePort {
         }
     }
 
-    private void validateRepeatedCategories(List<Long> categoryIds,List<String> errorList){
-        if(categoryIds.isEmpty()){
-            errorList.add(MINIMUM_CATEGORY);
-        }
-        else{
-            Map<Long, Long> hashMap = new HashMap<>();
-            for(Long categoryId : categoryIds) {
-                if(Boolean.TRUE.equals(categoryIdExists(categoryId))) {
-                    if(!hashMap.containsKey(categoryId)) {
-                        hashMap.put(categoryId, 1L);
-                    }
-                    //we check if the id exists 2 times
-                    else if(hashMap.get(categoryId)==2L){
-                        errorList.add(CATEGORY_REPEATED);
-                    }
-                    else{
-                        hashMap.put(categoryId, 2L);
-                    }
+    private void validateRepeatedCategories(
+            List<Long> categoryIds,List<String> errorList){
+        Map<Long, Long> hashMap = new HashMap<>();
+        for(Long categoryId : categoryIds) {
+            if(Boolean.TRUE.equals(categoryIdExists(categoryId))) {
+                if(!hashMap.containsKey(categoryId)) {
+                    hashMap.put(categoryId, 1L);
                 }
-                else{
-                    errorList.add(CATEGORY_NOT_FOUND);
+                //we check if the id exists 1 time
+                else if(hashMap.get(categoryId)==1L){
+                    errorList.add(CATEGORY_REPEATED);
+                    hashMap.put(categoryId,2L);
                 }
+            }
+            else{
+                errorList.add(CATEGORY_NOT_FOUND);
             }
         }
     }
