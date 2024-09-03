@@ -97,9 +97,6 @@ public class ArticleUseCase implements IArticleServicePort {
         }
     }
 
-    public void validateCategoryNames(List<String> categoryNames,List<String> errorList){
-        if(categoryNames.isEmpty()){
-            errorList.add(MINIMUM_CATEGORIES_MESSAGE);
     private void validateRepeatedCategories(
             List<Long> categoryIds,List<String> errorList){
         Map<Long, Long> hashMap = new HashMap<>();

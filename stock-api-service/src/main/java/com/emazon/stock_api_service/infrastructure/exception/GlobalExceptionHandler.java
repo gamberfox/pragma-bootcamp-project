@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -36,14 +37,25 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(CategoryUseCaseException.class)
-    public ResponseEntity<String> handleCategoryUseCaseException(CategoryUseCaseException ex){
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(ex.getErrorType().getDescription()+": " + ex.getMessage());
+    public ResponseEntity<Map<String, Object>> handleCategoryUseCaseException(CategoryUseCaseException ex){
+        JsonErrorResponse errorResponse =
+                new JsonErrorResponse(HttpStatus.BAD_REQUEST.value(),
+                        ex.getErrorList());
+        return new ResponseEntity<>(errorResponse.getResponse(), HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(CategoryPersistenceException.class)
-    public ResponseEntity<String> handleCategoryPersistenceException(CategoryPersistenceException ex){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(ex.getMessage());
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleResourceNotFoundException(ResourceNotFoundException ex){
+        JsonErrorResponse errorResponse =
+                new JsonErrorResponse(HttpStatus.NOT_FOUND.value(),
+                        ex.getMessage());
+        return new ResponseEntity<>(errorResponse.getResponse(),HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(BrandUseCaseException.class)
+    public ResponseEntity<Map<String, Object>> handleBrandUseCaseException(BrandUseCaseException ex){
+        JsonErrorResponse errorResponse =
+                new JsonErrorResponse(HttpStatus.BAD_REQUEST.value(),
+                        ex.getErrorList());
+        return new ResponseEntity<>(errorResponse.getResponse(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ArticleUseCaseException.class)
