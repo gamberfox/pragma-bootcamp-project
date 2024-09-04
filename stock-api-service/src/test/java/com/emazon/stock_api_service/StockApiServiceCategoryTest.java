@@ -6,14 +6,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class StockApiServiceCategoryTest {
+class StockApiServiceCategoryTest {
     @Test
     void contextLoads() {}
 
     @Test
     void categoryTest(){
         int a=2;
-        int b=2;
         assertEquals(2,a);
     }
     @Test
