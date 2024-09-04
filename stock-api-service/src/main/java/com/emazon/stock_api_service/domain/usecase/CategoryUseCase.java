@@ -2,9 +2,9 @@ package com.emazon.stock_api_service.domain.usecase;
 
 import com.emazon.stock_api_service.domain.api.ICategoryServicePort;
 import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
+import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
-import com.emazon.stock_api_service.infrastructure.exception.ResourceNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

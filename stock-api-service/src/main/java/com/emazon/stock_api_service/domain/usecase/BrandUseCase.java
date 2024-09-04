@@ -2,9 +2,10 @@ package com.emazon.stock_api_service.domain.usecase;
 
 import com.emazon.stock_api_service.domain.api.IBrandServicePort;
 import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
+import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import com.emazon.stock_api_service.domain.model.Brand;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
-import com.emazon.stock_api_service.infrastructure.exception.ResourceNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 import static com.emazon.stock_api_service.util.BrandConstants.*;

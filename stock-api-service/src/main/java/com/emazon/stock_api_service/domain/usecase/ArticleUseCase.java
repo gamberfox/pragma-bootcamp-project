@@ -42,6 +42,7 @@ public class ArticleUseCase implements IArticleServicePort {
             categoriesToAdd.add(categoryPersistencePort
                     .getCategoryById(category.getId()));
         }
+        categoriesToAdd.sort((a, b) -> a.getName().compareTo(b.getName()));
         article.setCategories(categoriesToAdd);
         articlePersistencePort.createArticle(article);
     }
@@ -55,8 +56,9 @@ public class ArticleUseCase implements IArticleServicePort {
     }
 
     @Override
-    public List<Article> getArticles(Boolean ascendingOrder, String comparor) {
+    public List<Article> getArticles(Boolean ascendingOrder, String comparator) {
         List<Article> articles= articlePersistencePort.getArticles();
+        sortArticles(articles,ascendingOrder,comparator);
         return articles;
     }
 
@@ -122,15 +124,12 @@ public class ArticleUseCase implements IArticleServicePort {
             }
         }
     }
-    private void sortArticles(List<Article> articles,Boolean ascendingOrder,String comparor){
-        for(Article article : articles){
-            article.getCategories().sort((a, b) -> a.getName().compareTo(b.getName()));
-        }
+    public void sortArticles(List<Article> articles,Boolean ascendingOrder,String comparator){
         if(Boolean.TRUE.equals(ascendingOrder)){
-            if(comparor.equals("article")){
+            if(comparator.equals("article")){
                 articles.sort((a, b) -> a.getName().compareTo(b.getName()));
             }
-            else if(comparor.equals("brand")){
+            else if(comparator.equals("brand")){
                 articles.sort((a, b) -> a.getBrand().getName().compareTo(b.getBrand().getName()));
             }
             else{//we'll sort by category as the default
@@ -139,10 +138,10 @@ public class ArticleUseCase implements IArticleServicePort {
             }
         }
         else{
-            if(comparor.equals("article")){
+            if(comparator.equals("article")){
                 articles.sort((a, b) -> b.getName().compareTo(a.getName()));
             }
-            else if(comparor.equals("brand")){
+            else if(comparator.equals("brand")){
                 articles.sort((a, b) -> b.getBrand().getName().compareTo(a.getBrand().getName()));
             }
             else{//we'll sort by category as the default
