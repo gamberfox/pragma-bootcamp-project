@@ -40,8 +40,8 @@ public class ArticleRestController {
         +articleHandler.getArticleResponseById(id).getBrand().getName());
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<Page<ArticleResponse>> getCategories(
+    @GetMapping("/")
+    public ResponseEntity<Page<ArticleResponse>> getArticles(
             @RequestParam(defaultValue = "0") int page,//page you want to get
             @RequestParam(defaultValue = "10") Long pageSize,
             @RequestParam(defaultValue = "true") Boolean ascendingOrder,
