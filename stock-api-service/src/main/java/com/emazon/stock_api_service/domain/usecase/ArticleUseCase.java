@@ -122,7 +122,35 @@ public class ArticleUseCase implements IArticleServicePort {
             }
         }
     }
-
+    private void sortArticles(List<Article> articles,Boolean ascendingOrder,String comparor){
+        for(Article article : articles){
+            article.getCategories().sort((a, b) -> a.getName().compareTo(b.getName()));
+        }
+        if(Boolean.TRUE.equals(ascendingOrder)){
+            if(comparor.equals("article")){
+                articles.sort((a, b) -> a.getName().compareTo(b.getName()));
+            }
+            else if(comparor.equals("brand")){
+                articles.sort((a, b) -> a.getBrand().getName().compareTo(b.getBrand().getName()));
+            }
+            else{//we'll sort by category as the default
+                articles.sort((a, b) -> a.getCategories().get(0).getName()
+                        .compareTo(b.getCategories().get(0).getName()));
+            }
+        }
+        else{
+            if(comparor.equals("article")){
+                articles.sort((a, b) -> b.getName().compareTo(a.getName()));
+            }
+            else if(comparor.equals("brand")){
+                articles.sort((a, b) -> b.getBrand().getName().compareTo(a.getBrand().getName()));
+            }
+            else{//we'll sort by category as the default
+                articles.sort((a, b) -> b.getCategories().get(0).getName()
+                        .compareTo(a.getCategories().get(0).getName()));
+            }
+        }
+    }
     public Boolean idExists(Long id) {
         return articlePersistencePort.articleIdExists(id);
     }
