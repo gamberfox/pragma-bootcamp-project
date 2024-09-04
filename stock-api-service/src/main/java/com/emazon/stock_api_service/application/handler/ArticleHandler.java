@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,9 +36,13 @@ public class ArticleHandler implements IArticleHandler {
     }
 
     @Override
-    public PageResponse getAllArticles(Boolean ascendingOrder, String comparator) {
+    public PageResponse<ArticleResponse> getArticleResponses(Boolean ascendingOrder, String comparator) {
         List<Article> articles = articleServicePort.getArticles(ascendingOrder, comparator);
-        PageResponse response=new PageResponse(articles,2L);
-        return new PageResponse(articles,2L);
+        List<ArticleResponse> articleResponses=new ArrayList<>();
+        for(Article article:articles){
+            articleResponses.add(articleResponseMapper.toArticleResponse(article));
+        }
+        //PageResponse<ArticleResponse> response=new PageResponse(articleResponses,2L);
+        return new PageResponse<>(articleResponses, 10L);
     }
 }

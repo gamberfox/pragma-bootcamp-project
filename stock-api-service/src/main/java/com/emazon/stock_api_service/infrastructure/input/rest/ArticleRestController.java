@@ -2,12 +2,16 @@ package com.emazon.stock_api_service.infrastructure.input.rest;
 
 import com.emazon.stock_api_service.application.dto.ArticleRequest;
 import com.emazon.stock_api_service.application.dto.ArticleResponse;
+import com.emazon.stock_api_service.application.dto.BrandResponse;
 import com.emazon.stock_api_service.application.handler.IArticleHandler;
+import com.emazon.stock_api_service.domain.usecase.PageResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.emazon.stock_api_service.util.ArticleConstants.*;
@@ -36,5 +40,22 @@ public class ArticleRestController {
                 articleHandler.getArticleResponseById(id).getName()
         +articleHandler.getArticleResponseById(id).getId()
         +articleHandler.getArticleResponseById(id).getBrand().getName());
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Page<ArticleResponse>> getCategories(
+            @RequestParam(defaultValue = "0") int page,//page you want to get
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "true") Boolean ascendingOrder,
+            @RequestParam(defaultValue = "article") String comparator) {
+        PageResponse<ArticleResponse> articleResponses = articleHandler.getArticleResponses(ascendingOrder,comparator);
+        size=Math.toIntExact(articleResponses.getTotalElements());
+
+//        Sort sort = Sort.by("name").ascending();
+//
+//// Create the Pageable object
+//        Pageable pageable = PageRequest.of(page, size, sort);
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(new PageImpl<>(articleResponses.getContent(), pageable, size));
     }
 }

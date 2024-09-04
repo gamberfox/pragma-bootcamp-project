@@ -55,18 +55,9 @@ public class ArticleUseCase implements IArticleServicePort {
     }
 
     @Override
-    public List<Article> getArticles() {
-        return List.of();
-    }
-
-    @Override
-    public List<Article> getArticlesByCategoryName(String name) {
-        return List.of();
-    }
-
-    @Override
-    public List<Article> getArticlesByBrandName(String name) {
-        return List.of();
+    public List<Article> getArticles(Boolean ascendingOrder, String comparor) {
+        List<Article> articles= articlePersistencePort.getArticles();
+        return articles;
     }
 
     @Override

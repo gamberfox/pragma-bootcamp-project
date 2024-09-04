@@ -9,6 +9,8 @@ import com.emazon.stock_api_service.infrastructure.output.jpa.repository.IArticl
 import com.emazon.stock_api_service.infrastructure.output.jpa.repository.ICategoryRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 public class ArticleJpaAdapter implements IArticlePersistencePort {
     private final IArticleRepository articleRepository;
@@ -26,6 +28,12 @@ public class ArticleJpaAdapter implements IArticlePersistencePort {
         //I called .isPresent() before getting to this line
         ArticleEntity articleEntity= articleRepository.findById(id).get();
         return articleEntityMapper.toArticle(articleEntity);
+    }
+
+    @Override
+    public List<Article> getArticles() {
+        List<ArticleEntity> articleEntityList= articleRepository.findAll();
+        return articleEntityMapper.toArticles(articleEntityList);
     }
 
     @Override

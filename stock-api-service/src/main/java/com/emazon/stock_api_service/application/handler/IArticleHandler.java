@@ -9,5 +9,5 @@ import java.util.List;
 public interface IArticleHandler {
     void createArticle(ArticleRequest articleRequest);
     ArticleResponse getArticleResponseById(Long id);
-    PageResponse getAllArticles(Boolean ascendingOrder, String comparator);
+    PageResponse getArticleResponses(Boolean ascendingOrder, String comparator);
 }
