@@ -28,7 +28,9 @@ public class ArticleEntity {
     @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    //@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    //why does cascade kill the operation?
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id", nullable = false)
     private BrandEntity brand;
 

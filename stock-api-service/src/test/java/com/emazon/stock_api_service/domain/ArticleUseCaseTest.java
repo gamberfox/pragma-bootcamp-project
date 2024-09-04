@@ -1,7 +1,6 @@
 package com.emazon.stock_api_service.domain;
 
 import com.emazon.stock_api_service.domain.exception.ArticleUseCaseException;
-import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
 import com.emazon.stock_api_service.domain.model.Article;
 import com.emazon.stock_api_service.domain.model.Brand;
 import com.emazon.stock_api_service.domain.model.Category;
@@ -9,7 +8,6 @@ import com.emazon.stock_api_service.domain.spi.IArticlePersistencePort;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.domain.usecase.ArticleUseCase;
-import com.emazon.stock_api_service.domain.usecase.BrandUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,6 +16,8 @@ import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.emazon.stock_api_service.util.ArticleConstants.*;
@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-public class ArticleUseCaseTest {
+class ArticleUseCaseTest {
 
 
     @Mock
@@ -39,9 +39,10 @@ public class ArticleUseCaseTest {
 
     @InjectMocks
     private ArticleUseCase articleUseCase;
-    private BrandUseCase brandUseCase;
     private Article article;
     private Brand brand;
+    private Brand brand2;
+    private Brand brand3;
     private Category category;
     private Category category2;
     private Category category3;
@@ -73,7 +74,7 @@ public class ArticleUseCaseTest {
 
         assertEquals(BRAND_OBLIGATORY
                 ,ex.getErrorList().get(0));
-        assertEquals(ex.getErrorList().size(),1);
+        assertEquals(1, ex.getErrorList().size());
     }
     @Test
     void testValidateBrandExists() {
@@ -83,7 +84,7 @@ public class ArticleUseCaseTest {
 
         assertEquals(BRAND_NOT_FOUND
                 ,ex.getErrorList().get(0));
-        assertEquals(ex.getErrorList().size(),1);
+        assertEquals(1, ex.getErrorList().size());
     }
 
     @Test
@@ -95,7 +96,7 @@ public class ArticleUseCaseTest {
 
         assertEquals(MINIMUM_CATEGORY
                 ,ex.getErrorList().get(0));
-        assertEquals(ex.getErrorList().size(),1);
+        assertEquals(1, ex.getErrorList().size());
     }
 
     @Test
@@ -122,7 +123,7 @@ public class ArticleUseCaseTest {
 
         assertEquals(CATEGORY_NOT_FOUND
                 ,ex.getErrorList().get(0));
-        assertEquals(ex.getErrorList().size(),1);
+        assertEquals(1, ex.getErrorList().size());
     }
 
     @Test
@@ -145,7 +146,7 @@ public class ArticleUseCaseTest {
 
         assertEquals(MAXIMUM_CATEGORY
                 ,ex.getErrorList().get(0));
-        assertEquals(ex.getErrorList().size(),1);
+        assertEquals(1, ex.getErrorList().size());
     }
 
     @Test
@@ -157,6 +158,67 @@ public class ArticleUseCaseTest {
 
         assertEquals(MINIMUM_CATEGORY
                 ,ex.getErrorList().get(0));
-        assertEquals(ex.getErrorList().size(),1);
+        assertEquals(1, ex.getErrorList().size());
+    }
+    @Test
+    void testValidateGetArticlesByName() {
+        category.setName("catName");
+        category.setDescription("catDesc");
+
+        Article article2=new Article(2L,"article2","description",2L,
+                new BigDecimal("12.12"),brand,null);
+        category2=new Category(2L,"catName2","description");
+        List<Category> categories2=new ArrayList<>();
+        categories2.add(category2);
+        article2.setCategories(categories2);
+
+        Article article3=new Article(3L,"article3","description",2L,
+                new BigDecimal("12.12"),brand,null);
+        category3=new Category(3L,"catName3","description");
+        List<Category> categories3=new ArrayList<>();
+        categories3.add(category3);
+        article3.setCategories(categories3);
+
+        //articles organized ascendingly by article name
+        List<Article> organizedArticles = Arrays.asList(article,article2,article3);
+        List<Article> articles = Arrays.asList(article3,article,article2);
+        articleUseCase.sortArticles(articles,true,"category");
+
+        assertEquals(organizedArticles,articles);
+
+        Collections.reverse(organizedArticles);
+        articleUseCase.sortArticles(articles,false,"category");
+        assertEquals(organizedArticles,articles);
+    }
+
+    @Test
+    void testValidateGetArticlesByBrandName() {
+        brand=new Brand(1L,"brandName","description");
+        article.setBrand(brand);
+
+        brand2=new Brand(2L,"brandName2","description");
+        Article article2=new Article(2L,"article2","description",2L,
+                new BigDecimal("12.12"),brand2,null);
+        List<Category> categories2=new ArrayList<>();
+        categories2.add(new Category(2L,"catName2","description"));
+        article2.setCategories(categories2);
+
+        brand3=new Brand(3L,"brandName3","description");
+        Article article3=new Article(3L,"article3","description",2L,
+                new BigDecimal("12.12"),brand3,null);
+        List<Category> categories3=new ArrayList<>();
+        categories3.add(new Category(3L,"catName3","description"));
+        article3.setCategories(categories3);
+
+        //articles organized ascendingly by brand name
+        List<Article> organizedArticles = Arrays.asList(article,article2,article3);
+        List<Article> articles = Arrays.asList(article3,article,article2);
+        articleUseCase.sortArticles(articles,true,"brand");
+
+        assertEquals(organizedArticles,articles);
+
+        Collections.reverse(organizedArticles);
+        articleUseCase.sortArticles(articles,false,"brand");
+        assertEquals(organizedArticles,articles);
     }
 }

@@ -42,6 +42,7 @@ public class ArticleUseCase implements IArticleServicePort {
             categoriesToAdd.add(categoryPersistencePort
                     .getCategoryById(category.getId()));
         }
+        categoriesToAdd.sort((a, b) -> a.getName().compareTo(b.getName()));
         article.setCategories(categoriesToAdd);
         articlePersistencePort.createArticle(article);
     }
@@ -52,6 +53,13 @@ public class ArticleUseCase implements IArticleServicePort {
             throw new ResourceNotFoundException(ARTICLE_NOT_FOUND);
         }
         return articlePersistencePort.getArticleById(id);
+    }
+
+    @Override
+    public List<Article> getArticles(Boolean ascendingOrder, String comparator) {
+        List<Article> articles= articlePersistencePort.getArticles();
+        sortArticles(articles,ascendingOrder,comparator);
+        return articles;
     }
 
     @Override
@@ -116,7 +124,32 @@ public class ArticleUseCase implements IArticleServicePort {
             }
         }
     }
-
+    public void sortArticles(List<Article> articles,Boolean ascendingOrder,String comparator){
+        if(Boolean.TRUE.equals(ascendingOrder)){
+            if(comparator.equals("article")){
+                articles.sort((a, b) -> a.getName().compareTo(b.getName()));
+            }
+            else if(comparator.equals("brand")){
+                articles.sort((a, b) -> a.getBrand().getName().compareTo(b.getBrand().getName()));
+            }
+            else{//we'll sort by category as the default
+                articles.sort((a, b) -> a.getCategories().get(0).getName()
+                        .compareTo(b.getCategories().get(0).getName()));
+            }
+        }
+        else{
+            if(comparator.equals("article")){
+                articles.sort((a, b) -> b.getName().compareTo(a.getName()));
+            }
+            else if(comparator.equals("brand")){
+                articles.sort((a, b) -> b.getBrand().getName().compareTo(a.getBrand().getName()));
+            }
+            else{//we'll sort by category as the default
+                articles.sort((a, b) -> b.getCategories().get(0).getName()
+                        .compareTo(a.getCategories().get(0).getName()));
+            }
+        }
+    }
     public Boolean idExists(Long id) {
         return articlePersistencePort.articleIdExists(id);
     }
