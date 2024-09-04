@@ -55,6 +55,21 @@ public class ArticleUseCase implements IArticleServicePort {
     }
 
     @Override
+    public List<Article> getArticles() {
+        return List.of();
+    }
+
+    @Override
+    public List<Article> getArticlesByCategoryName(String name) {
+        return List.of();
+    }
+
+    @Override
+    public List<Article> getArticlesByBrandName(String name) {
+        return List.of();
+    }
+
+    @Override
     public void validate(Article article) {
         List<String> errorList=new ArrayList<>();
         validateBrand(article.getBrand(),errorList);
