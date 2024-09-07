@@ -7,18 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class StockApiServiceCategoryTest {
+    Long number;
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+        number = 1L;
+    }
 
     @Test
     void categoryTest(){
-        int a=2;
-        assertEquals(2,a);
-    }
-    @Test
-    void getCategoryTest2() {
-        int a=2;
-        int b=2;
-        assertEquals(4,a+b);
+        number = 2L;
+        assertEquals(2,number);
     }
 }

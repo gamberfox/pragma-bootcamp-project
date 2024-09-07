@@ -2,6 +2,7 @@ package com.emazon.stock_api_service.domain;
 
 
 import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
+import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import com.emazon.stock_api_service.domain.model.Brand;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.usecase.BrandUseCase;
@@ -10,7 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,15 +20,47 @@ import java.util.List;
 import static com.emazon.stock_api_service.util.BrandConstants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
+//@SpringBootTest //used for integration tests
 @ExtendWith(MockitoExtension.class)
 class BrandUseCaseTest {
     @Mock
     private IBrandPersistencePort brandPersistencePort;
     @InjectMocks
     private BrandUseCase brandUseCase;
+
+    @Test
+    void testCreateBrand() {
+        Brand brand=new Brand(null,"a","description");
+        brandUseCase.createBrand(brand);
+        verify(brandPersistencePort, times(1)).createBrand(brand);
+
+        //when(brandPersistencePort.getBrandById(anyLong())).thenReturn(brand);
+    }
+
+    @Test
+    void testGetBrandById() {
+        Brand brand=new Brand(1L,"a","description");
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class
+                , () -> brandUseCase.getBrandById(1L));
+        assertEquals(BRAND_NOT_FOUND, ex.getMessage());
+
+        when(brandUseCase.idExists(1L)).thenReturn(true);
+        when(brandPersistencePort.getBrandById(anyLong())).thenReturn(brand);
+        assertEquals(brand, brandUseCase.getBrandById(1L));
+    }
+
+    @Test
+    void testGetBrandByName() {
+        Brand brand=new Brand(1L,"a","description");
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class
+                , () -> brandUseCase.getBrandByName("name"));
+        assertEquals(BRAND_NOT_FOUND, ex.getMessage());
+        when(brandPersistencePort.getBrandByName(anyString())).thenReturn(brand);
+        when(brandUseCase.nameExists("name")).thenReturn(true);
+        assertEquals(brand,brandUseCase.getBrandByName("name"));
+    }
 
     @Test
     void testSortBrands(){

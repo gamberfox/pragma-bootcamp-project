@@ -7,5 +7,5 @@ import com.emazon.stock_api_service.domain.usecase.PageResponse;
 public interface IArticleHandler {
     void createArticle(ArticleRequest articleRequest);
     ArticleResponse getArticleResponseById(Long id);
-    PageResponse<ArticleResponse> getArticleResponses(Boolean ascendingOrder, String comparator,Long pageSize);
+    PageResponse<ArticleResponse> getArticleResponses(Boolean ascendingOrder, String comparator,Long pageSize,Long pageNumber);
 }

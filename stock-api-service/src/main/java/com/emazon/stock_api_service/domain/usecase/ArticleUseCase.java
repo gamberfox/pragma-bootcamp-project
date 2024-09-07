@@ -10,14 +10,12 @@ import com.emazon.stock_api_service.domain.spi.IArticlePersistencePort;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.emazon.stock_api_service.util.ArticleConstants.*;
 import static com.emazon.stock_api_service.util.BrandConstants.BRAND_NOT_FOUND;
 import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NOT_FOUND;
+import static com.emazon.stock_api_service.util.GenericConstants.*;
 
 public class ArticleUseCase implements IArticleServicePort {
     private final IArticlePersistencePort articlePersistencePort;
@@ -49,17 +47,51 @@ public class ArticleUseCase implements IArticleServicePort {
 
     @Override
     public Article getArticleById(Long id) {
-        if(Boolean.FALSE.equals(idExists(id))) {
+        if(Boolean.FALSE.equals(articlePersistencePort.articleIdExists(id))) {
             throw new ResourceNotFoundException(ARTICLE_NOT_FOUND);
         }
         return articlePersistencePort.getArticleById(id);
     }
 
     @Override
-    public List<Article> getArticles(Boolean ascendingOrder, String comparator) {
-        List<Article> articles= articlePersistencePort.getArticles();
+    public PageResponse<Article> getArticles
+            (Boolean ascendingOrder, String comparator, Long pageSize, Long pageNumber) {
+        List<Article> articles=new ArrayList<>();
+        validateGetArticlesRequestParam(pageSize,pageNumber,articles);
+        articles=articlePersistencePort.getArticles();
         sortArticles(articles,ascendingOrder,comparator);
-        return articles;
+        PageResponse<Article> pageResponse=
+                new PageResponse<>(
+                        Collections.emptyList()
+                        ,articles.size()/pageSize
+                ,Long.valueOf(articles.size()),pageSize,pageNumber);
+        
+        if(pageNumber.equals(articles.size()/pageSize)) {
+            pageResponse.setContent(articles
+                    .subList(pageNumber.intValue()*pageSize.intValue()
+                            ,articles.size()));
+            pageResponse.setContent(articles);
+        }
+        else{
+            pageResponse.setContent(articles
+                    .subList(pageNumber.intValue()*pageSize.intValue()
+                            ,(pageNumber.intValue()+1)*(pageSize.intValue())));
+        }
+        return pageResponse;
+    }
+
+    @Override
+    public void validateGetArticlesRequestParam(Long pageSize, Long pageNumber,List<Article> articles) {
+        if(pageSize <1 ) {
+            throw new ArticleUseCaseException(List.of(PARAMETER_PAGE_SIZE_VALUE));
+        }
+        if(pageNumber <0) {
+            throw new ArticleUseCaseException(List.of(PARAMETER_NEGATIVE_PAGE_NUMBER_VALUE));
+        }
+        articles= articlePersistencePort.getArticles();
+        if(articles.size()<=(pageSize*pageNumber)) {
+            throw new ArticleUseCaseException(List.of(PARAMETER_PAGE_NUMBER));
+        }
     }
 
     @Override
@@ -145,9 +177,6 @@ public class ArticleUseCase implements IArticleServicePort {
                         .compareTo(a.getCategories().get(0).getName()));
             }
         }
-    }
-    public Boolean idExists(Long id) {
-        return articlePersistencePort.articleIdExists(id);
     }
     public Boolean categoryIdExists(Long id) {
         return categoryPersistencePort.categoryIdExists(id);

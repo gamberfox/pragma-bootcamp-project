@@ -1,30 +1,29 @@
 package com.emazon.stock_api_service.domain;
 
 import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
+import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.domain.usecase.CategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
 import static com.emazon.stock_api_service.util.CategoryConstants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class) // I'm sure this is useful
+//@SpringBootTest //used for integration tests
 class CategoryUseCaseTest {
     @Mock
     private ICategoryPersistencePort categoryPersistencePort;
@@ -34,6 +33,37 @@ class CategoryUseCaseTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void testCreateCategory() {
+        Category category=new Category(null,"name","description");
+        categoryUseCase.createCategory(category);
+        verify(categoryPersistencePort, times(1)).createCategory(category);
+        //when(categoryPersistencePort.getCategoryById(anyLong())).thenReturn(category);
+    }
+
+    @Test
+    void testGetCategoryById() {
+        Category category=new Category(1L,"a","description");
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class
+                , () -> categoryUseCase.getCategoryById(1L));
+        assertEquals(CATEGORY_NOT_FOUND, ex.getMessage());
+
+        when(categoryUseCase.idExists(1L)).thenReturn(true);
+        when(categoryPersistencePort.getCategoryById(anyLong())).thenReturn(category);
+        assertEquals(category, categoryUseCase.getCategoryById(1L));
+    }
+
+    @Test
+    void testGetCategoryByName() {
+        Category category=new Category(1L,"a","description");
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class
+                , () -> categoryUseCase.getCategoryByName("name"));
+        assertEquals(CATEGORY_NOT_FOUND, ex.getMessage());
+        when(categoryPersistencePort.getCategoryByName(anyString())).thenReturn(category);
+        when(categoryUseCase.nameExists("name")).thenReturn(true);
+        assertEquals(category,categoryUseCase.getCategoryByName("name"));
     }
 
     @Test

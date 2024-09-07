@@ -47,11 +47,10 @@ public class ArticleRestController {
             @RequestParam(defaultValue = "true") Boolean ascendingOrder,
             @RequestParam(defaultValue = "article") String comparator) {
         PageResponse<ArticleResponse> articleResponses =
-                 articleHandler.getArticleResponses(ascendingOrder,comparator,pageSize);
+                 articleHandler.getArticleResponses(ascendingOrder,comparator,pageSize, (long)page);
         Pageable pageable = PageRequest.of(page, Math.toIntExact(pageSize));
         return ResponseEntity.ok(new PageImpl<>
                 (articleResponses.getContent()
-                        .subList(Math.toIntExact(pageSize)*page,Math.toIntExact(pageSize)*(page+1))
-                        ,pageable, pageSize));
+                        ,pageable, articleResponses.getTotalElements()));
     }
 }

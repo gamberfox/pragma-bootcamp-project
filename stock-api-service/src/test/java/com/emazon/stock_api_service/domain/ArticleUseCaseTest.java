@@ -9,13 +9,12 @@ import com.emazon.stock_api_service.domain.spi.IArticlePersistencePort;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.domain.usecase.ArticleUseCase;
+import com.emazon.stock_api_service.domain.usecase.PageResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,11 +25,13 @@ import java.util.List;
 import static com.emazon.stock_api_service.util.ArticleConstants.*;
 import static com.emazon.stock_api_service.util.BrandConstants.*;
 import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NOT_FOUND;
+import static com.emazon.stock_api_service.util.GenericConstants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 //@ExtendWith(MockitoExtension.class)
+//@SpringBootTest//this is used for integration tests.
 class ArticleUseCaseTest {
 
     @Mock
@@ -78,6 +79,7 @@ class ArticleUseCaseTest {
     void testGetArticleById(){
         when(articlePersistencePort.getArticleById(1L)).thenReturn(article);
         when(articlePersistencePort.articleIdExists(1L)).thenReturn(true);
+        when(articlePersistencePort.articleIdExists(2L)).thenReturn(true);
 
         assertEquals(article, articleUseCase.getArticleById(1L));
 
@@ -182,6 +184,75 @@ class ArticleUseCaseTest {
     }
 
     @Test
+    void testGetArticles(){
+        category.setName("catName");
+        category.setDescription("catDesc");
+        Article article2=new Article(2L,"article2","description",2L,
+                new BigDecimal("12.12"),brand,null);
+        Article article3=new Article(3L,"article3","description",2L,
+                new BigDecimal("12.12"),brand,null);
+        List<Article> articles=new ArrayList<>();
+        articles.add(article);
+        articles.add(article2);
+        articles.add(article3);
+        when(articlePersistencePort.getArticles()).thenReturn(articles);
+        assertEquals(3,articlePersistencePort.getArticles().size());
+        PageResponse<Article> response=
+                articleUseCase.getArticles
+                        (true,"article",10L,0L);
+        assertEquals(3,response.getContent().size());
+        response=
+                articleUseCase.getArticles
+                        (true,"article",1L,0L);
+        assertEquals(1,response.getContent().size());
+
+        response=
+                articleUseCase.getArticles
+                        (true,"article",2L,0L);
+        assertEquals(2,response.getContent().size());
+
+    }
+
+    @Test
+    void testValidateGetArticlesRequestParam(){
+        category.setName("catName");
+        category.setDescription("catDesc");
+        Article article2=new Article(2L,"article2","description",2L,
+                new BigDecimal("12.12"),brand,null);
+        Article article3=new Article(3L,"article3","description",2L,
+                new BigDecimal("12.12"),brand,null);
+        List<Article> articles=Arrays.asList(article,article2,article3);
+        when(articlePersistencePort.getArticles()).thenReturn(articles);
+
+        ex = assertThrows(ArticleUseCaseException.class
+                , () -> articleUseCase
+                        .validateGetArticlesRequestParam
+                                (-2L,0L,articles));
+
+        assertEquals(PARAMETER_PAGE_SIZE_VALUE
+                ,ex.getErrorList().get(0));
+        assertEquals(1L, ex.getErrorList().size());
+
+        ex = assertThrows(ArticleUseCaseException.class
+                , () -> articleUseCase
+                        .validateGetArticlesRequestParam
+                                (2L,-1L,articles));
+
+        assertEquals(PARAMETER_NEGATIVE_PAGE_NUMBER_VALUE
+                ,ex.getErrorList().get(0));
+        assertEquals(1L, ex.getErrorList().size());
+
+        ex = assertThrows(ArticleUseCaseException.class
+                , () -> articleUseCase
+                        .validateGetArticlesRequestParam
+                                (2L,10L,articles));
+
+        assertEquals(PARAMETER_PAGE_NUMBER
+                ,ex.getErrorList().get(0));
+        assertEquals(1L, ex.getErrorList().size());
+    }
+
+    @Test
     void testValidateGetArticlesByArticleName() {
         category.setName("catName");
         category.setDescription("catDesc");
@@ -204,7 +275,7 @@ class ArticleUseCaseTest {
         List<Article> organizedArticles = Arrays.asList(article,article2,article3);
         List<Article> articlesToReturn = Arrays.asList(article3,article,article2);
         when(articlePersistencePort.getArticles()).thenReturn(articlesToReturn);
-        List<Article> articles=articleUseCase.getArticles(true,"article2");
+        List<Article> articles=articlePersistencePort.getArticles();
         articleUseCase.sortArticles(articles,true,"article");
 
         assertEquals(organizedArticles,articles);
