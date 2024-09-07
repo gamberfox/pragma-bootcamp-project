@@ -28,6 +28,9 @@ public class PageResponse<T>{
         this.previousPage = (this.totalPages==1 || this.currentPage==0)?(this.totalPages-1):this.currentPage-1L;
         this.nextPage = (this.currentPage==this.totalPages-1)?0L:this.currentPage+1L;
     }
+    public void setContent(List<T> content) {
+        this.content = content;
+    }
     public List<T> getContent() {
         return content;
     }

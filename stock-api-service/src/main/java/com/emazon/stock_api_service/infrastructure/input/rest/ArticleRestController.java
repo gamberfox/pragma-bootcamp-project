@@ -51,6 +51,6 @@ public class ArticleRestController {
         Pageable pageable = PageRequest.of(page, Math.toIntExact(pageSize));
         return ResponseEntity.ok(new PageImpl<>
                 (articleResponses.getContent()
-                        ,pageable, pageSize));
+                        ,pageable, articleResponses.getTotalElements()));
     }
 }

@@ -38,11 +38,17 @@ public class ArticleHandler implements IArticleHandler {
     @Override
     public PageResponse<ArticleResponse> getArticleResponses(Boolean ascendingOrder, String comparator,Long pageSize,Long pageNumber) {
         //Collections.emptyList();
-        List<Article> articles = articleServicePort.getArticles(ascendingOrder,comparator,pageSize,pageNumber);
+        PageResponse<Article> articles = articleServicePort.getArticles(ascendingOrder,comparator,pageSize,pageNumber);
         List<ArticleResponse> articleResponses=new ArrayList<>();
-        for(Article article:articles){
+        for(Article article:articles.getContent()){
             articleResponses.add(articleResponseMapper.toArticleResponse(article));
         }
-        return new PageResponse<>(articleResponses, pageSize);
+        return new PageResponse<>(
+                articleResponses,
+                articles.getTotalPages(),
+                articles.getTotalElements(),
+                articles.getPageSize(),
+                articles.getCurrentPage()
+        );
     }
 }
