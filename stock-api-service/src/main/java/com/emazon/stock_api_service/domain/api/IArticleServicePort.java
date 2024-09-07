@@ -11,4 +11,5 @@ public interface IArticleServicePort {
     void createArticle(Article article);
     Article getArticleById(Long id);
     PageResponse<Article> getArticles(Boolean ascendingOrder, String comparor, Long pageSize, Long pageNumber);
+    void validateGetArticlesRequestParam(Long pageSize, Long pageNumber,List<Article> articles);
 }

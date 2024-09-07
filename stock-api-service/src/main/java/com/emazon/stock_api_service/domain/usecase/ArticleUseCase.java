@@ -57,16 +57,9 @@ public class ArticleUseCase implements IArticleServicePort {
     @Override
     public PageResponse<Article> getArticles
             (Boolean ascendingOrder, String comparator, Long pageSize, Long pageNumber) {
-        if(pageSize <1 ) {
-            throw new ArticleUseCaseException(List.of(PARAMETER_PAGE_SIZE_VALUE));
-        }
-        if(pageNumber <0) {
-            throw new ArticleUseCaseException(List.of(PARAMETER_NEGATIVE_PAGE_NUMBER_VALUE));
-        }
-        List<Article> articles= articlePersistencePort.getArticles();
-        if(articles.size()<=(pageSize*pageNumber)) {
-            throw new ArticleUseCaseException(List.of(PARAMETER_PAGE_NUMBER));
-        }
+        List<Article> articles=new ArrayList<>();
+        validateGetArticlesRequestParam(pageSize,pageNumber,articles);
+        articles=articlePersistencePort.getArticles();
         sortArticles(articles,ascendingOrder,comparator);
         PageResponse<Article> pageResponse=
                 new PageResponse<>(
@@ -78,6 +71,7 @@ public class ArticleUseCase implements IArticleServicePort {
             pageResponse.setContent(articles
                     .subList(pageNumber.intValue()*pageSize.intValue()
                             ,articles.size()));
+            pageResponse.setContent(articles);
         }
         else{
             pageResponse.setContent(articles
@@ -85,6 +79,20 @@ public class ArticleUseCase implements IArticleServicePort {
                             ,(pageNumber.intValue()+1)*(pageSize.intValue())));
         }
         return pageResponse;
+    }
+
+    @Override
+    public void validateGetArticlesRequestParam(Long pageSize, Long pageNumber,List<Article> articles) {
+        if(pageSize <1 ) {
+            throw new ArticleUseCaseException(List.of(PARAMETER_PAGE_SIZE_VALUE));
+        }
+        if(pageNumber <0) {
+            throw new ArticleUseCaseException(List.of(PARAMETER_NEGATIVE_PAGE_NUMBER_VALUE));
+        }
+        articles= articlePersistencePort.getArticles();
+        if(articles.size()<=(pageSize*pageNumber)) {
+            throw new ArticleUseCaseException(List.of(PARAMETER_PAGE_NUMBER));
+        }
     }
 
     @Override
