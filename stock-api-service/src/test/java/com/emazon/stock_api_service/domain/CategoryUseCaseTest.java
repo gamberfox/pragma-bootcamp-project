@@ -3,18 +3,13 @@ package com.emazon.stock_api_service.domain;
 import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
 import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import com.emazon.stock_api_service.domain.model.Category;
-import com.emazon.stock_api_service.domain.model.Category;
-import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.domain.usecase.CategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;

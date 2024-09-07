@@ -9,7 +9,6 @@ import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.IArticlePersistencePort;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
-import org.springframework.data.domain.Page;
 
 import java.util.*;
 
@@ -48,7 +47,6 @@ public class ArticleUseCase implements IArticleServicePort {
 
     @Override
     public Article getArticleById(Long id) {
-        //if(Boolean.FALSE.equals(idExists(id))) {
         if(Boolean.FALSE.equals(articlePersistencePort.articleIdExists(id))) {
             throw new ResourceNotFoundException(ARTICLE_NOT_FOUND);
         }
@@ -64,7 +62,7 @@ public class ArticleUseCase implements IArticleServicePort {
         sortArticles(articles,ascendingOrder,comparator);
         PageResponse<Article> pageResponse=
                 new PageResponse<>(
-                        Collections.EMPTY_LIST
+                        Collections.emptyList()
                         ,articles.size()/pageSize
                 ,Long.valueOf(articles.size()),pageSize,pageNumber);
         

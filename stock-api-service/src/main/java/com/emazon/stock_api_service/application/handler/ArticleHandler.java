@@ -37,7 +37,6 @@ public class ArticleHandler implements IArticleHandler {
 
     @Override
     public PageResponse<ArticleResponse> getArticleResponses(Boolean ascendingOrder, String comparator,Long pageSize,Long pageNumber) {
-        //Collections.emptyList();
         PageResponse<Article> articles = articleServicePort.getArticles(ascendingOrder,comparator,pageSize,pageNumber);
         List<ArticleResponse> articleResponses=new ArrayList<>();
         for(Article article:articles.getContent()){
