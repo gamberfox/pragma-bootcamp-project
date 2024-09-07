@@ -17,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 //@ExtendWith(MockitoExtension.class)
+//@SpringBootTest//this is used for integration tests.
 class ArticleUseCaseTest {
 
     @Mock
@@ -80,6 +82,7 @@ class ArticleUseCaseTest {
     void testGetArticleById(){
         when(articlePersistencePort.getArticleById(1L)).thenReturn(article);
         when(articlePersistencePort.articleIdExists(1L)).thenReturn(true);
+        when(articlePersistencePort.articleIdExists(2L)).thenReturn(true);
 
         assertEquals(article, articleUseCase.getArticleById(1L));
 

@@ -48,7 +48,8 @@ public class ArticleUseCase implements IArticleServicePort {
 
     @Override
     public Article getArticleById(Long id) {
-        if(Boolean.FALSE.equals(idExists(id))) {
+        //if(Boolean.FALSE.equals(idExists(id))) {
+        if(Boolean.FALSE.equals(articlePersistencePort.articleIdExists(id))) {
             throw new ResourceNotFoundException(ARTICLE_NOT_FOUND);
         }
         return articlePersistencePort.getArticleById(id);
@@ -178,9 +179,6 @@ public class ArticleUseCase implements IArticleServicePort {
                         .compareTo(a.getCategories().get(0).getName()));
             }
         }
-    }
-    public Boolean idExists(Long id) {
-        return articlePersistencePort.articleIdExists(id);
     }
     public Boolean categoryIdExists(Long id) {
         return categoryPersistencePort.categoryIdExists(id);
