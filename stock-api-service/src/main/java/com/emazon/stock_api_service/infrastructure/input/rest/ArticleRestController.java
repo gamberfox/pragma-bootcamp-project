@@ -50,6 +50,8 @@ public class ArticleRestController {
                  articleHandler.getArticleResponses(ascendingOrder,comparator,pageSize);
         Pageable pageable = PageRequest.of(page, Math.toIntExact(pageSize));
         return ResponseEntity.ok(new PageImpl<>
-                (articleResponses.getContent(), pageable, pageSize));
+                (articleResponses.getContent()
+                        .subList(Math.toIntExact(pageSize)*page,Math.toIntExact(pageSize)*(page+1))
+                        ,pageable, pageSize));
     }
 }
