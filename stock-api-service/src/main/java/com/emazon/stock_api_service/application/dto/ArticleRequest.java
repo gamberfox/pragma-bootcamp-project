@@ -15,8 +15,6 @@ public class ArticleRequest {
     private String description;
     private Long stock;
     private BigDecimal price;
-    @NotNull(message = BRAND_OBLIGATORY+"asdffffffffadsfasf")
     private Long brandId;
-    @NotNull(message = CATEGORY_LIST_OBLIGATORY)
     private List<Long> categoryIds;
 }

@@ -71,10 +71,6 @@ public class ArticleUseCase implements IArticleServicePort {
             throw new ArticleUseCaseException(errorList);
         }
     }
-
-    public void validateArticle(Article article,List<String> errorList){
-//        there's no restrictions in the article, it could all be null
-    }
     public void validateBrand(Brand brand, List<String> errorList){
         //the brand object is null, or its id attribute is null
         if(brand==null || brand.getId()==null){
@@ -152,12 +148,6 @@ public class ArticleUseCase implements IArticleServicePort {
     }
     public Boolean idExists(Long id) {
         return articlePersistencePort.articleIdExists(id);
-    }
-    public Boolean nameExists(String name) {
-        return articlePersistencePort.articleNameExists(name);
-    }
-    public Boolean categoryNameExists(String name) {
-        return categoryPersistencePort.categoryNameExists(name);
     }
     public Boolean categoryIdExists(Long id) {
         return categoryPersistencePort.categoryIdExists(id);

@@ -1,6 +1,7 @@
 package com.emazon.stock_api_service.domain;
 
 import com.emazon.stock_api_service.domain.exception.ArticleUseCaseException;
+import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import com.emazon.stock_api_service.domain.model.Article;
 import com.emazon.stock_api_service.domain.model.Brand;
 import com.emazon.stock_api_service.domain.model.Category;
@@ -10,9 +11,11 @@ import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.domain.usecase.ArticleUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -25,10 +28,10 @@ import static com.emazon.stock_api_service.util.BrandConstants.*;
 import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NOT_FOUND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
+//@ExtendWith(MockitoExtension.class)
 class ArticleUseCaseTest {
-
 
     @Mock
     private IArticlePersistencePort articlePersistencePort;
@@ -65,7 +68,24 @@ class ArticleUseCaseTest {
         when(articleUseCase.categoryIdExists(1L)).thenReturn(true);
         when(articleUseCase.brandIdExists(1L)).thenReturn(true);
     }
+    @Test
+    void testCreateArticle() {
+        when(articlePersistencePort.articleIdExists(1L)).thenReturn(true);
+        articleUseCase.createArticle(article);
+        verify(articlePersistencePort, times(1)).createArticle(article);
+    }
+    @Test
+    void testGetArticleById(){
+        when(articlePersistencePort.getArticleById(1L)).thenReturn(article);
+        when(articlePersistencePort.articleIdExists(1L)).thenReturn(true);
 
+        assertEquals(article, articleUseCase.getArticleById(1L));
+
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class
+                , () -> articleUseCase.getArticleById(5L));
+        assertEquals(ARTICLE_NOT_FOUND
+                ,exception.getMessage());
+    }
     @Test
     void testValidateBrandNotNull() {
         article.setBrand(null);
@@ -160,8 +180,41 @@ class ArticleUseCaseTest {
                 ,ex.getErrorList().get(0));
         assertEquals(1, ex.getErrorList().size());
     }
+
     @Test
-    void testValidateGetArticlesByName() {
+    void testValidateGetArticlesByArticleName() {
+        category.setName("catName");
+        category.setDescription("catDesc");
+
+        Article article2=new Article(2L,"article2","description",2L,
+                new BigDecimal("12.12"),brand,null);
+        category2=new Category(2L,"catName2","description");
+        List<Category> categories2=new ArrayList<>();
+        categories2.add(category2);
+        article2.setCategories(categories2);
+
+        Article article3=new Article(3L,"article3","description",2L,
+                new BigDecimal("12.12"),brand,null);
+        category3=new Category(3L,"catName3","description");
+        List<Category> categories3=new ArrayList<>();
+        categories3.add(category3);
+        article3.setCategories(categories3);
+
+        //articles organized ascendingly by article name
+        List<Article> organizedArticles = Arrays.asList(article,article2,article3);
+        List<Article> articlesToReturn = Arrays.asList(article3,article,article2);
+        when(articlePersistencePort.getArticles()).thenReturn(articlesToReturn);
+        List<Article> articles=articleUseCase.getArticles(true,"article2");
+        articleUseCase.sortArticles(articles,true,"article");
+
+        assertEquals(organizedArticles,articles);
+
+        Collections.reverse(organizedArticles);
+        articleUseCase.sortArticles(articles,false,"article");
+        assertEquals(organizedArticles,articles);
+    }
+    @Test
+    void testValidateGetArticlesByCategoryName() {
         category.setName("catName");
         category.setDescription("catDesc");
 
