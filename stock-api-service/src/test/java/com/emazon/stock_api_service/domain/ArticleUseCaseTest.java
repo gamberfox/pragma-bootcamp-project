@@ -27,6 +27,7 @@ import java.util.List;
 import static com.emazon.stock_api_service.util.ArticleConstants.*;
 import static com.emazon.stock_api_service.util.BrandConstants.*;
 import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NOT_FOUND;
+import static com.emazon.stock_api_service.util.GenericConstants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -210,6 +211,45 @@ class ArticleUseCaseTest {
                         (true,"article",2L,0L);
         assertEquals(2,response.getContent().size());
 
+    }
+
+    @Test
+    void testValidateGetArticlesRequestParam(){
+        category.setName("catName");
+        category.setDescription("catDesc");
+        Article article2=new Article(2L,"article2","description",2L,
+                new BigDecimal("12.12"),brand,null);
+        Article article3=new Article(3L,"article3","description",2L,
+                new BigDecimal("12.12"),brand,null);
+        List<Article> articles=Arrays.asList(article,article2,article3);
+        when(articlePersistencePort.getArticles()).thenReturn(articles);
+
+        ex = assertThrows(ArticleUseCaseException.class
+                , () -> articleUseCase
+                        .validateGetArticlesRequestParam
+                                (-2L,0L,articles));
+
+        assertEquals(PARAMETER_PAGE_SIZE_VALUE
+                ,ex.getErrorList().get(0));
+        assertEquals(1L, ex.getErrorList().size());
+
+        ex = assertThrows(ArticleUseCaseException.class
+                , () -> articleUseCase
+                        .validateGetArticlesRequestParam
+                                (2L,-1L,articles));
+
+        assertEquals(PARAMETER_NEGATIVE_PAGE_NUMBER_VALUE
+                ,ex.getErrorList().get(0));
+        assertEquals(1L, ex.getErrorList().size());
+
+        ex = assertThrows(ArticleUseCaseException.class
+                , () -> articleUseCase
+                        .validateGetArticlesRequestParam
+                                (2L,10L,articles));
+
+        assertEquals(PARAMETER_PAGE_NUMBER
+                ,ex.getErrorList().get(0));
+        assertEquals(1L, ex.getErrorList().size());
     }
 
     @Test

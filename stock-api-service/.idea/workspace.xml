@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32410900-d963-44f6-b6e4-8e7b74b08047" name="Changes" comment="solving pagination issues">
+    <list default="true" id="32410900-d963-44f6-b6e4-8e7b74b08047" name="Changes" comment="pagination">
       <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/api/IArticleServicePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/api/IArticleServicePort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/usecase/ArticleUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emazon/stock_api_service/domain/usecase/ArticleUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/emazon/stock_api_service/StockApiServiceCategoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/emazon/stock_api_service/StockApiServiceCategoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/emazon/stock_api_service/domain/ArticleUseCaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/emazon/stock_api_service/domain/ArticleUseCaseTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -242,8 +240,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.ArticleUseCaseTest" />
-        <item itemvalue="Gradle.Tests in 'com.emazon.stock_api_service.domain'" />
         <item itemvalue="Gradle.Tests in 'stock-api-service.test'" />
+        <item itemvalue="Gradle.Tests in 'com.emazon.stock_api_service.domain'" />
         <item itemvalue="Gradle.ArticleUseCaseTest.testGetArticleById" />
         <item itemvalue="Gradle.BrandUseCaseTest" />
       </list>
@@ -276,7 +274,7 @@
       <workItem from="1725487183812" duration="1693000" />
       <workItem from="1725669379184" duration="6105000" />
       <workItem from="1725709312637" duration="8654000" />
-      <workItem from="1725727741561" duration="5733000" />
+      <workItem from="1725727741561" duration="6531000" />
     </task>
     <task id="LOCAL-00001" summary="HU-001 progress&#10;implementing exception handlers in the domain layer">
       <option name="closed" value="true" />
@@ -358,7 +356,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725719706188</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="pagination">
+      <option name="closed" value="true" />
+      <created>1725735377489</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1725735377489</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -396,11 +402,12 @@
     <MESSAGE value="trying to break the code&#10;I'm trying to understand how the code works more clearly" />
     <MESSAGE value="omg pagination is different than I thought" />
     <MESSAGE value="solving pagination issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="solving pagination issues" />
+    <MESSAGE value="pagination" />
+    <option name="LAST_COMMIT_MESSAGE" value="pagination" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/stock_api_service$Tests_in__stock_api_service_test_.ic" NAME="Tests in 'stock-api-service.test' Coverage Results" MODIFIED="1725675301191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/stock_api_service$ArticleUseCaseTest.ic" NAME="ArticleUseCaseTest Coverage Results" MODIFIED="1725733666638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/stock_api_service$Tests_in__stock_api_service_test_.ic" NAME="Tests in 'stock-api-service.test' Coverage Results" MODIFIED="1725735564397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/stock_api_service$Tests_in__com_emazon_stock_api_service_domain_.ic" NAME="Tests in 'com.emazon.stock_api_service.domain' Coverage Results" MODIFIED="1725732759744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>
