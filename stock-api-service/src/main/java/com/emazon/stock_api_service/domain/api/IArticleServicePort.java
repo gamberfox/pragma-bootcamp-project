@@ -9,5 +9,5 @@ public interface IArticleServicePort {
     void validate(Article article);
     void createArticle(Article article);
     Article getArticleById(Long id);
-    List<Article> getArticles(Boolean ascendingOrder,String comparor);
+    List<Article> getArticles(Boolean ascendingOrder,String comparor, Long pageSize, Long pageNumber);
 }

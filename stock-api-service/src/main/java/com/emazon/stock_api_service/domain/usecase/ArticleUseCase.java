@@ -18,6 +18,7 @@ import java.util.Map;
 import static com.emazon.stock_api_service.util.ArticleConstants.*;
 import static com.emazon.stock_api_service.util.BrandConstants.BRAND_NOT_FOUND;
 import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NOT_FOUND;
+import static com.emazon.stock_api_service.util.GenericConstants.*;
 
 public class ArticleUseCase implements IArticleServicePort {
     private final IArticlePersistencePort articlePersistencePort;
@@ -56,10 +57,33 @@ public class ArticleUseCase implements IArticleServicePort {
     }
 
     @Override
-    public List<Article> getArticles(Boolean ascendingOrder, String comparator) {
+    public List<Article> getArticles
+            (Boolean ascendingOrder, String comparator, Long pageSize, Long pageNumber) {
+        if(pageSize <1 ) {
+            throw new ArticleUseCaseException(List.of(PARAMETER_PAGE_SIZE_VALUE));
+        }
+        if(pageNumber <0) {
+            throw new ArticleUseCaseException(List.of(PARAMETER_NEGATIVE_PAGE_NUMBER_VALUE));
+        }
         List<Article> articles= articlePersistencePort.getArticles();
+        if(articles.size()<=(pageSize*pageNumber)) {
+            throw new ArticleUseCaseException(List.of(PARAMETER_PAGE_NUMBER));
+        }
         sortArticles(articles,ascendingOrder,comparator);
-        return articles;
+        if(pageNumber.equals(articles.size()/pageSize)) {
+            return articles
+                    .subList(pageNumber.intValue()*pageSize.intValue()
+                            ,articles.size());
+        }
+        else{
+            return articles
+                    .subList(pageNumber.intValue()*pageSize.intValue()
+                            ,(pageNumber.intValue()+1)*(pageSize.intValue()));
+        }
+        List<Article> page=articles
+                .subList(pageNumber.intValue()*pageSize.intValue()
+                        ,(pageNumber.intValue()+1)*(pageSize.intValue()));
+        new PageResponse<>();
     }
 
     @Override
