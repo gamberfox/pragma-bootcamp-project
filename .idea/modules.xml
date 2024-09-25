@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/pragma-stock-api-service.iml" filepath="$PROJECT_DIR$/.idea/pragma-stock-api-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/stock-api-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/stock-api-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stock-api-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/stock-api-service.test.iml" />
     </modules>
   </component>
 </project>
